@@ -700,7 +700,7 @@ void process_client_commands() {
 
 					int value = 0;
 
-					printf("Character is *%c*\n",DataReceived[0]);
+					printf("Character is *%d*\n",DataReceived[0]);
 
 					if (isdigit(DataReceived[0])) {
 

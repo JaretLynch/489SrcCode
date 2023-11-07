@@ -94,14 +94,6 @@ int GetClientByIP(char* IP){
 
 }
 
-for (i=0;i<5;i++){
-
-	char* ComparatorIP=malloc(120);
-
-	strcpy(ComparatorIP,List1[i].IP);
-
-	if strcmp(ComparatorIP,ARG1)==0{
-
 
 
 	int create_client_socket(int portno) {

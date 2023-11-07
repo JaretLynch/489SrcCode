@@ -342,6 +342,8 @@
 
 	  	for (int i=0; i<ServerMessage[0]-1;i++){
 
+	  		printf("SERVERMESSAGE[0]-1 is %d\n",ServerMessage[0]-1);
+
 				char* listeningPort=malloc(50);
 
 				char* IP=malloc(120);
@@ -366,7 +368,7 @@
 
 					List1[l].ListeningPort=port;
 
-					l++;
+					l=l+1;
 
 		  		int iterator=0;
 

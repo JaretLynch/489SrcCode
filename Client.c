@@ -326,7 +326,7 @@ void ReceiveLoggedinInfo(char* ServerMessage){
 
   for (int i=0; i<ServerMessage[0]-1;i++){
 
-			char* listeningPort;
+			char* listeningPort=malloc(50);
 
 			char* IP=malloc(120);
 

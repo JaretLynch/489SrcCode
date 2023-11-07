@@ -410,9 +410,9 @@
 
 	    }
 
-	char* ListCommand(ClientsLoggedIn List2[]){
+	char* ListCommand(){
 
-			qsort(List2, 5, sizeof(ClientsLoggedIn), compareClients2);
+			qsort(List1, 5, sizeof(ClientsLoggedIn), compareClients2);
 
 			char *ReturnM = malloc(1024*sizeof(char));
 
@@ -762,7 +762,7 @@
 
 								else if (strcmp(Input,"LIST")==0){
 
-									char* Message=ListCommand(List1);
+									char* Message=ListCommand();
 
 									cse4589_print_and_log("[LIST:SUCCESS]\n");
 
@@ -888,7 +888,7 @@
 
 							printf("AFTER RECEIVED LOGGEDININGO \n");
 
-							char* Ret=ListCommand(List1);
+							char* Ret=ListCommand();
 
 							printf("AFTER RECEIVED LISTCOMMAND \n");
 

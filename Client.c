@@ -80,7 +80,7 @@
 
 	
 
-int GetClientByIP(char* IP){
+int ClientExists(char* IP){
 
 	for(int i=0; i<5;i++){
 
@@ -768,7 +768,7 @@ int GetClientByIP(char* IP){
 
 								}
 
-								else if ((strcmp(Command,"SEND")==0)&&(GetClientByIP(Arg1)==1)){
+								else if ((strcmp(Command,"SEND")==0)&&(ClientExists(Arg1)==1)){
 
 									int LengthOfMessageSent=send(ClientFD,Input,strlen(Input),0);
 
@@ -798,7 +798,7 @@ int GetClientByIP(char* IP){
 
 								}
 
-								else if ((strcmp(Command,"BLOCK")==0)&&(GetClientByIP(Arg1)==1)){
+								else if ((strcmp(Command,"BLOCK")==0)&&(ClientExists(Arg1)==1)){
 
 									int j=send(ClientFD,Input,strlen(Input),0);
 
@@ -808,7 +808,7 @@ int GetClientByIP(char* IP){
 
 								}
 
-								else if ((strcmp(Command,"UNBLOCK")==0)&&(GetClientByIP(Arg1)==1)){
+								else if ((strcmp(Command,"UNBLOCK")==0)&&(ClientExists(Arg1)==1)){
 
 									int j=send(ClientFD,Input,strlen(Input),0);
 

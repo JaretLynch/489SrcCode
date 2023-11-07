@@ -230,7 +230,7 @@
 
 				printf("SHOULD BE COPYING INTO COMMAND\n");
 
-				
+				printf("Command is *%s*\n",Command);
 
 				(*Command)[iterator1]=*Character;
 

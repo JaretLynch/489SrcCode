@@ -374,9 +374,9 @@
 
 		  		for(int j=0; j<strlen(Manipulator);j++){
 
-						char Character[1];
+						char Character[2];
 
-						strncpy(Character,&Manipulator[i],1);
+						strncpy(Character,&Manipulator[j],1);
 
 						Character[1]='\0';
 

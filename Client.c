@@ -350,6 +350,8 @@
 
 		  		int iterator=0;
 
+		  		printf("FUCK YOU IS %s\n",FUCKYOU);
+
 		  		for(int j=0; j<strlen(Manipulator);j++){
 
 					char Character[1];

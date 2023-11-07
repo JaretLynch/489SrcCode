@@ -1658,7 +1658,7 @@ char* statistics(const Client LIST[]) {
 
 							char *DataToSend= ReturnMessage(List,0);
 
-
+							printf("SENDING TO CLIENT:*%s*",DataToSend)
 
 					
 

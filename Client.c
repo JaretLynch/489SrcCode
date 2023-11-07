@@ -348,7 +348,7 @@
 
 				char* FUCKYOU=malloc(200);
 
-		  		Parse2(&FUCKYOU,&IP,&listeningPort,ServerMessage);
+		  		Parse2(&FUCKYOU,&IP,&listeningPort,Manipulator);
 
 		  		printf("HOST NAME123123123 IS %s\n",FUCKYOU);
 

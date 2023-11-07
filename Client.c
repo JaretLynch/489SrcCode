@@ -254,7 +254,7 @@ void ReceiveLoggedinInfo(char* ServerMessage){
 
 			char* HostName=malloc(200);
 
-  		Parse(&HostName,&IP,&ListeningPort,ServerMessage);
+  		Parse(&HostName,&IP,&listeningPort,ServerMessage);
 
   		int iterator=0;
 

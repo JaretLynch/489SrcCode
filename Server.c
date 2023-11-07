@@ -374,9 +374,9 @@
 
 		for(int i=0; i<5; i++){
 
+			
+
 			int LoggedIn=List[i].LoggedIn;
-
-
 
 			if (LoggedIn==1){
 
@@ -397,6 +397,8 @@
 		}
 
 		ReturnM[0]=numLoggedIn;
+
+		printf("RETURN M IS *%s*\n",ReturnM);
 
 		return	ReturnM;
 

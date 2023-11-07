@@ -358,6 +358,8 @@
 
 					printf("IP IS %s",IP);
 
+					printf("iiiiiiiiiiiiiiiiiiiiiiii is %d and SERVERMESSAGE[0]-1 is %d\n",i,SERVERMESSAGE[0]-1); 
+
 					strcpy(List1[i].IP,IP);
 
 					strcpy(List1[i].HostName,FUCKYOU);

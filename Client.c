@@ -144,6 +144,74 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 		printf("CHARACTER IS *%s*\n",Character);
 
+		if(count==1){
+
+			(*FirstArgPointer)[iterator2]=*Character;
+
+			iterator2 ++;
+
+		}
+
+		if (count>1){
+
+			(*SecondArgPointer)[iterator3]=*Character;
+
+			iterator3++;
+
+		}
+
+		if (strcmp(Character," ")==0){
+
+			count++;
+
+
+
+		}
+
+		if (count==0){
+
+			(*Command)[iterator1]=*Character;
+
+			iterator1++;		
+
+		}
+
+		}
+
+		printf("PARSE DONE");
+
+}
+
+void Parse2(char** Command,char** FirstArgPointer, char** SecondArgPointer, char* Actualmsg){
+
+	int count=0;
+
+	int iterator1=0;
+
+	int iterator2=0;
+
+	int iterator3=0;
+
+	printf("CALLING PARSE");
+
+	int j=strlen(Actualmsg);
+
+	for (int i=0; i<strlen(Actualmsg); i++){
+
+		printf("MESSAGE IS %s\n",Actualmsg);
+
+		printf("PARSE LOOP:\n ");
+
+		char Character[2];
+
+		
+
+		strncpy(Character,&Actualmsg[i],1);
+
+		Character[1]='\0';
+
+		printf("CHARACTER IS *%s*\n",Character);
+
 		if(count==2){
 
 			(*FirstArgPointer)[iterator2]=*Character;
@@ -264,7 +332,7 @@ void ReceiveLoggedinInfo(char* ServerMessage){
 
 			char* HostName=malloc(200);
 
-  		Parse(&HostName,&IP,&listeningPort,ServerMessage);
+  		Parse2(&HostName,&IP,&listeningPort,ServerMessage);
 
   		int iterator=0;
 

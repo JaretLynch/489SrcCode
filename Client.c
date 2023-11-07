@@ -390,8 +390,6 @@
 
 							Manipulator=Manipulator+j;
 
-							break;
-
 						}
 
 				}

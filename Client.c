@@ -138,7 +138,7 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 		
 
-		strncpy(Character,&Actualmsg[i],1);
+		strcpy(Character,Actualmsg[i],1);
 
 		Character[1]='\0';
 

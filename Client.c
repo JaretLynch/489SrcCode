@@ -90,6 +90,8 @@ int GetClientByIP(char* IP){
 
 		}
 
+		}
+
 		return 0;
 
 }

@@ -452,39 +452,45 @@
 
 		ClientToAdd.LoggedIn=1;
 
-		for (int i=0; i<5; i++){
+		int ClientID=GetClientByIP(ip);
+
+		if (ClientID>-1){
+
+			List[ClientID].LoggedIn=1;
+
+			List[ClientID].FD=FD;
+
+		}
+
+		else{
+
+		
+
+			for (int i=0; i<5; i++){
 
 
 
-			int N=List[i].FD;
+				int N=List[i].FD;
 
 
 
-			if (N == -2){
+				if (N == -2){
 
 
 
-				List[i]=ClientToAdd;
+					List[i]=ClientToAdd;
 
 
 
-				return (0);
+					return (0);
 
-			}
+				}
 
-			if (N==-1){
-
-				List[i].ListeningPort==LP;
-
-				List[i].LoggedIn==1;
-
-			}
-
-
+		}
 
 	}
 
-	}
+}
 
 int GetClientByIP(char* IP){
 
@@ -752,7 +758,7 @@ void remove_connection(int socket) {
 
 		int ID=GetClientByIP(Ip);
 
-		if (ID>0){
+		if (ID>-1){
 
 			List[ID]=*Dummy;
 

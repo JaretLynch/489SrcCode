@@ -130,8 +130,6 @@ int GetClientByIP(char* IP){
 
 	void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char* Actualmsg){
 
-		printf("Parse called, Message is *%s*\n",Actualmsg);
-
 		int count=0;
 
 		int iterator1=0;
@@ -151,8 +149,6 @@ int GetClientByIP(char* IP){
 			strncpy(Character,&Actualmsg[i],1);
 
 			Character[1]='\0';
-
-			printf("CHARACTER as s IS *%s*\n",Character);
 
 			
 
@@ -206,8 +202,6 @@ int GetClientByIP(char* IP){
 
 		int iterator3=0;
 
-		printf("CALLING PARSE2");
-
 		int j=strlen(Actualmsg);
 
 		for (int i=0; i<strlen(Actualmsg); i++){
@@ -220,11 +214,11 @@ int GetClientByIP(char* IP){
 
 			Character[1]='\0';
 
-			printf("CHARACTER IS *%s*\n",Character);
+
 
 			if(count==2){
 
-				printf("SHOULD BE COPYING INTO FIRSTARGPOINT\n");
+
 
 				(*FirstArgPointer)[iterator2]=*Character;
 
@@ -241,10 +235,6 @@ int GetClientByIP(char* IP){
 			}
 
 			if (count==1){
-
-				printf("SHOULD BE COPYING INTO COMMAND\n");
-
-				printf("Command is *%s*\n",*Command);
 
 				(*Command)[iterator1]=*Character;
 
@@ -273,8 +263,6 @@ int GetClientByIP(char* IP){
 /*			}*/
 
 		}
-
-			printf("PARSE22 DONE. Command is %s\n",*Command);
 
 	}
 
@@ -364,15 +352,7 @@ int GetClientByIP(char* IP){
 
 				char* FUCKYOU=malloc(200);
 
-				printf("MANIPULATOR IS %s\n",Manipulator);
-
 		  		Parse2(&FUCKYOU,&IP,&listeningPort,Manipulator);
-
-		  		printf("HOST NAME123123123 IS %s\n",FUCKYOU);
-
-					printf("IP IS %s",IP);
-
-					printf("iiiiiiiiiiiiiiiiiiiiiiii is %d and SERVERMESSAGE[0]-1 is %d\n",i,ServerMessage[0]-1); 
 
 					strcpy(List1[i].IP,IP);
 
@@ -388,8 +368,6 @@ int GetClientByIP(char* IP){
 
 		  		int iterator=0;
 
-		  		printf("FUCK YOU IS %s\n",FUCKYOU);
-
 		  		for(int j=0; j<strlen(Manipulator);j++){
 
 						char Character[2];
@@ -400,7 +378,7 @@ int GetClientByIP(char* IP){
 
 						if (strcmp(Character," ")==0){
 
-							printf("SPACE DETECTED\n");
+
 
 							iterator++;
 
@@ -408,7 +386,7 @@ int GetClientByIP(char* IP){
 
 						if (iterator==5){
 
-							printf("TRYING TO CHANGE MANIPULATOR\n");
+			
 
 							Manipulator=Manipulator+j;
 
@@ -471,8 +449,6 @@ int GetClientByIP(char* IP){
 
 
 			}
-
-			printf("AT THE END OF LIST COMMAND AND RETURN M IS %s",ReturnM);
 
 			return	ReturnM;
 
@@ -616,7 +592,7 @@ int GetClientByIP(char* IP){
 
 						if (sock_index == 0){
 
-						printf("SOCK INDEX is 0jifedjiaosjdfioasjdfiojasdfiojsadfiojasiodfjioasdjio");
+		
 
 							char *Input = (char*) malloc(sizeof(char)*256);
 
@@ -854,15 +830,11 @@ int GetClientByIP(char* IP){
 
 					if ((LoggedIn==1)&&(sock_index!=0)){
 
-						printf("INFINTE LOOP\n");
-
 						char *DataReceived= (char*) malloc(256*sizeof(char));
 
 						char *ServerCommand=(char*) malloc(256*sizeof(char));
 
-						int LengthOfMessageReceived= recv(ClientFD, DataReceived, 1023,0);
-
-						printf("DataReceived is %s\n",DataReceived);
+						int LengthOfMessageReceived= recv(ClientFD, DataReceived, 1023,0)
 
 						char Mess[8];  // Make sure to allocate enough space for the copied characters and the null-terminator.
 
@@ -871,12 +843,6 @@ int GetClientByIP(char* IP){
 						// Copy the first 7 characters (0 to 6) from source to destination.
 
 						strncpy(Mess, DataReceived, 7);
-
-						
-
-						int value = 0;
-
-						printf("Character is *%d*\n",DataReceived[0]);
 
 						
 
@@ -900,11 +866,9 @@ int GetClientByIP(char* IP){
 
 							ReceiveLoggedinInfo(DataReceived);
 
-							printf("AFTER RECEIVED LOGGEDININGO \n");
-
 							char* Ret=ListCommand();
 
-							printf("AFTER RECEIVED LISTCOMMAND \n");
+						
 
 							cse4589_print_and_log("%s",Ret);
 
@@ -912,11 +876,15 @@ int GetClientByIP(char* IP){
 
 						}
 
-						fflush(stdout);
+						else{
 
-						cse4589_print_and_log("%s",DataReceived);
+							fflush(stdout);
+
+							cse4589_print_and_log("%s",DataReceived);
 
 	/*					process_client_commands();*/
+
+	}
 
 						}
 

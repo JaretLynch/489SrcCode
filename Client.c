@@ -70,7 +70,7 @@ typedef struct ClientsLoggedIn{
 
 	char HostName[50];
 
-	int LiseningPort;
+	int ListeningPort;
 
 }ClientsLoggedIn;
 

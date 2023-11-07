@@ -770,6 +770,8 @@ int ClientExists(char* IP){
 
 								else if ((strcmp(Command,"SEND")==0)&&(ClientExists(Arg1)==1)){
 
+									print("CLIENT EXISTS");
+
 									int LengthOfMessageSent=send(ClientFD,Input,strlen(Input),0);
 
 								}

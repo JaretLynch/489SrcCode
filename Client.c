@@ -16,7 +16,7 @@
 
 #include <string.h>
 
-
+#include <ctype.h>
 
 #include <arpa/inet.h>
 

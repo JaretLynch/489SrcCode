@@ -412,7 +412,7 @@
 
 	char* ListCommand(){
 
-			qsort(List1, 5, sizeof(ClientsLoggedIn), compareClients2);
+/*			qsort(List1, 5, sizeof(ClientsLoggedIn), compareClients2);*/
 
 			char *ReturnM = malloc(1024*sizeof(char));
 

@@ -366,7 +366,7 @@
 
 		}
 
-		sprintf(ReturnM+strlen(ReturnM),"%d ",numLoggedIn);
+		sprintf(ReturnM+strlen(ReturnM),"%d",numLoggedIn);
 
 		int id=1;
 

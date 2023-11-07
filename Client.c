@@ -642,11 +642,11 @@ void process_client_commands() {
 
 								char* Message=ListCommand(List1);
 
-								cse4589_print_and_log("[LIST:SUCCESS]\n")
+								cse4589_print_and_log("[LIST:SUCCESS]\n");
 
 								cse4589_print_and_log(Message);
 
-								cse4589_print_and_log("[LIST:END]\n")
+								cse4589_print_and_log("[LIST:END]\n");
 
 								free(Input);
 

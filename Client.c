@@ -260,7 +260,7 @@
 
 		}
 
-			printf("PARSE22 DONE");
+			printf("PARSE22 DONE. Command is %s\n",*Command);
 
 	}
 

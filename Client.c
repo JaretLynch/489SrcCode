@@ -238,6 +238,8 @@
 
 				printf("SHOULD BE COPYING INTO COMMAND\n");
 
+				
+
 				(*Command)[iterator1]=*Character;
 
 				iterator1++;		
@@ -330,9 +332,9 @@
 
 				char* IP=malloc(120);
 
-				char* HostName=malloc(200);
+				char* FUCKYOU=malloc(200);
 
-		  		Parse2(&HostName,&IP,&listeningPort,ServerMessage);
+		  		Parse2(&FUCKYOU,&IP,&listeningPort,ServerMessage);
 
 		  		int iterator=0;
 
@@ -360,13 +362,13 @@
 
 				}
 
-				printf("HOST NAME IS %s\n",HostName);
+				printf("HOST NAME IS %s\n",FUCKYOU);
 
 				printf("IP IS %s",IP);
 
 				strcpy(List1[l].IP,IP);
 
-				strcpy(List1[l].HostName,HostName);
+				strcpy(List1[l].HostName,FUCKYOU);
 
 				int port=atoi(listeningPort);
 

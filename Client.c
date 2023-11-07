@@ -846,7 +846,7 @@ void process_client_commands() {
 
 						ListCommand(List1);
 
-						free(DataREceived);
+						free(DataReceived);
 
 					}
 

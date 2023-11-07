@@ -134,13 +134,15 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 		char Character[2];
 
+		strncpy(Character,&Actualmsg[i],1);
+
+		Character[1]='\0';
+
 		printf("CHARACTER as %s IS *%s*\n",Character);
 
 		printf("CHARACTER as %c IS *%s*\n",Character);
 
 		
-
-		Character[1]='\0';
 
 		if(count==1){
 

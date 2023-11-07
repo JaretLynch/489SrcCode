@@ -858,7 +858,7 @@ void process_client_commands() {
 
 					cse4589_print_and_log("%s",DataReceived);
 
-					process_client_commands();
+/*					process_client_commands();*/
 
 					}
 

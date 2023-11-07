@@ -108,7 +108,7 @@
 
 		
 
-		Message MessageList[5];
+		Message MessageList[100];
 
 		
 

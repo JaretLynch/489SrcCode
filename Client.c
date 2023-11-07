@@ -348,6 +348,8 @@
 
 				char* FUCKYOU=malloc(200);
 
+				printf("MANIPULATOR IS %s\n",Manipulator);
+
 		  		Parse2(&FUCKYOU,&IP,&listeningPort,Manipulator);
 
 		  		printf("HOST NAME123123123 IS %s\n",FUCKYOU);
@@ -357,6 +359,8 @@
 					strcpy(List1[l].IP,IP);
 
 					strcpy(List1[l].HostName,FUCKYOU);
+
+					
 
 					int port=atoi(listeningPort);
 

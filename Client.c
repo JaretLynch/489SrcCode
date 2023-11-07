@@ -64,6 +64,20 @@ fd_set watch_list;
 
 
 
+typedef struct ClientsLoggedIn{
+
+	char* IP[30];
+
+	char* HostName[50];
+
+	int LiseningPort;
+
+}ClientsLoggedIn;
+
+
+
+ClientsLoggedIn List1[5];
+
 
 
 
@@ -202,7 +216,139 @@ void close_connection(int client_fd) {
 
 }
 
+int compareClients2(const void *a, const void *b) {
 
+			
+
+
+
+		  const Client *clientA = (const Client *)a;
+
+
+
+		  const Client *clientB = (const Client *)b;
+
+
+
+		  return clientA->ListeningPort - clientB->ListeningPort;
+
+
+
+	}
+
+void ReceiveLoggedinInfo(char* ServerMessage){
+
+	int count; // The count of logged-in clients
+
+  int id, listeningPort;
+
+  char IP[30], HostName[50];
+
+  char* pos = strchr(ServerMessage, ' ');
+
+  if (pos == NULL) {
+
+        // Handle parsing error
+
+        return;
+
+    }
+
+    ServerMessage = pos + 1;
+
+
+
+    // Loop to parse the individual client information
+
+    for (int i = 0; i < count; i++) {
+
+        if (sscanf(ServerMessage, "%d %29s %49s %d", &id, IP, HostName, &listeningPort) != 4) {
+
+            // Handle parsing error
+
+            return;
+
+        }
+
+
+
+        // Store the parsed data in your structure array
+
+        if (i < 5) {
+
+            strcpy(List1[i].IP, IP);
+
+            strcpy(List1[i].HostName, HostName);
+
+            List1[i].ListeningPort = listeningPort;
+
+        }
+
+
+
+        // Move the ServerMessage pointer to the next client's data
+
+        pos = strchr(ServerMessage, ' ');
+
+        if (pos == NULL) {
+
+            // Handle parsing error
+
+            return;
+
+        }
+
+        ServerMessage = pos + 1;
+
+    }
+
+}
+
+char* ListCommand(client List2[]){
+
+		qsort(List2, 5, sizeof(Client), compareClients);
+
+		char *ReturnM = malloc(1024*sizeof(char));
+
+
+
+		int id=1;
+
+
+
+		for(int i=0; i<5; i++){
+
+			char* IP=List[i];
+
+			if (strlen(IP)>0){
+
+				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List[i].HostName,List[i].IP, List[i].ListeningPort);
+
+			}
+
+			if (LoggedIn==1){
+
+
+
+				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,LIST[i].Name,LIST[i].IPaddress, LIST[i].ListeningPort);
+
+
+
+				id+=1;
+
+
+
+		}
+
+
+
+		}
+
+		return	ReturnM;
+
+
+
+	}
 
 void login_to_server(const char* server_ip, int server_port) {
 
@@ -496,7 +642,7 @@ void process_client_commands() {
 
 							else if (strcmp(Input,"LIST")==0){
 
-								int j=send(ClientFD,Input,strlen(Input),0);
+								ListCommand(List1);
 
 
 
@@ -575,6 +721,32 @@ void process_client_commands() {
 					char *ServerCommand=(char*) malloc(256*sizeof(char));
 
 					int LengthOfMessageReceived= recv(ClientFD, DataReceived, 1023,0);
+
+					char Mess[8];  // Make sure to allocate enough space for the copied characters and the null-terminator.
+
+
+
+					// Copy the first 7 characters (0 to 6) from source to destination.
+
+					strncpy(Mess, DataReceived, 7);
+
+					if (strcmp(Mess,"REFRESH")==0){
+
+						char* stripped;
+
+						stripped=DataReceived+7;
+
+						ReceiveLoggedinInfo(stripped);
+
+					}
+
+					else if (sscanf(ServerMessage, "%d", &messageCount) == 1) {
+
+						ReceiveLoggedinInfo(DataReceived);
+
+						ListCommand(List1);
+
+					}
 
 					ParseServerMessage(&ServerCommand,DataReceived);
 

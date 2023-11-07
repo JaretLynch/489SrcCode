@@ -602,7 +602,7 @@ int UnBlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 
 				char* BlockListIP=malloc(30*sizeof(char));
 
-				strcpy(BlockListIP,List[BlockerID].BlockList[i];
+				strcpy(BlockListIP,List[BlockerID].BlockList[i]);
 
 				if (strcmp(BlockListIP,DestIP)==0){
 

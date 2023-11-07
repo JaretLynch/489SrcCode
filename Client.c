@@ -390,7 +390,7 @@
 
 						if (iterator==4){
 
-							printf("TRYING TO CHANGE MANIPULATOR\n")
+							printf("TRYING TO CHANGE MANIPULATOR\n");
 
 							Manipulator=Manipulator+j;
 

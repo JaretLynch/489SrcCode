@@ -396,8 +396,6 @@
 
 		}
 
-		int numLoggedIn=1;
-
 		ReturnM[0]=numLoggedIn+0;
 
 		printf("RETURN M IS *%s*\n",ReturnM);

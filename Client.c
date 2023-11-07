@@ -392,7 +392,7 @@ char* ListCommand(ClientsLoggedIn List2[]){
 
 			strcpy(IP,List2[i].IP);
 
-			printf("IP IS %s\n");
+			printf("IP IS %s\n",IP);
 
 			if (strlen(IP)>0){
 
@@ -838,7 +838,7 @@ void process_client_commands() {
 
 					
 
-					else if (DataReceived[0]>0) {
+					else if ((DataReceived[0])>0&&(DataReceived[0]<5)) {
 
 						printf("ELSE IF\n");
 

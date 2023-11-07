@@ -226,14 +226,6 @@
 
 			}
 
-			if (strcmp(Character," ")==0){
-
-				count++;
-
-
-
-			}
-
 			if (count==1){
 
 				printf("SHOULD BE COPYING INTO COMMAND\n");
@@ -246,7 +238,27 @@
 
 			}
 
+			if (strcmp(Character," ")==0){
+
+				count++;
+
+
+
 			}
+
+/*			if (count==1){*/
+
+/*				printf("SHOULD BE COPYING INTO COMMAND\n");*/
+
+/*				*/
+
+/*				(*Command)[iterator1]=*Character;*/
+
+/*				iterator1++;		*/
+
+/*			}*/
+
+/*			}*/
 
 			printf("PARSE22 DONE");
 

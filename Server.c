@@ -362,7 +362,7 @@
 
 		if (a==1){
 
-			sprintf(ReturnM+strlen(ReturnM),"REFRESH"\n);
+			sprintf(ReturnM+strlen(ReturnM),"REFRESH ");
 
 		}
 

@@ -1716,7 +1716,7 @@ char* statistics(const Client LIST[]) {
 
 								else if (strcmp(DataReceived,"REFRESH")==0){
 
-									print("REFRESH RECEIVED\n")
+									print("REFRESH RECEIVED\n");
 
 									char *DataToSend= ReturnMessage(List,1);
 

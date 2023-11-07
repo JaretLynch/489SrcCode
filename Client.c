@@ -696,7 +696,11 @@ void process_client_commands() {
 
 					int value = 0;
 
+					printf("Character is *%c*\n",DataReceived[0]);
+
 					if (isdigit(DataReceived[0])) {
+
+						printf("DIGIT DETECTED\n");
 
     				value = DataReceived[0] - '0'; // Convert to integer
 

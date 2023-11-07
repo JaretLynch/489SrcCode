@@ -176,7 +176,7 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 		}
 
-		printf("PARSE DONE");
+		printf("PARSE DONE\n");
 
 }
 

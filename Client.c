@@ -192,7 +192,7 @@ void Parse2(char** Command,char** FirstArgPointer, char** SecondArgPointer, char
 
 	int iterator3=0;
 
-	printf("CALLING PARSE");
+	printf("CALLING PARSE2");
 
 	int j=strlen(Actualmsg);
 
@@ -200,7 +200,7 @@ void Parse2(char** Command,char** FirstArgPointer, char** SecondArgPointer, char
 
 		printf("MESSAGE IS %s\n",Actualmsg);
 
-		printf("PARSE LOOP:\n ");
+		printf("PARSE2 LOOP:\n ");
 
 		char Character[2];
 

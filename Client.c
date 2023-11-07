@@ -362,7 +362,7 @@
 
 				printf("HOST NAME IS %s\n",HostName);
 
-				printf("IP IS %s",IP)
+				printf("IP IS %s",IP);
 
 				strcpy(List1[l].IP,IP);
 

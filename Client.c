@@ -238,7 +238,7 @@ int compareClients2(const void *a, const void *b) {
 
 void ReceiveLoggedinInfo(char* ServerMessage){
 
-	printf("SERVER MESSAGE IS %s\n",ServerMessage)
+	printf("SERVER MESSAGE IS %s\n",ServerMessage);
 
 	int count; // The count of logged-in clients
 
@@ -704,7 +704,7 @@ void process_client_commands() {
 
 					else if (sscanf(DataReceived, "%d", &firstValue) >0) {
 
-						printf("ELSE IF\n")
+						printf("ELSE IF\n");
 
 						ReceiveLoggedinInfo(DataReceived);
 

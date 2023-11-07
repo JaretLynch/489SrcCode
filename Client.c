@@ -350,47 +350,47 @@
 
 		  		Parse2(&FUCKYOU,&IP,&listeningPort,ServerMessage);
 
+		  		printf("HOST NAME123123123 IS %s\n",FUCKYOU);
+
+					printf("IP IS %s",IP);
+
+					strcpy(List1[l].IP,IP);
+
+					strcpy(List1[l].HostName,FUCKYOU);
+
+					int port=atoi(listeningPort);
+
+					List1[l].ListeningPort=port;
+
+					l++;
+
 		  		int iterator=0;
 
 		  		printf("FUCK YOU IS %s\n",FUCKYOU);
 
 		  		for(int j=0; j<strlen(Manipulator);j++){
 
-					char Character[1];
+						char Character[1];
 
-					strncpy(Character,&Manipulator[i],1);
+						strncpy(Character,&Manipulator[i],1);
 
-					Character[1]='\0';
+						Character[1]='\0';
 
-					if (strcmp(Character," ")==0){
+						if (strcmp(Character," ")==0){
 
-						iterator++;
+							iterator++;
 
-					}
+						}
 
-					if (iterator==4){
+						if (iterator==4){
 
-						Manipulator=Manipulator+j;
+							Manipulator=Manipulator+j;
 
-						break;
+							break;
 
-					}
+						}
 
 				}
-
-				printf("HOST NAME123123123 IS %s\n",FUCKYOU);
-
-				printf("IP IS %s",IP);
-
-				strcpy(List1[l].IP,IP);
-
-				strcpy(List1[l].HostName,FUCKYOU);
-
-				int port=atoi(listeningPort);
-
-				List1[l].ListeningPort=port;
-
-				l++;
 
 	  	}
 

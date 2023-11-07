@@ -124,21 +124,15 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 	int iterator3=0;
 
-	printf("CALLING PARSE");
+
 
 	int j=strlen(Actualmsg);
 
 	for (int i=0; i<strlen(Actualmsg); i++){
 
-		printf("MESSAGE IS %s\n",Actualmsg);
-
-		printf("PARSE LOOP:\n ");
-
 		char Character[2];
 
 		
-
-		strncpy(Character,&Actualmsg[i],1);
 
 		Character[1]='\0';
 

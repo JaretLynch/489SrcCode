@@ -124,17 +124,23 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 	int iterator3=0;
 
-	
+	printf("CALLING PARSE");
 
 	int j=strlen(Actualmsg);
 
 	for (int i=0; i<strlen(Actualmsg); i++){
 
+		printf("PARSE LOOP:\n ");
+
 		char Character[1];
+
+		
 
 		strncpy(Character,&Actualmsg[i],1);
 
 		Character[1]='\0';
+
+		printf("CHARACTER IS *%c*\n",Character);
 
 		if(count==1){
 
@@ -169,6 +175,8 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 		}
 
 		}
+
+		printf("PARSE DONE");
 
 }
 
@@ -289,6 +297,8 @@ void ReceiveLoggedinInfo(char* ServerMessage){
 			int port=atoi(listeningPort);
 
 			List1[l].ListeningPort=port;
+
+			l++;
 
   	}
 

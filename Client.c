@@ -222,11 +222,11 @@ int compareClients2(const void *a, const void *b) {
 
 
 
-		  const ClientsLoggedIn *clientA = (const Client *)a;
+		  const ClientsLoggedIn *clientA = (const ClientsLoggedIn *)a;
 
 
 
-		  const ClientsLoggedIn *clientB = (const Client *)b;
+		  const ClientsLoggedIn *clientB = (const ClientsLoggedIn *)b;
 
 
 
@@ -253,6 +253,14 @@ void ReceiveLoggedinInfo(char* ServerMessage){
         return;
 
     }
+
+    int i;  // Declare i as an integer
+
+if (sscanf(ServerMessage, "%d", &i) == 1) {
+
+    // i will now contain the integer from the beginning of ServerMessage
+
+    // Rest of your code here...
 
     ServerMessage = pos + 1;
 
@@ -289,6 +297,8 @@ void ReceiveLoggedinInfo(char* ServerMessage){
         }
 
         ServerMessage = pos + 1;
+
+    }
 
     }
 
@@ -737,8 +747,6 @@ void process_client_commands() {
 						ListCommand(List1);
 
 					}
-
-					ParseServerMessage(&ServerCommand,DataReceived);
 
 					fflush(stdout);
 

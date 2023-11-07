@@ -360,6 +360,8 @@ void ReceiveLoggedinInfo(char* ServerMessage){
 
 			}
 
+			printf("HOST NAME IS %s\n",HostName);
+
 			strcpy(List1[l].IP,IP);
 
 			strcpy(List1[l].HostName,HostName);

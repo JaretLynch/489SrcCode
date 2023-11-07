@@ -382,7 +382,7 @@
 
 
 
-				sprintf(ReturnM+strlen(ReturnM), "%d %s %s %d ",id,LIST[i].Name,LIST[i].IPaddress, LIST[i].ListeningPort);
+				sprintf(ReturnM+strlen(ReturnM), "%d %s %s %d",id,LIST[i].Name,LIST[i].IPaddress, LIST[i].ListeningPort);
 
 				numLoggedIn;
 
@@ -1716,7 +1716,7 @@ char* statistics(const Client LIST[]) {
 
 								else if (strcmp(DataReceived,"REFRESH")==0){
 
-
+									print("REFRESH RECEIVED\n")
 
 									char *DataToSend= ReturnMessage(List,1);
 

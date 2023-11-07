@@ -144,7 +144,7 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 		printf("CHARACTER IS *%s*\n",Character);
 
-		if(count==1){
+		if(count==2){
 
 			(*FirstArgPointer)[iterator2]=*Character;
 
@@ -152,7 +152,7 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 		}
 
-		if (count>1){
+		if (count>2){
 
 			(*SecondArgPointer)[iterator3]=*Character;
 
@@ -168,7 +168,7 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 		}
 
-		if (count==0){
+		if (count==1){
 
 			(*Command)[iterator1]=*Character;
 

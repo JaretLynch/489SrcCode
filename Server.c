@@ -418,7 +418,33 @@
 
 
 
-	int AddClient(char ip[], char Name[], int LP, int FD) {
+
+
+int GetClientByIP(char* IP){
+
+	char* ListIP=malloc(30*sizeof(char));
+
+	for (int i=0;i<5; i++){
+
+		strcpy(ListIP,List[i].IPaddress);
+
+		if (strcmp(ListIP,IP)==0){
+
+			free(ListIP);
+
+			return i;
+
+	}
+
+}
+
+	return -1;
+
+
+
+	}
+
+int AddClient(char ip[], char Name[], int LP, int FD) {
 
 
 
@@ -491,32 +517,6 @@
 	}
 
 }
-
-int GetClientByIP(char* IP){
-
-	char* ListIP=malloc(30*sizeof(char));
-
-	for (int i=0;i<5; i++){
-
-		strcpy(ListIP,List[i].IPaddress);
-
-		if (strcmp(ListIP,IP)==0){
-
-			free(ListIP);
-
-			return i;
-
-	}
-
-}
-
-	return -1;
-
-
-
-	}
-
-
 
 int BlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 

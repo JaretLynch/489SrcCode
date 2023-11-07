@@ -382,7 +382,7 @@
 
 
 
-				sprintf(ReturnM+strlen(ReturnM), "%d %s %s %d",id,LIST[i].Name,LIST[i].IPaddress, LIST[i].ListeningPort);
+				sprintf(ReturnM+strlen(ReturnM), "%d %s %s %d ",id,LIST[i].Name,LIST[i].IPaddress, LIST[i].ListeningPort);
 
 				numLoggedIn;
 

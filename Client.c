@@ -770,7 +770,7 @@ int ClientExists(char* IP){
 
 								else if ((strcmp(Command,"SEND")==0)){
 
-								if (ClientExists(Arg1)==1)){
+								if (ClientExists(Arg1)==1){
 
 										int j=send(ClientFD,Input,strlen(Input),0);
 
@@ -812,7 +812,7 @@ int ClientExists(char* IP){
 
 								else if ((strcmp(Command,"BLOCK")==0){
 
-									if (ClientExists(Arg1)==1)){
+									if (ClientExists(Arg1)==1){
 
 										int j=send(ClientFD,Input,strlen(Input),0);
 
@@ -830,7 +830,7 @@ int ClientExists(char* IP){
 
 								else if ((strcmp(Command,"UNBLOCK")==0)&&(ClientExists(Arg1)==1)){
 
-									if (ClientExists(Arg1)==1)){
+									if (ClientExists(Arg1)==1){
 
 										int j=send(ClientFD,Input,strlen(Input),0);
 

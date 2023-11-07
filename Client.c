@@ -316,7 +316,9 @@ char* ListCommand(ClientsLoggedIn List2[]){
 
 		for(int i=0; i<5; i++){
 
-			char* IP=List2[i].IP;
+			char* IP=malloc(120);
+
+			strcpy(IP,List2[i].IP);
 
 			if (strlen(IP)>0){
 

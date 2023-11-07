@@ -1468,10 +1468,6 @@ char* statistics(const Client LIST[]) {
 
 
 
-								remove_connection(head_socket);
-
-
-
 								cse4589_print_and_log("[EXIT:SUCCESS]\n");
 
 

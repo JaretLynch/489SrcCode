@@ -508,7 +508,7 @@ void login_to_server(const char* server_ip, int server_port) {
 
 
 
-		process_client_commands();
+/*		process_client_commands();*/
 
 	}
 
@@ -844,7 +844,11 @@ void process_client_commands() {
 
 						ReceiveLoggedinInfo(DataReceived);
 
+						printf("AFTER RECEIVED LOGGEDININGO \n");
+
 						ListCommand(List1);
+
+						printf("AFTER RECEIVED LISTCOMMAND \n");
 
 						free(DataReceived);
 

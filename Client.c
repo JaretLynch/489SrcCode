@@ -836,7 +836,7 @@ int GetClientByIP(char* IP){
 
 						char *ServerCommand=(char*) malloc(256*sizeof(char));
 
-						int LengthOfMessageReceived= recv(ClientFD, DataReceived, 1023,0)
+						int LengthOfMessageReceived= recv(ClientFD, DataReceived, 1023,0);
 
 						char Mess[8];  // Make sure to allocate enough space for the copied characters and the null-terminator.
 

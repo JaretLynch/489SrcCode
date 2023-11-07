@@ -1508,9 +1508,7 @@ char* statistics(const Client LIST[]) {
 
 								else{
 
-									cse4589_print_and_log("[%s:ERROR]\n",cmd);
-
-									cse4589_print_and_log("[%s:END]\n",cmd);
+									fflush(stdout);
 
 								}
 

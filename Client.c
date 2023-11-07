@@ -238,17 +238,59 @@ int compareClients2(const void *a, const void *b) {
 
 void ReceiveLoggedinInfo(char* ServerMessage){
 
+	char* Manipulator=ServerMessage;
+
 	printf("SERVER MESSAGE IS %s\n",ServerMessage);
 
 	int count; // The count of logged-in clients
 
-  int listeningPort;
+  int l=0;
 
-  char* IP=malloc(120);
+  for (int i=0; i<ServerMessage[0]-1;i++){
 
-  char *HostName=malloc(200);
+			char* listeningPort;
 
-  char* pos = strchr(ServerMessage, ' ');
+			char* IP=malloc(120);
+
+			char* HostName=malloc(200);
+
+  		Parse(&HostName,&IP,&ListeningPort,ServerMessage);
+
+  		int iterator=0;
+
+  		for(int j=0; j<strlen(Manipulator);j++){
+
+				char Character[1];
+
+				strncpy(Character,&Manipulator[i],1);
+
+				Character[1]='\0';
+
+				if (strcmp(Character," ")==0){
+
+					iterator++;
+
+				}
+
+				if (iterator==4){
+
+					Manipulator=Manipulator+j;
+
+					break;
+
+				}
+
+			}
+
+			strcpy(List1[l].IP,IP);
+
+			strcpy(List1[l].HostName,HostName);
+
+			int port=atoi(listeningPort);
+
+			List1[l].ListeningPort=port;
+
+  	}
 
   
 

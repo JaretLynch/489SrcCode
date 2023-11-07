@@ -306,7 +306,7 @@ void ReceiveLoggedinInfo(char* ServerMessage){
 
 char* ListCommand(ClientsLoggedIn List2[]){
 
-		qsort(List2, 5, sizeof(ClientsLoggedIn), compareClients);
+		qsort(List2, 5, sizeof(ClientsLoggedIn), compareClients2);
 
 		char *ReturnM = malloc(1024*sizeof(char));
 
@@ -740,7 +740,7 @@ void process_client_commands() {
 
 					}
 
-					else if (sscanf(ServerMessage, "%d", &messageCount) == 1) {
+					else if (sscanf(DataReceived, "%d", &messageCount) == 1) {
 
 						ReceiveLoggedinInfo(DataReceived);
 

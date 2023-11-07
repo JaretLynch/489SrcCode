@@ -238,67 +238,19 @@ int compareClients2(const void *a, const void *b) {
 
 void ReceiveLoggedinInfo(char* ServerMessage){
 
+	printf("SERVER MESSAGE IS %s\n",ServerMessage)
+
 	int count; // The count of logged-in clients
 
-  int id, listeningPort;
+  int listeningPort;
 
-  char IP[30], HostName[50];
+  char* IP=malloc(120);
+
+  char *HostName=malloc(200);
 
   char* pos = strchr(ServerMessage, ' ');
 
-  if (pos == NULL) {
-
-        // Handle parsing error
-
-        return;
-
-    }
-
-    int i;  // Declare i as an integer
-
-if (sscanf(ServerMessage, "%d", &i) > 1) {
-
-    // i will now contain the integer from the beginning of ServerMessage
-
-    // Rest of your code here...
-
-    ServerMessage = pos + 1;
-
-
-
-    // Loop to parse the individual client information
-
-
-
-        // Store the parsed data in your structure array
-
-        if (i < 5) {
-
-            strcpy(List1[i].IP, IP);
-
-            strcpy(List1[i].HostName, HostName);
-
-            List1[i].ListeningPort = listeningPort;
-
-        }
-
-
-
-        // Move the ServerMessage pointer to the next client's data
-
-        pos = strchr(ServerMessage, ' ');
-
-        if (pos == NULL) {
-
-            // Handle parsing error
-
-            return;
-
-        }
-
-        ServerMessage = pos + 1;
-
-    }
+  
 
     }
 
@@ -740,6 +692,8 @@ void process_client_commands() {
 
 					if (strcmp(Mess,"REFRESH")==0){	
 
+						printf("REFRESH\n");
+
 						char* stripped;
 
 						stripped=DataReceived+7;
@@ -749,6 +703,8 @@ void process_client_commands() {
 					}
 
 					else if (sscanf(DataReceived, "%d", &firstValue) >0) {
+
+						printf("ELSE IF\n")
 
 						ReceiveLoggedinInfo(DataReceived);
 

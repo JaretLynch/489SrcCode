@@ -692,6 +692,8 @@ void process_client_commands() {
 
 					strncpy(Mess, DataReceived, 7);
 
+					int value = atoi(DataReceived[0]);
+
 					if (strcmp(Mess,"REFRESH")==0){	
 
 						printf("REFRESH\n");
@@ -704,7 +706,9 @@ void process_client_commands() {
 
 					}
 
-					else if (sscanf(DataReceived, "%d", &firstValue) >0) {
+					
+
+					else if (value>0) {
 
 						printf("ELSE IF\n");
 

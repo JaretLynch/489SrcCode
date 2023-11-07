@@ -640,9 +640,13 @@ void process_client_commands() {
 
 							else if (strcmp(Input,"LIST")==0){
 
-								ListCommand(List1);
+								char* Message=ListCommand(List1);
 
+								cse4589_print_and_log("[LIST:SUCCESS]\n")
 
+								cse4589_print_and_log(Message);
+
+								cse4589_print_and_log("[LIST:END]\n")
 
 								free(Input);
 
@@ -728,7 +732,7 @@ void process_client_commands() {
 
 					strncpy(Mess, DataReceived, 7);
 
-					if (strcmp(Mess,"REFRESH")==0){
+					if (strcmp(Mess,"REFRESH")==0){	
 
 						char* stripped;
 

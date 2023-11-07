@@ -558,12 +558,6 @@ void process_client_commands() {
 
 							else{
 
-
-
-							cse4589_print_and_log("[%s:ERROR]\n",Input);
-
-							cse4589_print_and_log("[%s:END]\n",Input);
-
 							fflush(stdout);
 
 							}

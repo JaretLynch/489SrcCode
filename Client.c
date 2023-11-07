@@ -358,15 +358,15 @@
 
 					printf("IP IS %s",IP);
 
-					strcpy(List1[l].IP,IP);
+					strcpy(List1[i].IP,IP);
 
-					strcpy(List1[l].HostName,FUCKYOU);
+					strcpy(List1[i].HostName,FUCKYOU);
 
 					
 
 					int port=atoi(listeningPort);
 
-					List1[l].ListeningPort=port;
+					List1[i].ListeningPort=port;
 
 					l=l+1;
 

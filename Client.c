@@ -1,232 +1,112 @@
-	#include "Server.h"
+#include <stdio.h>
 
-	#include <arpa/inet.h>
 
-	#include <stdio.h>
 
-	#include <string.h>
+#include <stdlib.h>
 
-	#include <sys/socket.h>
 
-	#include <unistd.h>
 
-	#include <netinet/in.h>
+#include <sys/socket.h>
 
-	#include <stdlib.h>
 
-	#include "../include/global.h"
 
-	#include "../include/logger.h"
+#include <strings.h>
 
-	#include "Commands.h"
 
-	#include <netdb.h>
 
-	#define CMD_SIZE 100
+#include <string.h>
 
-	#define BUFFER_SIZE 256
 
 
+#include <arpa/inet.h>
 
-	int server_socket;
 
 
+#include <sys/types.h>
 
-	struct sockaddr_in client_addr,server_addr;
 
 
+#include <netdb.h>
 
-	fd_set master_list, watch_list;
 
 
+#include <unistd.h>
 
-	int head_socket, selret, sock_index, fdaccept=0, caddr_len;
 
 
+#include "../include/global.h"
 
-	int PORT = 8080;
 
 
+#include "../include/logger.h"
 
-	char buffer[256];
 
 
+#include "Commands.h"
 
-	typedef struct Client {
 
 
+int Portno;
 
-		char IPaddress[30];
 
 
+void process_client_commands();
 
-		char Name[30];
 
 
+int LoggedIn=0;
 
-		int ListeningPort;
 
 
+int ClientFD=-1;
 
-		int FD;
+fd_set watch_list;
 
-		
 
-		int MessagesReceived;
 
-		
+typedef struct ClientsLoggedIn{
 
-		int MessagesSent;
+	char IP[30];
 
-		
+	char HostName[50];
 
-		int LoggedIn;
+	int ListeningPort;
 
-		
+}ClientsLoggedIn;
 
-		char BlockList[5][30];
 
-		
 
-		int NumberOfBlocked;
+ClientsLoggedIn List1[5];
 
-	} Client;
 
 
 
-	typedef struct Message{
 
-			char SourceIP[30];
+int create_client_socket(int portno) {
 
-			char Message[256];
+	Portno=portno;
 
-		}Message;
+	int client_fd = socket(AF_INET, SOCK_STREAM, 0);
 
-	typedef struct Backlog {
+	if (client_fd < 0) {
 
-		char DestIP[30];
+		cse4589_print_and_log("\n Socket creation error \n");
 
-		
-
-		Message MessageList[100];
-
-		
-
-		int NumOfMessages;
-
-	}Backlog;
-
-	char* EmptyString[30];
-
-	Client List[5];
-
-	Backlog ListOfBacklogs[5];
-
-
-
-	Backlog* EmptyLog;
-
-
-
-	Message* Empty;
-
-
-
-	Client* Dummy;
-
-
-
-	char* BlockList[5];
-
-	void AddToBacklog(char* SourceIP,char* DestIP,char* Message){
-
-		struct Message NewMessage;
-
-		strcpy(NewMessage.SourceIP,SourceIP);
-
-		strcpy(NewMessage.Message, Message);
-
-		int exists=0;
-
-		for(int i=0; i<5; i++){
-
-			struct Backlog ClientInList=ListOfBacklogs[i];
-
-			if (strcmp(ClientInList.DestIP,DestIP)==0){
-
-				exists=1;
-
-				ListOfBacklogs[i].MessageList[ClientInList.NumOfMessages]=NewMessage;
-
-				ListOfBacklogs[i].NumOfMessages+=1;		
-
-			}
-
-		}
-
-		if (exists==0){
-
-			struct Backlog NewBacklog;
-
-			strcpy(NewBacklog.DestIP,DestIP);
-
-			NewBacklog.MessageList[0]=NewMessage;
-
-			NewBacklog.NumOfMessages=1;
-
-			for(int i=0; i<5; i++){
-
-				if (strcmp(ListOfBacklogs[i].DestIP,"69")==0){
-
-					ListOfBacklogs[i]=NewBacklog;
-
-					break;
-
-					}
-
-			}	
-
-		}
+		return -1;
 
 	}
 
+	else{
 
-
-	void ClearBacklog(char* DestIP,char* Message){
-
-		for(int i=0; i<5; i++){
-
-			struct Backlog CurrentClient=ListOfBacklogs[i];
-
-			if (strcmp(CurrentClient.DestIP,DestIP)==0){
-
-				CurrentClient.NumOfMessages=0;
-
-			}
-
-			
-
-		}
-
-	}
+		process_client_commands();
 
 
 
-	void LogClientOut(int socket){
+		ClientFD=client_fd;
 
-		close(socket);
 
-		FD_CLR(socket, &master_list);
 
-		for (int i = 0; i < 5; i++) {
-
-			if (List[i].FD == socket) {
-
-				List[i].LoggedIn=0;
-
-				List[i].FD=-1;
-
-		}
+		return client_fd;
 
 	}
 
@@ -234,189 +114,119 @@
 
 
 
+void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char* Actualmsg){
 
+	int count=0;
 
-	char* GetIPAddress(int client_fd) {
+	int iterator1=0;
 
-		char* Ip=malloc(100*sizeof(char));
+	int iterator2=0;
 
-		  for (int i = 0; i < 5; i++) {
+	int iterator3=0;
 
-		      if (List[i].FD == client_fd) {
+	
 
-		      		strcpy(Ip,List[i].IPaddress);
+	int j=strlen(Actualmsg);
 
-		          return Ip;
+	for (int i=0; i<strlen(Actualmsg); i++){
 
-		      }
+		char Character[1];
 
-		  }
+		strncpy(Character,&Actualmsg[i],1);
 
-		  return NULL; // Client with the given FD not found
+		Character[1]='\0';
 
-	}
+		if(count==1){
 
+			(*FirstArgPointer)[iterator2]=*Character;
 
-
-	void Parse1(char** Command,char** FirstArgPointer, char** SecondArgPointer, char* Actualmsg){
-
-		
-
-		int count=0;
-
-		int iterator1=0;
-
-		int iterator2=0;
-
-		int iterator3=0;
-
-		
-
-		int j=strlen(Actualmsg);
-
-		for (int i=0; i<strlen(Actualmsg); i++){
-
-			char Character[1];
-
-			strncpy(Character,&Actualmsg[i],1);
-
-			Character[1]='\0';
-
-			if(count==1){
-
-				(*FirstArgPointer)[iterator2]=*Character;
-
-				iterator2 ++;
-
-			}
-
-			//POSSIBLE ERRORS DUE TO MESSAGE SIZE 
-
-			if ((count>1)&&(iterator3<256)){
-
-				(*SecondArgPointer)[iterator3]=*Character;
-
-				iterator3++;
-
-			}
-
-			if (strcmp(Character," ")==0){
-
-				count++;
-
-
-
-			}
-
-			if (count==0){
-
-				(*Command)[iterator1]=*Character;
-
-				iterator1++;		
-
-			}
-
-			}
-
-	}
-
-	char* MessageCreator(char* Message,char* Command,char* SourceIP,char* DestIP, int success){
-
-		char *ReturnM = malloc(300*sizeof(char));
-
-		if (success==1){
-
-			sprintf(ReturnM,"[%s:SUCCESS]\n",Command);
-
-			if (((((strcmp(Command,"LOGIN")==0)||(strcmp(Command,"SEND")==0))||(strcmp(Command,"BLOCK")==0))||(strcmp(Command,"UNBLOCK")==0))||				(strcmp(Command,"BROADCAST")==0)){
-
-				sprintf(ReturnM+strlen(ReturnM),"[%s:END]\n",Command);
-
-			}
-
-			else if (strcmp(Command,"RECEIVED")==0){
-
-				sprintf(ReturnM+strlen(ReturnM),"msg from:%s\n[msg]:%s\n[RECEIVED:END]\n", SourceIP,Message);
-
-			}
-
-				
-
-			}
-
-		else{
-
-			sprintf(ReturnM,"[%s:ERROR]\n[%s:END]\n",Command,Command);
-
-		}	
-
-		return ReturnM;
-
-	}
-
-	char* ReturnMessage(const Client LIST[],int a){
-
-		int numLoggedIn=1;
-
-		char *ReturnM = malloc(1024*sizeof(char));
-
-		if (a==1){
-
-			sprintf(ReturnM+strlen(ReturnM),"REFRESH");
+			iterator2 ++;
 
 		}
 
-		sprintf(ReturnM+strlen(ReturnM),"%d ",numLoggedIn);
+		if (count>1){
 
-		int id=1;
+			(*SecondArgPointer)[iterator3]=*Character;
 
-		
+			iterator3++;
 
-		for(int i=0; i<5; i++){
+		}
+
+		if (strcmp(Character," ")==0){
+
+			count++;
+
+
+
+		}
+
+		if (count==0){
+
+			(*Command)[iterator1]=*Character;
+
+			iterator1++;		
+
+		}
+
+		}
+
+}
+
+void ParseServerMessage(char** ServerCommand,char* ServerMessage){
+
+	int count=0;
+
+	int iterator1=0;
+
+	
+
+	int j=strlen(ServerMessage);
+
+	for (int i=0; i<strlen(ServerMessage); i++){
+
+		char Character[1];
+
+		strncpy(Character,&ServerMessage[i],1);
+
+		Character[1]='\0';
+
+		if (strcmp(Character," ")==0){
+
+			count++;
+
+		}
+
+		if (count==0){
+
+			(*ServerCommand)[iterator1]=*Character;
+
+			iterator1++;		
+
+		}
+
+		}
+
+}
+
+
+
+void close_connection(int client_fd) {
+
+	close(client_fd);
+
+}
+
+int compareClients2(const void *a, const void *b) {
 
 			
 
-			int LoggedIn=List[i].LoggedIn;
-
-			if (LoggedIn==1){
 
 
-
-				sprintf(ReturnM+strlen(ReturnM), "%d %s %s %d ",id,LIST[i].Name,LIST[i].IPaddress, LIST[i].ListeningPort);
-
-				numLoggedIn;
-
-				id+=1;
-
-				numLoggedIn+=1;
-
-		}
+		  const ClientsLoggedIn *clientA = (const ClientsLoggedIn *)a;
 
 
 
-		}
-
-		ReturnM[0]=numLoggedIn;
-
-		printf("RETURN M IS *%s*\n",ReturnM);
-
-		return	ReturnM;
-
-
-
-	}
-
-
-
-	int compareClients(const void *a, const void *b) {
-
-
-
-		  const Client *clientA = (const Client *)a;
-
-
-
-		  const Client *clientB = (const Client *)b;
+		  const ClientsLoggedIn *clientB = (const ClientsLoggedIn *)b;
 
 
 
@@ -426,1445 +236,535 @@
 
 	}
 
+void ReceiveLoggedinInfo(char* ServerMessage){
 
+	int count; // The count of logged-in clients
 
+  int id, listeningPort;
 
+  char IP[30], HostName[50];
 
-int GetClientByIP(char* IP){
+  char* pos = strchr(ServerMessage, ' ');
 
-	char* ListIP=malloc(30*sizeof(char));
+  if (pos == NULL) {
 
-	for (int i=0;i<5; i++){
+        // Handle parsing error
 
-		strcpy(ListIP,List[i].IPaddress);
+        return;
 
-		if (strcmp(ListIP,IP)==0){
+    }
 
-			free(ListIP);
+    int i;  // Declare i as an integer
 
-			return i;
+if (sscanf(ServerMessage, "%d", &i) > 1) {
 
-	}
+    // i will now contain the integer from the beginning of ServerMessage
 
-}
+    // Rest of your code here...
 
-	return -1;
+    ServerMessage = pos + 1;
 
 
 
-	}
+    // Loop to parse the individual client information
 
-int AddClient(char ip[], char Name[], int LP, int FD) {
 
 
+        // Store the parsed data in your structure array
 
-		Client ClientToAdd;
+        if (i < 5) {
 
+            strcpy(List1[i].IP, IP);
 
+            strcpy(List1[i].HostName, HostName);
 
-		strcpy(ClientToAdd.IPaddress,ip);
+            List1[i].ListeningPort = listeningPort;
 
+        }
 
 
-		strcpy(ClientToAdd.Name,Name);
 
+        // Move the ServerMessage pointer to the next client's data
 
+        pos = strchr(ServerMessage, ' ');
 
-		ClientToAdd.ListeningPort=LP;
+        if (pos == NULL) {
 
+            // Handle parsing error
 
+            return;
 
-		ClientToAdd.FD=FD;
+        }
 
-		
+        ServerMessage = pos + 1;
 
-		ClientToAdd.MessagesReceived=0;
+    }
 
-		
+    }
 
-		ClientToAdd.MessagesSent=0;
+char* ListCommand(ClientsLoggedIn List2[]){
 
-		
+		qsort(List2, 5, sizeof(ClientsLoggedIn), compareClients2);
 
-		ClientToAdd.LoggedIn=1;
+		char *ReturnM = malloc(1024*sizeof(char));
 
-		int ClientID=GetClientByIP(ip);
 
-		if (ClientID>-1){
-
-			List[ClientID].LoggedIn=1;
-
-			List[ClientID].FD=FD;
-
-		}
-
-		else{
-
-		
-
-			for (int i=0; i<5; i++){
-
-
-
-				int N=List[i].FD;
-
-
-
-				if (N == -2){
-
-
-
-					List[i]=ClientToAdd;
-
-
-
-					return (0);
-
-				}
-
-		}
-
-	}
-
-}
-
-int BlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
-
-	for(int i=0;i<5;i++){
-
-		Client CurrentClient=List[i];
-
-		char* ClientToBlock=GetIPAddress(DestSock);
-
-		if (((strcmp(CurrentClient.IPaddress,ClientToBlock)==0)&&(strcmp(CurrentClient.IPaddress,SourceIP)!=0))&&(CurrentClient.LoggedIn==1)){
-
-			for (int j=0; j<5;j++){
-
-				char* BlockedClientIP=malloc(30*sizeof(char));
-
-				strcpy(BlockedClientIP,List[GetClientByIP(SourceIP)].BlockList[j]);
-
-				if (strcmp(BlockedClientIP,DestIP)==0){
-
-					return 0;
-
-				}
-
-				else{
-
-
-
-					int BlockerID=GetClientByIP(SourceIP);
-
-					if (BlockerID>-1){
-
-
-
-						Client Blocker=List[BlockerID];
-
-						int numBlocked=Blocker.NumberOfBlocked;
-
-						fflush(stdout);
-
-						strcpy(List[BlockerID].BlockList[numBlocked],ClientToBlock);
-
-						List[BlockerID].NumberOfBlocked+=1;
-
-					return 1;
-
-				}
-
-	}
-
-	
-
-}
-
-}
-
-}
-
-return 0;
-
-}
-
-int UnBlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
-
-	int success=0;
-
-	int BlockerID=GetClientByIP(SourceIP);
-
-	if(BlockerID>-1){
-
-		int BlockedID=GetClientByIP(DestIP);
-
-		if((BlockedID>-1)&&(List[BlockedID].LoggedIn==1)){
-
-			for(int i=0;i<5;i++){
-
-				char* BlockListIP=malloc(30*sizeof(char));
-
-				strcpy(BlockListIP,List[BlockerID].BlockList[i]);
-
-				if (strcmp(BlockListIP,DestIP)==0){
-
-					strcpy(List[BlockerID].BlockList[i],"");
-
-					return 1;
-
-				}
-
-			}
-
-		}
-
-	}
-
-return 0;
-
-}
-
-int BlockedMessage(char* IPaddress){
-
-		int exists=0;
-
-		Client LIST[5];
-
-		for (int i=0;i<5;i++){
-
-			LIST[i]=*Dummy;
-
-		}
-
-		char *ReturnM = malloc(1024);
-
-		int ClientFD=GetClientByIP(IPaddress);
-
-		if (ClientFD==-2){
-
-			cse4589_print_and_log("[BLOCKED:ERROR]\n[BLOCKED:END]\n");
-
-			return 1;
-
-		}
-
-		else{
-
-			for(int i=0; i<5; i++){
-
-				if(GetClientByIP(List[ClientFD].BlockList[i])!=-1){
-
-					exists=1;
-
-					LIST[i]=List[GetClientByIP(List[ClientFD].BlockList[i])];
-
-				}
-
-			}	
-
-		}
-
-		if (exists==0){
-
-			cse4589_print_and_log("[BLOCKED:ERROR]\n[BLOCKED:END]\n");
-
-			return 1;
-
-		}
-
-		qsort(LIST, 5, sizeof(Client), compareClients);
-
-		
-
-		sprintf(ReturnM+strlen(ReturnM),"[BLOCKED:SUCCESS]\n");
 
 		int id=1;
 
+
+
 		for(int i=0; i<5; i++){
 
+			printf("I IS %d and List2[i].IP is %s\n",i,List2[i].IP);
+
+			char* IP=malloc(120);
+
+			strcpy(IP,List2[i].IP);
+
+			printf("IP IS %s\n");
+
+			if (strlen(IP)>0){
+
+				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List2[i].HostName,List2[i].IP, List2[i].ListeningPort);
+
+			}
+
+/*			if (LoggedIn==1){*/
 
 
-			if (LIST[i].FD!=-2){
+
+/*				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List2[i].HostName,List2[i].IPaddress, List2[i].ListeningPort);*/
 
 
 
-				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,LIST[i].Name,LIST[i].IPaddress, LIST[i].ListeningPort);
+/*				id+=1;*/
 
 
 
-				id+=1;
+/*		}*/
 
 
 
 		}
 
+		return	ReturnM;
 
 
-		}
-
-		sprintf(ReturnM+strlen(ReturnM),"[BLOCKED:END]\n");
-
-		cse4589_print_and_log(ReturnM);
-
-	return	1;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void remove_connection(int socket) {
-
-
-
-		char* Ip=GetIPAddress(socket);
-
-		int ID=GetClientByIP(Ip);
-
-		if (ID>-1){
-
-			List[ID]=*Dummy;
-
-		}
-
-		close(socket);
-
-		FD_CLR(socket, &master_list);
 
 	}
 
+void login_to_server(const char* server_ip, int server_port) {
 
 
 
+	struct sockaddr_in serv_addr;
 
 
 
+	if ((ClientFD = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
 
 
 
+		cse4589_print_and_log("[LOGIN:ERROR]\n");
 
+		cse4589_print_and_log("[LOGIN:END]\n");
 
+		ClientFD=-1;
 
-
-
-	int Create_Server(int PortNO){
-
-
-
-		  	int port = PortNO; 
-
-
-
-		if (port <= 0) {
-
-
-
-			  return 1;
-
-
-
-		}
-
-
-
-		  	if (initialize_server(port) < 0) {
-
-
-
-			return 1;
-
-
-
-			  }
-
-
-
-		else{
-
-
-
-			PORT=port;
-
-
-
-			server_loop();
-
-
-
-		}
-
-
-
-		return 0;  
-
-
-
-		}
-
-
-
-
-
-
-
-void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataReceived, int sock_index){
-
-	int Exists=0;
-
-	Parse1(&Command,&Arg1,&Arg2,DataReceived);
-
-	Arg1[strlen(Arg1)-1]='\0';
-
-	if (strcmp(Command,"SEND")==0){
-
-		for (int i = 0; i < 5; i++) {
-
-			Client currentClient = List[i];
-
-				char *ClientIP=malloc(256*sizeof(char));
-
-				strcpy(ClientIP,currentClient.IPaddress);
-
-				if (strcmp(Arg1,ClientIP)==0){
-
-					 	if(List[i].FD!=sock_index){
-
-
-
-							Exists=1;
-
-							char* MessageToSender=(char*) malloc(1024*sizeof(char));
-
-							strcpy(MessageToSender,MessageCreator(DataReceived,Command,GetIPAddress(sock_index),SenderIP,1));
-
-							int MSLen=strlen(MessageToSender);
-
-							send(sock_index,MessageToSender,MSLen,0);
-
-							int NumberDestHasBlocked=List[i].NumberOfBlocked;
-
-							int blocked=0;
-
-							int DestID=GetClientByIP(Arg1);
-
-
-
-							for (int j=0;j<NumberDestHasBlocked;j++){
-
-
-
-								if(strcmp(List[i].BlockList[j],SenderIP)==0){
-
-
-
-									
-
-									blocked=1;
-
-								}
-
-							}
-
-							if (blocked==0){
-
-								if (currentClient.LoggedIn==1){
-
-									char* MessageToDest=(char*) malloc(1024*sizeof(char));
-
-									strcpy(MessageToDest,MessageCreator(Arg2,"RECEIVED",GetIPAddress(sock_index),Arg1,1));
-
-									int MDLen=strlen(MessageToDest);
-
-									send(currentClient.FD,MessageToDest,MDLen,0);
-
-									cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
-
-									List[GetClientByIP(SenderIP)].MessagesSent+=1;
-
-									List[GetClientByIP(ClientIP)].MessagesReceived+=1;
-
-								}
-
-								else{
-
-
-
-									AddToBacklog(GetIPAddress(sock_index),ClientIP,Arg2);
-
-								}
-
-								break;
-
-							}
-
-						}
-
-						
-
-				}
-
-			}
-
-		if (Exists==0){
-
-
-
-					char* MessageToSender=(char*)malloc(1024*sizeof(char));
-
-					strcpy(MessageToSender,MessageCreator(Command,Command,Command,Command,0));
-
-					int MSLen=strlen(MessageToSender);
-
-					send(sock_index,MessageToSender,MSLen,0);
-
-		}
-
-}
-
-}
-
-
-
-void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataReceived, int sock_index){
-
-	int success=0;
-
-	int Exists=0;
-
-		Parse1(&Command,&Arg1,&Arg2,DataReceived);
-
-		for (int i = 0; i < 5; i++) {
-
-			Client currentClient = List[i];
-
-			char *ClientIP=malloc(256*sizeof(char));
-
-			strcpy(ClientIP,currentClient.IPaddress);
-
-		 	if((List[i].FD!=sock_index)&& (List[i].FD!=-2)){
-
-
-
-				Exists=1;
-
-				int blocked=0;
-
-				int DestID=GetClientByIP(Arg1);
-
-				int NumberDestHasBlocked=List[i].NumberOfBlocked;
-
-				for (int j=0;j<NumberDestHasBlocked;j++){
-
-								if(strcmp(List[i].BlockList[j],SenderIP)==0){
-
-
-
-									
-
-									blocked=1;
-
-								}
-
-							}
-
-				if (blocked==0){
-
-					if (currentClient.LoggedIn==1){
-
-					
-
-						success==1;
-
-						char* MessageToDest=(char*) malloc(1024*sizeof(char));
-
-						strcpy(MessageToDest,MessageCreator(Arg1,"RECEIVED",GetIPAddress(sock_index),ClientIP,1));
-
-						int MDLen=strlen(MessageToDest);
-
-						send(currentClient.FD,MessageToDest,MDLen,0);
-
-						List[GetClientByIP(SenderIP)].MessagesSent+=1;
-
-						List[GetClientByIP(ClientIP)].MessagesReceived+=1;
-
-					}
-
-					else{
-
-
-
-						AddToBacklog(GetIPAddress(sock_index),ClientIP,Arg1);
-
-					}
-
-			}
-
-			}
-
-			}
-
-			if (Exists==0){
-
-
-
-						char* MessageToSender=(char*)malloc(1024*sizeof(char));
-
-						strcpy(MessageToSender,MessageCreator(Command,Command,Command,Command,0));
-
-						int MSLen=strlen(MessageToSender);
-
-						send(sock_index,MessageToSender,MSLen,0);
-
-			}
-
-			else{
-
-					char* MessageToSender=(char*) malloc(1024*sizeof(char));
-
-					strcpy(MessageToSender,MessageCreator(DataReceived,Command,GetIPAddress(sock_index),SenderIP,1));
-
-					int MSLen=strlen(MessageToSender);
-
-					send(sock_index,MessageToSender,MSLen,0);
-
-					cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,"255.255.255.255",Arg1);
-
-			}
-
-}
-
-	// Initialize the server
-
-char* statistics(const Client LIST[]) {
-
-	char *ReturnM = malloc(1024*sizeof(char));
-
-	int id=1;
-
-	for(int i=0; i<5; i++){
-
-		if (List[i].FD!=-2){
-
-			char* Logged=malloc(30*sizeof(char));
-
-			if (List[i].LoggedIn==1){
-
-				Logged=malloc(9*sizeof(char));
-
-				strcpy(Logged,"logged-in");
-
-			}
-
-			else{
-
-				Logged=malloc(10*sizeof(char));
-
-				strcpy(Logged,"logged-out");
-
-			}
-
-			
-
-
-
-				sprintf(ReturnM+strlen(ReturnM),"%-5d%-35s%-8d%-8d%-8s\n", id,List[i].Name,List[i].MessagesSent,List[i].MessagesReceived,Logged);
-
-
-
-				id+=1;
-
-
-
-		}
+		return;
 
 	}
 
-	return ReturnM;
+	serv_addr.sin_family = AF_INET;
+
+
+
+	serv_addr.sin_port = htons(server_port);
+
+
+
+	if (inet_pton(AF_INET, server_ip, &serv_addr.sin_addr) <= 0) {
+
+
+
+		cse4589_print_and_log("[LOGIN:ERROR]\n");
+
+		cse4589_print_and_log("[LOGIN:END]\n");
+
+		ClientFD=-1;
+
+		close(ClientFD);
+
+		return;
 
 	}
+
+	if (connect(ClientFD, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == -1) {
+
+
+
+		cse4589_print_and_log("[LOGIN:ERROR]\n");
+
+		cse4589_print_and_log("[LOGIN:END]\n");
+
+		ClientFD=-1;
+
+		close(ClientFD);
+
+		return;
+
+	}
+
+	else{
+
+/*		cse4589_print_and_log("[LOGIN:SUCCESS]\n");*/
+
+/*		cse4589_print_and_log("[LOGIN:END]\n");*/
+
+		LoggedIn=1;
+
+
+
+		char MESSAGE[10];
+
+
+
+		sprintf(MESSAGE, "%d", Portno);
+
+
+
+		int j=send(ClientFD,MESSAGE,strlen(MESSAGE),0);	
+
+
+
+		process_client_commands();
+
+	}
+
+}
+
+
+
+void process_client_commands() {
+
+	// The loop to keep client running and accept commands
+
+
+
+	while(1) {
+
+		FD_ZERO(&watch_list);
+
+		FD_SET(0,&watch_list);
 
 	
 
+		if(ClientFD!=-1){
 
-
-	int initialize_server(int port) {
-
-
-
-	/*Backlog EmptyLog;*/
-
-	EmptyLog = (Backlog*)malloc(sizeof(Backlog));
-
-
-
-	/*Message Empty;*/
-
-	Empty = (Message*)malloc(sizeof(Message));
-
-
-
-	/*Client Dummy;*/
-
-		Dummy = (Client*)malloc(sizeof(Client));
-
-		Dummy->FD=-2;
-
-		strcpy(Dummy->Name,"EMPTY");
-
-		Dummy->ListeningPort=0;
-
-		Dummy->MessagesReceived=0;
-
-		Dummy->MessagesSent=0;
-
-		Dummy->LoggedIn=0;
-
-		for(int i=0;i<5;i++){
-
-			strcpy(Dummy->BlockList[i],"");
+			FD_SET(ClientFD,&watch_list);
 
 		}
 
-		strcpy(Dummy->IPaddress,"69");
+		int selret = select(10, &watch_list, NULL, NULL, NULL);
 
-		strcpy(Empty->SourceIP,"69");
+		if(selret < 0){
 
-		strcpy(EmptyLog->DestIP,"69");
+       
 
-		for(int i=0;i<5;i++){
+			perror("select failed.\n");
 
-			ListOfBacklogs[i]=*EmptyLog;
+
 
 		}
 
-		for (int i=0; i<5;i++){
+		if(selret >= 0){
 
-			List[i]=*Dummy;
+			for(int sock_index=0; sock_index<=5; sock_index+=1){
 
-		}
 
 
+				if(FD_ISSET(sock_index, &watch_list)){
 
 
 
-		  PORT = port;
+					if (sock_index == 0){
 
+						char *Input = (char*) malloc(sizeof(char)*256);
 
 
-		  server_socket = socket(AF_INET, SOCK_STREAM, 0);
 
-
-
-		  if (server_socket < 0) {
-
-
-
-		      perror("Socket creation failed");
-
-
-
-		      return -1;
-
-
-
-		  }
-
-
-
-		  server_addr.sin_family = AF_INET;
-
-
-
-		  server_addr.sin_addr.s_addr = INADDR_ANY;
-
-
-
-		  server_addr.sin_port = htons(PORT);
-
-
-
-		  if (bind(server_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
-
-
-
-		      return -1;
-
-
-
-		  }
-
-
-
-		  if (listen(server_socket, 5) < 0) {  // 10 is the max number of waiting connections
-
-
-
-		      perror("Listen failed\n");
-
-
-
-		      return -1;
-
-
-
-		  }
-
-
-
-		  FD_ZERO(&master_list);
-
-
-
-		  FD_SET(server_socket, &master_list);
-
-
-
-		  FD_SET(0,&master_list);
-
-
-
-		  head_socket = server_socket;
-
-
-
-		  return 0;  // success
-
-
-
-	}
-
-
-
-	// Accept a new connection
-
-
-
-	int accept_new_connection() {
-
-
-
-		  int new_socket;
-
-
-
-		  socklen_t addr_len = sizeof(client_addr);
-
-
-
-		  new_socket = accept(server_socket, (struct sockaddr*)&client_addr, &addr_len);
-
-
-
-		  if (new_socket < 0) {
-
-
-
-		      perror("Accept failed\n");
-
-
-
-		      return -1;
-
-
-
-		  }
-
-
-
-		  // Add to master_list
-
-
-
-		  FD_SET(new_socket, &master_list);
-
-
-
-		  if (new_socket > head_socket){
-
-
-
-		  	head_socket = new_socket;
-
-
-
-		  }
-
-
-
-		  return new_socket;
-
-
-
-	}
-
-
-
-	void server_loop() { 
-
-
-
-		while (1) {
-
-
-
-			memcpy(&watch_list, &master_list, sizeof(master_list));
-
-
-
-			int STDIN= fileno(stdin);
-
-
-
-			selret = select(head_socket + 1, &watch_list, NULL, NULL, NULL);
-
-
-
-			if(selret < 0){
-
-
-
-				perror("select failed.\n");
-
-
-
-				}
-
-
-
-			if(selret > 0){
-
-
-
-				/* Loop through socket descriptors to check which ones are ready */
-
-
-
-				for(sock_index=0; sock_index<=head_socket; sock_index+=1){
-
-
-
-					if(FD_ISSET(sock_index, &watch_list)){
-
-
-
-						if (sock_index == STDIN){
+						char *login = (char*) malloc(sizeof(char)*6);		
 
 						
 
-							char *cmd = (char*) malloc(sizeof(char)*CMD_SIZE);
+						char *Command= (char*) malloc(sizeof(char)*256);
+
+						
+
+						char *Arg1 = (char*) malloc(sizeof(char)*256);
+
+						
+
+						char *Arg2 = (char*) malloc(sizeof(char)*256);
+
+						
+
+						fgets(Input, 256, stdin);
+
+						
+
+						Parse(&Command,&Arg1,&Arg2,Input);
+
+						Input[strlen(Input)-1]= '\0';
 
 
 
-							if(fgets(cmd, CMD_SIZE-1, stdin) == NULL){ //Mind the newline character that will be written to cmd
+						strncpy(login,Input,5);
+
+						
 
 
 
-								exit(-1);
+						login[5] = '\0' ;
+
+
+
+						if (strcmp(Input, "AUTHOR") == 0) {
+
+
+
+							handle_author_command();
+
+
+
+						} 
+
+
+
+						else if (strcmp(Input, "IP") == 0) {
+
+
+
+							handle_ip_command();
+
+
+
+						} 
+
+
+
+						else if (strcmp(Input,"PORT")==0){
+
+
+
+							handle_port_command(Portno);
+
+
+
+						}
+
+
+
+						else if (strcmp(Input,"EXIT")==0){
+
+
+
+							cse4589_print_and_log("[EXIT:SUCCESS]\n");
+
+
+
+							cse4589_print_and_log("[EXIT:END]\n");
+
+
+
+							close_connection(ClientFD);
+
+
+
+							exit(-1);
+
+
+
+						}
+
+						else if (LoggedIn==0){
+
+							if ((strcmp(login,"LOGIN")==0)){
+
+								Arg1[strlen(Arg1)-1]= '\0';
+
+
+
+								int IPlen= strlen(Arg1);
+
+
+
+								int PORTN= atoi(Arg2);
+
+
+
+								login_to_server(Arg1,PORTN);
+
+
+
+								free(Input);
 
 
 
 							}
-
-							cmd[strlen(cmd)-1]='\0';
-
-
-
-							if (strcmp(cmd,"EXIT")==0){
-
-
-
-								cse4589_print_and_log("[EXIT:SUCCESS]\n");
-
-
-
-								cse4589_print_and_log("[EXIT:END]\n");
-
-
-
-								exit(-1);
-
-
-
-							}
-
-							else if (strcmp(cmd,"AUTHOR")==0){
-
-
-
-								handle_author_command();
-
-
-
-							}
-
-
-
-							else if (strcmp(cmd,"IP")==0){
-
-							
-
-								handle_ip_command();
-
-							}
-
-
-
-							else if (strcmp(cmd,"PORT")==0){
-
-
-
-								handle_port_command(PORT);
-
-
-
-							}
-
-							else if (strcmp(cmd,"STATISTICS")==0){
-
-								qsort(List, 5, sizeof(Client), compareClients);
-
-								char *Data=statistics(List);
-
-								cse4589_print_and_log("[STATISTICS:SUCCESS]\n");
-
-								cse4589_print_and_log("%s", Data);
-
-								cse4589_print_and_log("[STATISTICS:END]\n");
-
-								statistics(List);
-
-							}
-
-/*							else if (strcmp(cmd,"LIST")==0){*/
-
-
-
-/*								char *DataToSend= ReturnMessage(List);*/
-
-/*								cse4589_print_and_log("[LIST:SUCCESS]\n");*/
-
-/*								cse4589_print_and_log("%s", DataToSend);*/
-
-/*								cse4589_print_and_log("[LIST:END]\n");*/
-
-
-
-/*							}*/
-
-							
 
 							else{
 
-								char *Command1= (char*) malloc(256*sizeof(char));
-
-								char *AArg1= (char*) malloc(256*sizeof(char));
-
-								char *AArg2 = (char*) malloc(256*sizeof(char));
-
-								AArg1[strlen(AArg1)-1]='\0';
-
-								char *SenderIP=(char*) malloc(256*sizeof(char));
-
-								Parse1(&Command1,&AArg1,&AArg2,cmd);
-
-								if (strcmp(Command1,"BLOCKED")==0){
-
-									BlockedMessage(AArg1);
-
-								}
 
 
+							cse4589_print_and_log("[%s:ERROR]\n",Input);
 
-								else{
+							cse4589_print_and_log("[%s:END]\n",Input);
 
-									fflush(stdout);
+							fflush(stdout);
 
-								}
-
-
-
-								}
-
-
-
-							free(cmd);
-
-
-
-
+							}
 
 						}
-
-
 
 						
 
-						//new client trying to login
+						else if (LoggedIn==1){
 
-						else if(sock_index == server_socket){
+							fflush(stdout);
 
+							if (strcmp("REFRESH",Input)==0){
 
-
-							caddr_len = sizeof(client_addr);
-
-
-
-							fdaccept = accept(server_socket, (struct sockaddr *)&client_addr, &caddr_len);
+								int j=send(ClientFD,Input,strlen(Input),0);
 
 
 
-							if(fdaccept < 0){
+								free(Input);
 
+							}
 
+							else if (strcmp(Input,"LIST")==0){
 
-								perror("Accept failed.");
+								char* Message=ListCommand(List1);
+
+								cse4589_print_and_log("[LIST:SUCCESS]\n");
+
+								cse4589_print_and_log(Message);
+
+								cse4589_print_and_log("[LIST:END]\n");
+
+								free(Input);
 
 
 
 							}
 
+							else if (strcmp(Command,"SEND")==0){
 
-
-							char client_ip[INET_ADDRSTRLEN];
-
-
-
-							char client_hostname[256];
-
-
-
-							getnameinfo((struct sockaddr *)&client_addr, sizeof(client_addr), client_hostname, sizeof(client_hostname), NULL, 0, 0);
-
-
-
-							inet_ntop(AF_INET, &client_addr.sin_addr, client_ip, sizeof(client_ip));
-
-
-
-							/* Add to watched socket list */
-
-
-
-							FD_SET(fdaccept, &master_list);
-
-
-
-							if(fdaccept > head_socket) {
-
-
-
-								head_socket = fdaccept;
-
-
+								int LengthOfMessageSent=send(ClientFD,Input,strlen(Input),0);
 
 							}
 
+							else if (strcmp(Command,"BROADCAST")==0){
 
-
-							char *DataR = (char*) malloc(sizeof(char)*256);
-
-
-
-							int bytes_received = recv(fdaccept, DataR, 255,0);
-
-
-
-							if (bytes_received > 0) {
-
-
-
-								DataR[bytes_received] = '\0';
-
-
+								int LengthOfMessageSent=send(ClientFD,Input,strlen(Input),0);
 
 							}
 
-							AddClient(client_ip,client_hostname,atoi(DataR),fdaccept);
+							else if (strcmp(Input,"LOGOUT")==0){
 
-							
+								cse4589_print_and_log("[%s:SUCCESS]\n",Input);
 
-							//trying to send backclogged messages
+								cse4589_print_and_log("[%s:END]\n",Input);
 
-							for (int i=0;i<5;i++){
+								send(ClientFD,"LOGOUT",strlen("LOGOUT"),0);
 
-								char* BackLogIP=malloc(30*sizeof(char));
+								close_connection(ClientFD);
 
-								strcpy(BackLogIP,ListOfBacklogs[i].DestIP);
+								FD_CLR(ClientFD,&watch_list);
 
+								ClientFD=-1;
 
-
-								if(strcmp(BackLogIP,GetIPAddress(fdaccept))==0){
-
-									int NumOfMessages=ListOfBacklogs[i].NumOfMessages;
-
-									if (NumOfMessages>0){
-
-										for(int j=0;j<NumOfMessages;j++){
-
-											char* SourceIP=malloc(30*sizeof(char));
-
-											char* Msg=malloc(256*sizeof(char));
-
-											strcpy(SourceIP,ListOfBacklogs[i].MessageList[j].SourceIP);
-
-
-
-											strcpy(Msg,ListOfBacklogs[i].MessageList[j].Message);
-
-
-
-											strcpy(ListOfBacklogs[i].MessageList[j].Message,"");
-
-											strcpy(ListOfBacklogs[i].MessageList[j].SourceIP,"");
-
-											char* MessageToDest=(char*) malloc(1024*sizeof(char));
-
-											strcpy(MessageToDest,MessageCreator(Msg,"RECEIVED",SourceIP,BackLogIP,1));
-
-											int MDLen=strlen(MessageToDest);
-
-											send(fdaccept,MessageToDest,MDLen,0);
-
-											cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SourceIP,BackLogIP, Msg);
-
-											List[GetClientByIP(SourceIP)].MessagesSent+=1;
-
-											List[GetClientByIP(BackLogIP)].MessagesReceived+=1;
-
-										}								
-
-									}
-
-									ListOfBacklogs[i].NumOfMessages=0;
-
-								}
+								LoggedIn=0;
 
 							}
 
-							qsort(List, 5, sizeof(Client), compareClients);
+							else if (strcmp(Command,"BLOCK")==0){
 
-							
-
-							char *DataToSend= ReturnMessage(List,0);
-
-							printf("SENDING TO CLIENT:*%s*",DataToSend);
-
-					
+								int j=send(ClientFD,Input,strlen(Input),0);
 
 
 
-							send(fdaccept,DataToSend,strlen(DataToSend),0);
+								free(Input);
 
-							char *LoginData=MessageCreator("LOGIN","LOGIN","LOGIN","LOGIN",1);
+							}
 
-							send(fdaccept,LoginData,strlen(LoginData),0);
+							else if (strcmp(Command,"UNBLOCK")==0){
+
+								int j=send(ClientFD,Input,strlen(Input),0);
 
 
+
+								free(Input);
+
+							}
+
+							else{
+
+							fflush(stdout);
+
+							}
 
 						}
-
-
-
-					/* Read from existing clients */
-
-
-
-						else{
-
-							int *SOCKET = &sock_index;
-
-							int Sock=*SOCKET;
-
-							char *DataReceived= (char*) malloc(sizeof(char)*1023);
-
-							
-
-							if(recv(sock_index, DataReceived, 256, 0) <= 0){
-
-
-
-								remove_connection(sock_index);
-
-
-
-							}
-
-
-
-							else {
-
-								
-
-								if (strcmp(DataReceived,"LOGOUT")==0){
-
-									LogClientOut(sock_index);
-
-								}
-
-								else if (strcmp(DataReceived,"REFRESH")==0){
-
-
-
-									char *DataToSend= ReturnMessage(List,1);
-
-
-
-									send(sock_index,DataToSend,strlen(DataToSend),0);
-
-
-
-
-
-								}
-
-								else{
-
-									char *Command= (char*) malloc(256*sizeof(char));
-
-									char *Arg1= (char*) malloc(256*sizeof(char));
-
-									char *Arg2 = (char*) malloc(256*sizeof(char));
-
-									char *SenderIP=(char*) malloc(256*sizeof(char));
-
-									int Exists=0;
-
-									Parse1(&Command,&Arg1,&Arg2,DataReceived);
-
-									strcpy(SenderIP,GetIPAddress(sock_index));
-
-									if (strcmp(Command,"SEND")==0){
-
-										SendMessage(Command,Arg1,Arg2,SenderIP,DataReceived,sock_index);
-
-									}
-
-									else if (strcmp(Command,"BROADCAST")==0){
-
-										BroadcastMessage(Command,Arg1,Arg2,SenderIP,DataReceived,sock_index);
-
-									}
-
-									else if (strcmp(Command,"BLOCK")==0){
-
-										char* MessageToSender1=(char*) malloc(1024*sizeof(char));
-
-										int BlockedID=GetClientByIP(Arg1);
-
-										if(BlockedID>=0){
-
-											int BlockSock=List[BlockedID].FD;
-
-											int status=BlockClient(SenderIP,Arg1,sock_index,BlockSock);
-
-											if(status==1){
-
-												strcpy(MessageToSender1,MessageCreator(DataReceived,Command,GetIPAddress(sock_index),SenderIP,1));
-
-												int MSLen=strlen(MessageToSender1);
-
-												send(sock_index,MessageToSender1,MSLen,0);
-
-											}
-
-											else{
-
-												strcpy(MessageToSender1,MessageCreator(DataReceived,Command,GetIPAddress(sock_index),SenderIP,0));
-
-												int MSLen=strlen(MessageToSender1);
-
-												send(sock_index,MessageToSender1,MSLen,0);
-
-											}
-
-											}
-
-										else{
-
-											strcpy(MessageToSender1,MessageCreator(DataReceived,Command,GetIPAddress(sock_index),SenderIP,0));
-
-											int MSLen=strlen(MessageToSender1);
-
-											send(sock_index,MessageToSender1,MSLen,0);
-
-										}
-
-									}
-
-							else if(strcmp(Command,"UNBLOCK")==0){
-
-								char* MessageToSender2=(char*) malloc(1024*sizeof(char));
-
-										int UnBlockedID=GetClientByIP(Arg1);
-
-										if(UnBlockedID>=0){
-
-											int UnBlockSock=List[UnBlockedID].FD;
-
-											int status=UnBlockClient(SenderIP,Arg1,sock_index,UnBlockSock);
-
-											if(status==1){
-
-												strcpy(MessageToSender2,MessageCreator(DataReceived,Command,GetIPAddress(sock_index),SenderIP,1));
-
-												int MSLen=strlen(MessageToSender2);
-
-												send(sock_index,MessageToSender2,MSLen,0);
-
-											}
-
-											else{
-
-												strcpy(MessageToSender2,MessageCreator(DataReceived,Command,GetIPAddress(sock_index),SenderIP,0));
-
-												int MSLen=strlen(MessageToSender2);
-
-												send(sock_index,MessageToSender2,MSLen,0);
-
-											}
-
-											}
-
-										else{
-
-											strcpy(MessageToSender2,MessageCreator(DataReceived,Command,GetIPAddress(sock_index),SenderIP,0));
-
-											int MSLen=strlen(MessageToSender2);
-
-											send(sock_index,MessageToSender2,MSLen,0);
-
-										}
-
-							}
-
-				
-
-
-
-						}
-
-
 
 					}
 
+				//END OF READING FROM STDIN
 
+				if ((LoggedIn==1)&&(sock_index!=0)){
+
+					char *DataReceived= (char*) malloc(256*sizeof(char));
+
+					char *ServerCommand=(char*) malloc(256*sizeof(char));
+
+					int LengthOfMessageReceived= recv(ClientFD, DataReceived, 1023,0);
+
+					char Mess[8];  // Make sure to allocate enough space for the copied characters and the null-terminator.
+
+					int firstValue;
+
+					// Copy the first 7 characters (0 to 6) from source to destination.
+
+					strncpy(Mess, DataReceived, 7);
+
+					if (strcmp(Mess,"REFRESH")==0){	
+
+						char* stripped;
+
+						stripped=DataReceived+7;
+
+						ReceiveLoggedinInfo(stripped);
+
+					}
+
+					else if (sscanf(DataReceived, "%d", &firstValue) >0) {
+
+						ReceiveLoggedinInfo(DataReceived);
+
+						ListCommand(List1);
+
+					}
+
+					fflush(stdout);
+
+					cse4589_print_and_log("%s",DataReceived);
+
+					process_client_commands();
+
+					}
 
 				}
-
-
 
 			}
 
@@ -1872,6 +772,4 @@ char* statistics(const Client LIST[]) {
 
 	}
 
-	}
-
-	}
+}

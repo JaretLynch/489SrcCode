@@ -324,19 +324,19 @@ char* ListCommand(ClientsLoggedIn List2[]){
 
 			}
 
-			if (LoggedIn==1){
+/*			if (LoggedIn==1){*/
 
 
 
-				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List2[i].Name,List2[i].IPaddress, List2[i].ListeningPort);
+/*				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List2[i].HostName,List2[i].IPaddress, List2[i].ListeningPort);*/
 
 
 
-				id+=1;
+/*				id+=1;*/
 
 
 
-		}
+/*		}*/
 
 
 

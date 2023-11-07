@@ -394,7 +394,7 @@
 
 							Manipulator=Manipulator+j;
 
-							break
+							break;
 
 						}
 

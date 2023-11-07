@@ -690,6 +690,8 @@ void process_client_commands() {
 
 					int firstValue;
 
+					printf("Character is *%c*\n",DataReceived[0]);
+
 					// Copy the first 7 characters (0 to 6) from source to destination.
 
 					strncpy(Mess, DataReceived, 7);

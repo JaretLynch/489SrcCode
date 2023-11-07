@@ -722,7 +722,7 @@ void process_client_commands() {
 
 					char Mess[8];  // Make sure to allocate enough space for the copied characters and the null-terminator.
 
-
+					int firstValue;
 
 					// Copy the first 7 characters (0 to 6) from source to destination.
 
@@ -737,8 +737,6 @@ void process_client_commands() {
 						ReceiveLoggedinInfo(stripped);
 
 					}
-
-					int firstValue;
 
 					else if (sscanf(DataReceived, "%d", &firstValue) >0) {
 

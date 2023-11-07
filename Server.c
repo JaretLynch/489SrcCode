@@ -264,25 +264,17 @@ void remove_connection(int socket) {
 
 		char* Ip=GetIPAddress(socket);
 
+		int ID=GetClientByIP(Ip);
+
+		if (ID>0){
+
+			List[ID]=*Dummy;
+
+		}
+
 		close(socket);
 
 		FD_CLR(socket, &master_list);
-
-
-
-		for (int i = 0; i < 5; i++) {
-
-
-
-			if (strcmp(List[i].IPaddress,Ip)== 0) {
-
-				List[i]=*Dummy;
-
-			}	
-
-
-
-		}
 
 	}
 

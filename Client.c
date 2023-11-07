@@ -562,6 +562,8 @@ void process_client_commands() {
 
 					if (sock_index == 0){
 
+					printf("SOCK INDEX is 0jifedjiaosjdfioasjdfiojasdfiojsadfiojasiodfjioasdjio");
+
 						char *Input = (char*) malloc(sizeof(char)*256);
 
 

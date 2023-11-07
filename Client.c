@@ -868,7 +868,7 @@
 
 							char* stripped;
 
-							stripped=DataReceived+7;
+							stripped=DataReceived+8;
 
 							ReceiveLoggedinInfo(stripped);
 

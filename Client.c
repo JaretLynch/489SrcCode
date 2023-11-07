@@ -418,6 +418,8 @@ char* ListCommand(ClientsLoggedIn List2[]){
 
 		}
 
+		printf("AT THE END OF LIST COMMAND AND RETURN M IS %s",ReturnM);
+
 		return	ReturnM;
 
 

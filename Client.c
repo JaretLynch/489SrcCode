@@ -848,11 +848,11 @@ void process_client_commands() {
 
 						printf("AFTER RECEIVED LOGGEDININGO \n");
 
-						ListCommand(List1);
+						char* Ret=ListCommand(List1);
 
 						printf("AFTER RECEIVED LISTCOMMAND \n");
 
-						cse4589_print_and_log("%s",ListCommand);
+						cse4589_print_and_log("%s",Ret);
 
 						free(DataReceived);
 

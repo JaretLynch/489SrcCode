@@ -142,7 +142,7 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 		Character[1]='\0';
 
-		printf("CHARACTER IS *%c*\n",Character);
+		printf("CHARACTER IS *%s*\n",Character);
 
 		if(count==1){
 

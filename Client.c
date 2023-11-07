@@ -382,11 +382,15 @@
 
 						if (strcmp(Character," ")==0){
 
+							printf("SPACE DETECTED\n");
+
 							iterator++;
 
 						}
 
 						if (iterator==4){
+
+							printf("TRYING TO CHANGE MANIPULATOR\n")
 
 							Manipulator=Manipulator+j;
 

@@ -362,7 +362,7 @@
 
 		if (a==1){
 
-			sprintf(ReturnM+strlen(ReturnM),"REFRESH");
+			sprintf(ReturnM+strlen(ReturnM),"REFRESH"\n);
 
 		}
 
@@ -396,7 +396,17 @@
 
 		}
 
-		ReturnM[0]=numLoggedIn+0;
+		if(a==0){
+
+			ReturnM[0]=numLoggedIn+0;
+
+			}
+
+		else{
+
+			ReturnM[8]=numLoggedIn+0;
+
+		}
 
 		printf("RETURN M IS *%s*\n",ReturnM);
 
@@ -1660,7 +1670,7 @@ char* statistics(const Client LIST[]) {
 
 							char *DataToSend= ReturnMessage(List,0);
 
-							printf("SENDING TO CLIENT:*%s*",DataToSend);
+							printf("SENDING TO CLIENT:*%s*\n",DataToSend);
 
 					
 

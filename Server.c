@@ -592,7 +592,7 @@ int UnBlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 
 	int BlockerID=GetClientByIP(SourceIP);
 
-	if(ListID>-1){
+	if(BlockerID>-1){
 
 		int BlockedID=GetClientByIP(DestIP);
 

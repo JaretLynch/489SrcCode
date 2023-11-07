@@ -388,7 +388,7 @@
 
 						}
 
-						if (iterator==5){
+						if (iterator==4){
 
 							printf("TRYING TO CHANGE MANIPULATOR\n");
 

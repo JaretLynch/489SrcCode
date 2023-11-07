@@ -356,7 +356,7 @@
 
 	char* ReturnMessage(const Client LIST[],int a){
 
-		int numLoggedIn=0;
+		int numLoggedIn=1;
 
 		char *ReturnM = malloc(1024*sizeof(char));
 
@@ -382,7 +382,7 @@
 
 
 
-				sprintf(ReturnM+strlen(ReturnM), "",id,LIST[i].Name,LIST[i].IPaddress, LIST[i].ListeningPort);
+				sprintf(ReturnM+strlen(ReturnM), "%d %s %s %d ",id,LIST[i].Name,LIST[i].IPaddress, LIST[i].ListeningPort);
 
 				numLoggedIn;
 

@@ -138,9 +138,7 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 		Character[1]='\0';
 
-		printf("CHARACTER as %s IS *%s*\n",Character);
-
-		printf("CHARACTER as %c IS *%s*\n",Character);
+		printf("CHARACTER as s IS *%s*\n",Character);
 
 		
 
@@ -800,7 +798,7 @@ void process_client_commands() {
 
 				if ((LoggedIn==1)&&(sock_index!=0)){
 
-				printf("INFINTE LOOP\n");
+					printf("INFINTE LOOP\n");
 
 					char *DataReceived= (char*) malloc(256*sizeof(char));
 
@@ -847,6 +845,8 @@ void process_client_commands() {
 						ReceiveLoggedinInfo(DataReceived);
 
 						ListCommand(List1);
+
+						free(DataREceived);
 
 					}
 

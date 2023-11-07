@@ -1074,8 +1074,6 @@ char* statistics(const Client LIST[]) {
 
 	for(int i=0; i<5; i++){
 
-		printf("LIST[%d].FD is *%d*\n",i,LIST[i].FD);
-
 		if (List[i].FD!=-2){
 
 			char* Logged=malloc(30*sizeof(char));

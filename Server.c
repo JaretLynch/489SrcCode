@@ -546,7 +546,7 @@ int BlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 
 		char* ClientToBlock=GetIPAddress(DestSock);
 
-		if (((strcmp(CurrentClient.IPaddress,ClientToBlock)==0)&&(strcmp(CurrentClient.IPaddress,SourceIP)!=0))&&(CurrentClient.LoggedIn==1)){
+		if (((strcmp(CurrentClient.IPaddress,ClientToBlock)==0)&&(strcmp(CurrentClient.IPaddress,SourceIP)!=0))){
 
 			for (int j=0; j<5;j++){
 
@@ -608,7 +608,7 @@ int UnBlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 
 		int BlockedID=GetClientByIP(DestIP);
 
-		if((BlockedID>-1)&&(List[BlockedID].LoggedIn==1)){
+		if((BlockedID>-1)){
 
 			for(int i=0;i<5;i++){
 

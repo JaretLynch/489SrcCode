@@ -258,25 +258,7 @@
 
 	}
 
-void remove_connection(int socket) {
 
-
-
-		char* Ip=GetIPAddress(socket);
-
-		int ID=GetClientByIP(Ip);
-
-		if (ID>0){
-
-			List[ID]=*Dummy;
-
-		}
-
-		close(socket);
-
-		FD_CLR(socket, &master_list);
-
-	}
 
 	void Parse1(char** Command,char** FirstArgPointer, char** SecondArgPointer, char* Actualmsg){
 
@@ -814,7 +796,25 @@ int BlockedMessage(char* IPaddress){
 
 
 
+void remove_connection(int socket) {
 
+
+
+		char* Ip=GetIPAddress(socket);
+
+		int ID=GetClientByIP(Ip);
+
+		if (ID>0){
+
+			List[ID]=*Dummy;
+
+		}
+
+		close(socket);
+
+		FD_CLR(socket, &master_list);
+
+	}
 
 
 

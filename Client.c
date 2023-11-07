@@ -210,6 +210,8 @@ void Parse2(char** Command,char** FirstArgPointer, char** SecondArgPointer, char
 
 		if(count==2){
 
+			printf("SHOULD BE COPYING INTO FIRSTARGPOINT\n");
+
 			(*FirstArgPointer)[iterator2]=*Character;
 
 			iterator2 ++;
@@ -233,6 +235,8 @@ void Parse2(char** Command,char** FirstArgPointer, char** SecondArgPointer, char
 		}
 
 		if (count==1){
+
+			printf("SHOULD BE COPYING INTO COMMAND\n");
 
 			(*Command)[iterator1]=*Character;
 
@@ -328,11 +332,11 @@ void ReceiveLoggedinInfo(char* ServerMessage){
 
 			char* HostName=malloc(200);
 
-  		Parse2(&HostName,&IP,&listeningPort,ServerMessage);
+	  		Parse2(&HostName,&IP,&listeningPort,ServerMessage);
 
-  		int iterator=0;
+	  		int iterator=0;
 
-  		for(int j=0; j<strlen(Manipulator);j++){
+	  		for(int j=0; j<strlen(Manipulator);j++){
 
 				char Character[1];
 

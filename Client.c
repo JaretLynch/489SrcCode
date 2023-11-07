@@ -692,9 +692,15 @@ void process_client_commands() {
 
 					strncpy(Mess, DataReceived, 7);
 
-					int value = atoi(DataReceived[0]);
+					
 
-					printf("DATA RECEIVED[0]is %c",DataReceived[0]);
+					int value = 0;
+
+					if (isdigit(DataReceived[0])) {
+
+    				value = DataReceived[0] - '0'; // Convert to integer
+
+						} 
 
 					if (strcmp(Mess,"REFRESH")==0){	
 

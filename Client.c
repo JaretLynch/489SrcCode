@@ -256,7 +256,7 @@ void ReceiveLoggedinInfo(char* ServerMessage){
 
     int i;  // Declare i as an integer
 
-if (sscanf(ServerMessage, "%d", &i) == 1) {
+if (sscanf(ServerMessage, "%d", &i) > 1) {
 
     // i will now contain the integer from the beginning of ServerMessage
 
@@ -316,7 +316,7 @@ char* ListCommand(ClientsLoggedIn List2[]){
 
 		for(int i=0; i<5; i++){
 
-			char* IP=List2[i];
+			char* IP=List2[i].IP;
 
 			if (strlen(IP)>0){
 

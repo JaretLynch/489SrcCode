@@ -588,6 +588,8 @@ void process_client_commands() {
 
 							if (strcmp("REFRESH",Input)==0){
 
+								printf("REFRESH CALLED\n");
+
 								int j=send(ClientFD,Input,strlen(Input),0);
 
 

@@ -156,8 +156,6 @@
 
 				exists=1;
 
-/*				printf("Changing ClientInList.MessageList[ClientInList.NumOfMessages]=NewMessage;\n");*/
-
 				ListOfBacklogs[i].MessageList[ClientInList.NumOfMessages]=NewMessage;
 
 				ListOfBacklogs[i].NumOfMessages+=1;		
@@ -324,10 +322,6 @@
 
 	char* MessageCreator(char* Message,char* Command,char* SourceIP,char* DestIP, int success){
 
-/*		printf("MESSAGE CREATOR CALLED\n");*/
-
-/*		printf("success=%d\n",success);*/
-
 		char *ReturnM = malloc(300*sizeof(char));
 
 		if (success==1){
@@ -342,8 +336,6 @@
 
 			else if (strcmp(Command,"RECEIVED")==0){
 
-/*				printf("RECEIVED\n");*/
-
 				sprintf(ReturnM+strlen(ReturnM),"msg from:%s\n[msg]:%s\n[RECEIVED:END]\n", SourceIP,Message);
 
 			}
@@ -353,8 +345,6 @@
 			}
 
 		else{
-
-/*		printf("ELSE\n");*/
 
 			sprintf(ReturnM,"[%s:ERROR]\n[%s:END]\n",Command,Command);
 
@@ -498,21 +488,13 @@
 
 int GetClientByIP(char* IP){
 
-/*	printf("GET CLIENT BY IP CALLED with IP address of *%s*\n",IP);*/
-
 	char* ListIP=malloc(30*sizeof(char));
 
 	for (int i=0;i<5; i++){
 
-/*		printf("About to access list[i].IPaddress\n");*/
-
-/*		printf("List[i].IPaddress is *%s*\n",List[i].IPaddress);*/
-
 		strcpy(ListIP,List[i].IPaddress);
 
 		if (strcmp(ListIP,IP)==0){
-
-/*			printf("GET CLIENT SUCCEEDED\n");*/
 
 			free(ListIP);
 
@@ -521,8 +503,6 @@ int GetClientByIP(char* IP){
 	}
 
 }
-
-/*	printf("GET CLIENT FAILED\n");*/
 
 	return -1;
 
@@ -534,8 +514,6 @@ int GetClientByIP(char* IP){
 
 int BlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 
-/*	printf("BLOCK CLIENT CALLED\n");*/
-
 	for(int i=0;i<5;i++){
 
 		Client CurrentClient=List[i];
@@ -544,15 +522,7 @@ int BlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 
 		if (((strcmp(CurrentClient.IPaddress,ClientToBlock)==0)&&(strcmp(CurrentClient.IPaddress,SourceIP)!=0))&&(CurrentClient.LoggedIn==1)){
 
-/*			printf("IP IS VALID\n");*/
-
-			//Means IP exists, IP is logged in, and IP is not equal to the Blocker IPaddress
-
-		//checking if already blocked
-
 			for (int j=0; j<5;j++){
-
-/*				printf("CHECKING TO SEE IF CLIENT IS ALREADY BLOCKED\n");*/
 
 				char* BlockedClientIP=malloc(30*sizeof(char));
 
@@ -560,37 +530,27 @@ int BlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 
 				if (strcmp(BlockedClientIP,DestIP)==0){
 
-					//client already blocked
-
 					return 0;
 
 				}
 
 				else{
 
-/*					printf("TRYING TO BLOCK CLIENT\n");*/
+
 
 					int BlockerID=GetClientByIP(SourceIP);
 
 					if (BlockerID>-1){
 
-/*						printf("BLOCKER ID>-1\n");*/
+
 
 						Client Blocker=List[BlockerID];
-
-/*						printf("BLOCKER MADE\n");*/
 
 						int numBlocked=Blocker.NumberOfBlocked;
 
 						fflush(stdout);
 
-/*						printf("CLIENT TO BLOCK IS%s\n",ClientToBlock);*/
-
 						strcpy(List[BlockerID].BlockList[numBlocked],ClientToBlock);
-
-/*						printf("List[BlockerID].BlockList[numBlocked] is %s\n",List[BlockerID].BlockList[numBlocked]);*/
-
-/*						printf("KSDJFISDFJ\n");*/
 
 						List[BlockerID].NumberOfBlocked+=1;
 
@@ -614,8 +574,6 @@ return 0;
 
 int UnBlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 
-/*	printf("UNBLOCK CLIENT CALLED\n");*/
-
 	int success=0;
 
 	for(int i=0;i<5;i++){
@@ -626,15 +584,9 @@ int UnBlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 
 		if (((strcmp(CurrentClient.IPaddress,ClientToBlock)==0)&&(strcmp(CurrentClient.IPaddress,SourceIP)!=0))&&(CurrentClient.LoggedIn==1)){
 
-/*			printf("IP IS VALID\n");*/
-
-			//Means IP exists, IP is logged in, and IP is not equal to the Blocker IPaddress
-
-		//checking if already blocked
-
 			for (int j=0; j<5;j++){
 
-/*				printf("CHECKING TO SEE IF CLIENT IS UNBLOCKED\n");*/
+
 
 				char* BlockedClientIP=malloc(30*sizeof(char));
 
@@ -642,31 +594,27 @@ int UnBlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 
 				if (strcmp(BlockedClientIP,DestIP)==0){
 
-/*					printf("TRYING TO UnBLOCK CLIENT\n");*/
+
 
 					int BlockerID=GetClientByIP(SourceIP);
 
 					if (BlockerID>-1){
 
-/*						printf("BLOCKER ID>-1\n");*/
+
 
 						Client Blocker=List[BlockerID];
 
-/*						printf("BLOCKER MADE\n");*/
+
 
 						int numBlocked=Blocker.NumberOfBlocked;
 
 						fflush(stdout);
 
-/*						printf("CLIENT TO UNBLOCK IS%s\n",ClientToBlock);*/
+
 
 						strcpy(List[BlockerID].BlockList[j],"");
 
-/*						printf("List[BlockerID].BlockList[numBlocked] is %s\n",List[BlockerID].BlockList[numBlocked]);*/
 
-/*						printf("KSDJFISDFJ\n");*/
-
-						//Client Unblocked
 
 					return 1;
 
@@ -674,7 +622,7 @@ int UnBlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 
 				else{
 
-				//Client Already not blocked
+
 
 					return 0;
 
@@ -930,19 +878,15 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 							int DestID=GetClientByIP(Arg1);
 
-/*							printf("Dest List ID is *%d* with an IP of *%s*\n",DestID,Arg1);*/
+
 
 							for (int j=0;j<NumberDestHasBlocked;j++){
 
-/*								printf("NUMBER DEST HAS BLOCKED IS%d\n",NumberDestHasBlocked);*/
 
-/*								printf("currentClient.BlockList[%d] is *%s*\n",j,List[DestID].BlockList[j]);*/
-
-/*								printf("SENDER IP IS *%s*\n",SenderIP);*/
 
 								if(strcmp(List[i].BlockList[j],SenderIP)==0){
 
-/*									printf("SEND FUNCTION, CLIENT IS BLOCKED\n");*/
+
 
 									
 
@@ -968,11 +912,13 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 									List[GetClientByIP(SenderIP)].MessagesSent+=1;
 
+									List[GetClientByIP(ClientIP)].MessagesReceived+=1;
+
 								}
 
 								else{
 
-/*									printf("Client is not logged inSEND\n");*/
+
 
 									AddToBacklog(GetIPAddress(sock_index),ClientIP,Arg2);
 
@@ -992,7 +938,7 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 		if (Exists==0){
 
-/*					printf("GO FUCK YOURSELF\n");*/
+
 
 					char* MessageToSender=(char*)malloc(1024*sizeof(char));
 
@@ -1028,9 +974,7 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 		 	if((List[i].FD!=sock_index)&& (List[i].FD!=-2)){
 
-/*		 		printf("List[i].FD is *%d* and Socket is *%d*\n",List[i].FD,sock_index);*/
 
-/*				printf("Client FD is not -1\n");*/
 
 				Exists=1;
 
@@ -1042,15 +986,9 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 				for (int j=0;j<NumberDestHasBlocked;j++){
 
-/*								printf("NUMBER DEST HAS BLOCKED IS%d\n",NumberDestHasBlocked);*/
-
-/*								printf("currentClient.BlockList[%d] is *%s*\n",j,List[DestID].BlockList[j]);*/
-
-/*								printf("SENDER IP IS *%s*\n",SenderIP);*/
-
 								if(strcmp(List[i].BlockList[j],SenderIP)==0){
 
-/*									printf("SEND FUNCTION, CLIENT IS BLOCKED\n");*/
+
 
 									
 
@@ -1084,7 +1022,7 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 					else{
 
-/*						printf("Client is not logged inBROADCAST\n");*/
+
 
 						AddToBacklog(GetIPAddress(sock_index),ClientIP,Arg1);
 
@@ -1098,7 +1036,7 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 			if (Exists==0){
 
-/*						printf("No Clietns currently logged in\n");*/
+
 
 						char* MessageToSender=(char*)malloc(1024*sizeof(char));
 
@@ -1160,7 +1098,7 @@ char* statistics(const Client LIST[]) {
 
 			
 
-/*				char* Hostname=malloc(50*sizeof(char));*/
+
 
 				sprintf(ReturnM+strlen(ReturnM),"%-5d%-35s%-8d%-8d%-8s\n", id,List[i].Name,List[i].MessagesSent,List[i].MessagesReceived,Logged);
 
@@ -1600,7 +1538,7 @@ char* statistics(const Client LIST[]) {
 
 						else if(sock_index == server_socket){
 
-/*							printf("CLIENT LOGGIN IN\n");*/
+
 
 							caddr_len = sizeof(client_addr);
 
@@ -1688,9 +1626,7 @@ char* statistics(const Client LIST[]) {
 
 								strcpy(BackLogIP,ListOfBacklogs[i].DestIP);
 
-/*								printf("BACKLOG IP IS%s\n",BackLogIP);*/
 
-/*								printf("CURRENT IP IS%s\n",GetIPAddress(fdaccept));*/
 
 								if(strcmp(BackLogIP,GetIPAddress(fdaccept))==0){
 
@@ -1706,13 +1642,13 @@ char* statistics(const Client LIST[]) {
 
 											strcpy(SourceIP,ListOfBacklogs[i].MessageList[j].SourceIP);
 
-/*											printf("COPYING SOURCE IP OF BACKLOG[i].MESSAGELSIT\n");*/
+
 
 											strcpy(Msg,ListOfBacklogs[i].MessageList[j].Message);
 
 											cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SourceIP,BackLogIP, Msg);
 
-/*											printf("COpying actual message into msg variable\n");*/
+
 
 											strcpy(ListOfBacklogs[i].MessageList[j].Message,"");
 
@@ -1758,10 +1694,6 @@ char* statistics(const Client LIST[]) {
 
 							send(fdaccept,LoginData,strlen(LoginData),0);
 
-/*							cse4589_print_and_log("SENDING DATA%s\n",DataToSend);*/
-
-							//also send every message if there are messages
-
 
 
 						}
@@ -1788,21 +1720,13 @@ char* statistics(const Client LIST[]) {
 
 								remove_connection(sock_index);
 
-/*								printf("HOSUE\n");*/
+
 
 							}
 
 
 
 							else {
-
-								
-
-/*								printf("RECEIVED DATA FROM CLIENT:%s\n",DataReceived);*/
-
-								
-
-					
 
 								
 
@@ -1900,8 +1824,6 @@ char* statistics(const Client LIST[]) {
 
 										}
 
-/*										printf("Block Client Status Received*%s*",Arg1);*/
-
 									}
 
 							else if(strcmp(Command,"UNBLOCK")==0){
@@ -1947,8 +1869,6 @@ char* statistics(const Client LIST[]) {
 											send(sock_index,MessageToSender2,MSLen,0);
 
 										}
-
-/*										printf("Block Client Status Received*%s*",Arg1);*/
 
 							}
 

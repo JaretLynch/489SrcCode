@@ -168,7 +168,7 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 		}
 
-		if (count==0){
+		if (count>2){
 
 			(*Command)[iterator1]=*Character;
 

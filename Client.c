@@ -800,6 +800,8 @@ void process_client_commands() {
 
 				if ((LoggedIn==1)&&(sock_index!=0)){
 
+				printf("INFINTE LOOP\n");
+
 					char *DataReceived= (char*) malloc(256*sizeof(char));
 
 					char *ServerCommand=(char*) malloc(256*sizeof(char));

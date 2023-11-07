@@ -354,17 +354,23 @@
 
 	}
 
-	char* ReturnMessage(const Client LIST[]){
+	char* ReturnMessage(const Client LIST[],int a){
 
+		int numLoggedIn=0;
 
+		char *ReturnM = malloc(1024*sizeof(char));
 
-		char *ReturnM = malloc(1024);
+		if (a==1){
 
+			sprintf(ReturnM+strlen(ReturnM),"REFRESH");
 
+		}
+
+		sprintf(ReturnM+strlen(ReturnM),"%d ",numLoggedIn);
 
 		int id=1;
 
-
+		
 
 		for(int i=0; i<5; i++){
 
@@ -376,19 +382,21 @@
 
 
 
-				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,LIST[i].Name,LIST[i].IPaddress, LIST[i].ListeningPort);
+				sprintf(ReturnM+strlen(ReturnM), "",id,LIST[i].Name,LIST[i].IPaddress, LIST[i].ListeningPort);
 
-
+				numLoggedIn;
 
 				id+=1;
 
+				numLoggedIn+=1;
+
+		}
+
 
 
 		}
 
-
-
-		}
+		ReturnM[0]=numLoggedIn;
 
 		return	ReturnM;
 
@@ -582,67 +590,33 @@ int UnBlockClient(char* SourceIP,char *DestIP,int SourceSock,int DestSock){
 
 	int success=0;
 
-	for(int i=0;i<5;i++){
+	int BlockerID=GetClientByIP(SourceIP);
 
-		Client CurrentClient=List[i];
+	if(ListID>-1){
 
-		char* ClientToBlock=GetIPAddress(DestSock);
+		int BlockedID=GetClientByIP(DestIP);
 
-		if (((strcmp(CurrentClient.IPaddress,ClientToBlock)==0)&&(strcmp(CurrentClient.IPaddress,SourceIP)!=0))&&(CurrentClient.LoggedIn==1)){
+		if((BlockedID>-1)&&(List[BlockedID].LoggedIn==1)){
 
-			for (int j=0; j<5;j++){
+			for(int i=0;i<5;i++){
 
+				char* BlockListIP=malloc(30*sizeof(char));
 
+				strcpy(BlockListIP,List[BlockerID].BlockList[i];
 
-				char* BlockedClientIP=malloc(30*sizeof(char));
+				if (strcmp(BlockListIP,DestIP)==0){
 
-				strcpy(BlockedClientIP,List[GetClientByIP(SourceIP)].BlockList[j]);
-
-				if (strcmp(BlockedClientIP,DestIP)==0){
-
-
-
-					int BlockerID=GetClientByIP(SourceIP);
-
-					if (BlockerID>-1){
-
-
-
-						Client Blocker=List[BlockerID];
-
-
-
-						int numBlocked=Blocker.NumberOfBlocked;
-
-						fflush(stdout);
-
-
-
-						strcpy(List[BlockerID].BlockList[j],"");
-
-
+					strcpy(List[BlockerID].BlockList[i],"");
 
 					return 1;
 
 				}
 
-				else{
+			}
 
-
-
-					return 0;
+		}
 
 	}
-
-	
-
-}
-
-}
-
-}
-
-}
 
 return 0;
 
@@ -912,9 +886,9 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 									int MDLen=strlen(MessageToDest);
 
-									cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
-
 									send(currentClient.FD,MessageToDest,MDLen,0);
+
+									cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
 
 									List[GetClientByIP(SenderIP)].MessagesSent+=1;
 
@@ -1056,8 +1030,6 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 			else{
 
-					cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,"255.255.255.255",Arg1);
-
 					char* MessageToSender=(char*) malloc(1024*sizeof(char));
 
 					strcpy(MessageToSender,MessageCreator(DataReceived,Command,GetIPAddress(sock_index),SenderIP,1));
@@ -1065,6 +1037,8 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 					int MSLen=strlen(MessageToSender);
 
 					send(sock_index,MessageToSender,MSLen,0);
+
+					cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,"255.255.255.255",Arg1);
 
 			}
 
@@ -1472,21 +1446,21 @@ char* statistics(const Client LIST[]) {
 
 							}
 
-							else if (strcmp(cmd,"LIST")==0){
+/*							else if (strcmp(cmd,"LIST")==0){*/
 
 
 
-								char *DataToSend= ReturnMessage(List);
+/*								char *DataToSend= ReturnMessage(List);*/
 
-								cse4589_print_and_log("[LIST:SUCCESS]\n");
+/*								cse4589_print_and_log("[LIST:SUCCESS]\n");*/
 
-								cse4589_print_and_log("%s", DataToSend);
+/*								cse4589_print_and_log("%s", DataToSend);*/
 
-								cse4589_print_and_log("[LIST:END]\n");
+/*								cse4589_print_and_log("[LIST:END]\n");*/
 
 
 
-							}
+/*							}*/
 
 							
 
@@ -1648,8 +1622,6 @@ char* statistics(const Client LIST[]) {
 
 											strcpy(Msg,ListOfBacklogs[i].MessageList[j].Message);
 
-											cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SourceIP,BackLogIP, Msg);
-
 
 
 											strcpy(ListOfBacklogs[i].MessageList[j].Message,"");
@@ -1663,6 +1635,8 @@ char* statistics(const Client LIST[]) {
 											int MDLen=strlen(MessageToDest);
 
 											send(fdaccept,MessageToDest,MDLen,0);
+
+											cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SourceIP,BackLogIP, Msg);
 
 											List[GetClientByIP(SourceIP)].MessagesSent+=1;
 
@@ -1682,7 +1656,7 @@ char* statistics(const Client LIST[]) {
 
 							
 
-							char *DataToSend= ReturnMessage(List);
+							char *DataToSend= ReturnMessage(List,0);
 
 
 
@@ -1738,11 +1712,11 @@ char* statistics(const Client LIST[]) {
 
 								}
 
-								else if ((strcmp(DataReceived,"REFRESH")==0) || (strcmp(DataReceived,"LIST")==0)){
+								else if (strcmp(DataReceived,"REFRESH")==0){
 
 
 
-									char *DataToSend= ReturnMessage(List);
+									char *DataToSend= ReturnMessage(List,1);
 
 
 

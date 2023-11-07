@@ -424,17 +424,17 @@
 
 			for(int i=0; i<5; i++){
 
-				printf("I IS %d and List2[i].IP is %s\n",i,List2[i].IP);
+				printf("I IS %d and List1[i].IP is %s\n",i,List1[i].IP);
 
 				char* IP=malloc(120);
 
-				strcpy(IP,List2[i].IP);
+				strcpy(IP,List1[i].IP);
 
 				printf("IP IS %s\n",IP);
 
 				if (strlen(IP)>0){
 
-					sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List2[i].HostName,List2[i].IP, List2[i].ListeningPort);
+					sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List1[i].HostName,List1[i].IP, List1[i].ListeningPort);
 
 					id+=1;
 

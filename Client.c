@@ -432,6 +432,8 @@
 
 					sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List2[i].HostName,List2[i].IP, List2[i].ListeningPort);
 
+					id+=1;
+
 				}
 
 	/*			if (LoggedIn==1){*/

@@ -330,15 +330,17 @@
 
 	void ReceiveLoggedinInfo(char* ServerMessage){
 
-		char* Manipulator=ServerMessage;
+		char* Manipulator=malloc(2000);
+
+		strcpy(Manipulator,ServerMessage);
 
 		printf("SERVER MESSAGE IS %s\n",ServerMessage);
 
 		int count; // The count of logged-in clients
 
-	  int l=0;
+	  	int l=0;
 
-	  for (int i=0; i<ServerMessage[0]-1;i++){
+	  	for (int i=0; i<ServerMessage[0]-1;i++){
 
 				char* listeningPort=malloc(50);
 
@@ -376,7 +378,7 @@
 
 				}
 
-				printf("HOST NAME IS %s\n",FUCKYOU);
+				printf("HOST NAME123123123 IS %s\n",FUCKYOU);
 
 				printf("IP IS %s",IP);
 

@@ -260,16 +260,6 @@ void ReceiveLoggedinInfo(char* ServerMessage){
 
     // Loop to parse the individual client information
 
-    for (int i = 0; i < count; i++) {
-
-        if (sscanf(ServerMessage, "%d %29s %49s %d", &id, IP, HostName, &listeningPort) != 4) {
-
-            // Handle parsing error
-
-            return;
-
-        }
-
 
 
         // Store the parsed data in your structure array
@@ -302,8 +292,6 @@ void ReceiveLoggedinInfo(char* ServerMessage){
 
     }
 
-}
-
 char* ListCommand(ClientsLoggedIn List2[]){
 
 		qsort(List2, 5, sizeof(ClientsLoggedIn), compareClients2);
@@ -322,7 +310,7 @@ char* ListCommand(ClientsLoggedIn List2[]){
 
 			if (strlen(IP)>0){
 
-				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List[i].HostName,List[i].IP, List[i].ListeningPort);
+				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List2[i].HostName,List2[i].IP, List2[i].ListeningPort);
 
 			}
 
@@ -330,7 +318,7 @@ char* ListCommand(ClientsLoggedIn List2[]){
 
 
 
-				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,LIST[i].Name,LIST[i].IPaddress, LIST[i].ListeningPort);
+				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List2[i].Name,List2[i].IPaddress, List2[i].ListeningPort);
 
 
 
@@ -740,7 +728,9 @@ void process_client_commands() {
 
 					}
 
-					else if (sscanf(DataReceived, "%d", &messageCount) == 1) {
+					int firstValue;
+
+					else if (sscanf(DataReceived, "%d", &firstValue) >0) {
 
 						ReceiveLoggedinInfo(DataReceived);
 

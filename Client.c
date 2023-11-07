@@ -116,6 +116,8 @@ int create_client_socket(int portno) {
 
 void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char* Actualmsg){
 
+	printf("Parse called, Message is *%s*\n",Actualmsg);
+
 	int count=0;
 
 	int iterator1=0;
@@ -135,8 +137,6 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 		
 
 		Character[1]='\0';
-
-		printf("CHARACTER IS *%s*\n",Character);
 
 		if(count==1){
 

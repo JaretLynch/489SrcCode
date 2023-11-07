@@ -690,8 +690,6 @@ void process_client_commands() {
 
 					int firstValue;
 
-					printf("Character is *%c*\n",DataReceived[0]);
-
 					// Copy the first 7 characters (0 to 6) from source to destination.
 
 					strncpy(Mess, DataReceived, 7);
@@ -702,13 +700,7 @@ void process_client_commands() {
 
 					printf("Character is *%d*\n",DataReceived[0]);
 
-					if (isdigit(DataReceived[0])) {
-
-						printf("DIGIT DETECTED\n");
-
-    				value = DataReceived[0] - '0'; // Convert to integer
-
-						} 
+					
 
 					if (strcmp(Mess,"REFRESH")==0){	
 
@@ -724,7 +716,7 @@ void process_client_commands() {
 
 					
 
-					else if (value>0) {
+					else if (DataReceived[0]>0) {
 
 						printf("ELSE IF\n");
 

@@ -976,6 +976,8 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 									send(currentClient.FD,MessageToDest,MDLen,0);
 
+									List[GetClientByIP(SenderIP)].MessagesSent+=1;
+
 								}
 
 								else{
@@ -1072,6 +1074,8 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 					if (currentClient.LoggedIn==1){
 
+					
+
 						success==1;
 
 						char* MessageToDest=(char*) malloc(1024*sizeof(char));
@@ -1081,6 +1085,10 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 						int MDLen=strlen(MessageToDest);
 
 						send(currentClient.FD,MessageToDest,MDLen,0);
+
+						List[GetClientByIP(SenderIP)].MessagesSent+=1;
+
+						List[GetClientByIP(ClientIP)].MessagesReceived+=1;
 
 					}
 
@@ -1731,6 +1739,10 @@ char* statistics(const Client LIST[]) {
 											int MDLen=strlen(MessageToDest);
 
 											send(fdaccept,MessageToDest,MDLen,0);
+
+											List[GetClientByIP(SourceIP)].MessagesSent+=1;
+
+											List[GetClientByIP(BackLogIP)].MessagesReceived+=1;
 
 										}								
 

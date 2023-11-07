@@ -84,7 +84,7 @@ int GetClientByIP(char* IP){
 
 	for(int i=0; i<5;i++){
 
-		if (strcmp(IP,List1[i].IP)==0{
+		if (strcmp(IP,List1[i].IP)==0){
 
 			return 1;
 

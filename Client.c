@@ -1,874 +1,878 @@
-#include <stdio.h>
+		#include <stdio.h>
 
 
 
-#include <stdlib.h>
+	#include <stdlib.h>
 
 
 
-#include <sys/socket.h>
+	#include <sys/socket.h>
 
 
 
-#include <strings.h>
+	#include <strings.h>
 
 
 
-#include <string.h>
+	#include <string.h>
 
-#include <ctype.h>
+	#include <ctype.h>
 
-#include <arpa/inet.h>
+	#include <arpa/inet.h>
 
 
 
-#include <sys/types.h>
+	#include <sys/types.h>
 
 
 
-#include <netdb.h>
+	#include <netdb.h>
 
 
 
-#include <unistd.h>
+	#include <unistd.h>
 
 
 
-#include "../include/global.h"
+	#include "../include/global.h"
 
 
 
-#include "../include/logger.h"
+	#include "../include/logger.h"
 
 
 
-#include "Commands.h"
+	#include "Commands.h"
 
 
 
-int Portno;
+	int Portno;
 
 
 
-void process_client_commands();
+	void process_client_commands();
 
 
 
-int LoggedIn=0;
+	int LoggedIn=0;
 
 
 
-int ClientFD=-1;
+	int ClientFD=-1;
 
-fd_set watch_list;
+	fd_set watch_list;
 
 
 
-typedef struct ClientsLoggedIn{
+	typedef struct ClientsLoggedIn{
 
-	char IP[30];
+		char IP[30];
 
-	char HostName[50];
+		char HostName[50];
 
-	int ListeningPort;
+		int ListeningPort;
 
-}ClientsLoggedIn;
+	}ClientsLoggedIn;
 
 
 
-ClientsLoggedIn List1[5];
+	ClientsLoggedIn List1[5];
 
 
 
 
 
-int create_client_socket(int portno) {
+	int create_client_socket(int portno) {
 
-	Portno=portno;
+		Portno=portno;
 
-	int client_fd = socket(AF_INET, SOCK_STREAM, 0);
+		int client_fd = socket(AF_INET, SOCK_STREAM, 0);
 
-	if (client_fd < 0) {
+		if (client_fd < 0) {
 
-		cse4589_print_and_log("\n Socket creation error \n");
+			cse4589_print_and_log("\n Socket creation error \n");
 
-		return -1;
+			return -1;
+
+		}
+
+		else{
+
+			process_client_commands();
+
+
+
+			ClientFD=client_fd;
+
+
+
+			return client_fd;
+
+		}
 
 	}
 
-	else{
 
-		process_client_commands();
 
+	void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char* Actualmsg){
 
+		printf("Parse called, Message is *%s*\n",Actualmsg);
 
-		ClientFD=client_fd;
+		int count=0;
 
+		int iterator1=0;
 
+		int iterator2=0;
 
-		return client_fd;
+		int iterator3=0;
 
-	}
 
-}
 
+		int j=strlen(Actualmsg);
 
+		for (int i=0; i<strlen(Actualmsg); i++){
 
-void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char* Actualmsg){
+			char Character[2];
 
-	printf("Parse called, Message is *%s*\n",Actualmsg);
+			strncpy(Character,&Actualmsg[i],1);
 
-	int count=0;
+			Character[1]='\0';
 
-	int iterator1=0;
-
-	int iterator2=0;
-
-	int iterator3=0;
-
-
-
-	int j=strlen(Actualmsg);
-
-	for (int i=0; i<strlen(Actualmsg); i++){
-
-		char Character[2];
-
-		strncpy(Character,&Actualmsg[i],1);
-
-		Character[1]='\0';
-
-		printf("CHARACTER as s IS *%s*\n",Character);
-
-		
-
-		if(count==1){
-
-			(*FirstArgPointer)[iterator2]=*Character;
-
-			iterator2 ++;
-
-		}
-
-		if (count>1){
-
-			(*SecondArgPointer)[iterator3]=*Character;
-
-			iterator3++;
-
-		}
-
-		if (strcmp(Character," ")==0){
-
-			count++;
-
-
-
-		}
-
-		if (count>2){
-
-			(*Command)[iterator1]=*Character;
-
-			iterator1++;		
-
-		}
-
-		}
-
-		printf("PARSE DONE\n");
-
-}
-
-void Parse2(char** Command,char** FirstArgPointer, char** SecondArgPointer, char* Actualmsg){
-
-	printf("Parse 2 called\n");
-
-	int count=0;
-
-	int iterator1=0;
-
-	int iterator2=0;
-
-	int iterator3=0;
-
-	printf("CALLING PARSE2");
-
-	int j=strlen(Actualmsg);
-
-	for (int i=0; i<strlen(Actualmsg); i++){
-
-		char Character[2];
-
-		
-
-		strncpy(Character,&Actualmsg[i],1);
-
-		Character[1]='\0';
-
-		printf("CHARACTER IS *%s*\n",Character);
-
-		if(count==2){
-
-			printf("SHOULD BE COPYING INTO FIRSTARGPOINT\n");
-
-			(*FirstArgPointer)[iterator2]=*Character;
-
-			iterator2 ++;
-
-		}
-
-		if (count>2){
-
-			(*SecondArgPointer)[iterator3]=*Character;
-
-			iterator3++;
-
-		}
-
-		if (strcmp(Character," ")==0){
-
-			count++;
-
-
-
-		}
-
-		if (count==1){
-
-			printf("SHOULD BE COPYING INTO COMMAND\n");
-
-			(*Command)[iterator1]=*Character;
-
-			iterator1++;		
-
-		}
-
-		}
-
-		printf("PARSE22 DONE");
-
-}
-
-void ParseServerMessage(char** ServerCommand,char* ServerMessage){
-
-	int count=0;
-
-	int iterator1=0;
-
-	
-
-	int j=strlen(ServerMessage);
-
-	for (int i=0; i<strlen(ServerMessage); i++){
-
-		char Character[1];
-
-		strncpy(Character,&ServerMessage[i],1);
-
-		Character[1]='\0';
-
-		if (strcmp(Character," ")==0){
-
-			count++;
-
-		}
-
-		if (count==0){
-
-			(*ServerCommand)[iterator1]=*Character;
-
-			iterator1++;		
-
-		}
-
-		}
-
-}
-
-
-
-void close_connection(int client_fd) {
-
-	close(client_fd);
-
-}
-
-int compareClients2(const void *a, const void *b) {
+			printf("CHARACTER as s IS *%s*\n",Character);
 
 			
 
+			if(count==1){
 
+				(*FirstArgPointer)[iterator2]=*Character;
 
-		  const ClientsLoggedIn *clientA = (const ClientsLoggedIn *)a;
-
-
-
-		  const ClientsLoggedIn *clientB = (const ClientsLoggedIn *)b;
-
-
-
-		  return clientA->ListeningPort - clientB->ListeningPort;
-
-
-
-	}
-
-void ReceiveLoggedinInfo(char* ServerMessage){
-
-	char* Manipulator=ServerMessage;
-
-	printf("SERVER MESSAGE IS %s\n",ServerMessage);
-
-	int count; // The count of logged-in clients
-
-  int l=0;
-
-  for (int i=0; i<ServerMessage[0]-1;i++){
-
-			char* listeningPort=malloc(50);
-
-			char* IP=malloc(120);
-
-			char* HostName=malloc(200);
-
-	  		Parse2(&HostName,&IP,&listeningPort,ServerMessage);
-
-	  		int iterator=0;
-
-	  		for(int j=0; j<strlen(Manipulator);j++){
-
-				char Character[1];
-
-				strncpy(Character,&Manipulator[i],1);
-
-				Character[1]='\0';
-
-				if (strcmp(Character," ")==0){
-
-					iterator++;
-
-				}
-
-				if (iterator==4){
-
-					Manipulator=Manipulator+j;
-
-					break;
-
-				}
+				iterator2 ++;
 
 			}
 
-			printf("HOST NAME IS %s\n",HostName);
+			if (count>1){
 
-			strcpy(List1[l].IP,IP);
+				(*SecondArgPointer)[iterator3]=*Character;
 
-			strcpy(List1[l].HostName,HostName);
-
-			int port=atoi(listeningPort);
-
-			List1[l].ListeningPort=port;
-
-			l++;
-
-  	}
-
-  
-
-    }
-
-char* ListCommand(ClientsLoggedIn List2[]){
-
-		qsort(List2, 5, sizeof(ClientsLoggedIn), compareClients2);
-
-		char *ReturnM = malloc(1024*sizeof(char));
-
-
-
-		int id=1;
-
-
-
-		for(int i=0; i<5; i++){
-
-			printf("I IS %d and List2[i].IP is %s\n",i,List2[i].IP);
-
-			char* IP=malloc(120);
-
-			strcpy(IP,List2[i].IP);
-
-			printf("IP IS %s\n",IP);
-
-			if (strlen(IP)>0){
-
-				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List2[i].HostName,List2[i].IP, List2[i].ListeningPort);
+				iterator3++;
 
 			}
 
-/*			if (LoggedIn==1){*/
+			if (strcmp(Character," ")==0){
+
+				count++;
 
 
 
-/*				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List2[i].HostName,List2[i].IPaddress, List2[i].ListeningPort);*/
+			}
+
+			if (count>2){
+
+				(*Command)[iterator1]=*Character;
+
+				iterator1++;		
+
+			}
+
+			}
+
+			printf("PARSE DONE\n");
+
+	}
+
+	void Parse2(char** Command,char** FirstArgPointer, char** SecondArgPointer, char* Actualmsg){
+
+		printf("Parse 2 called\n");
+
+		int count=0;
+
+		int iterator1=0;
+
+		int iterator2=0;
+
+		int iterator3=0;
+
+		printf("CALLING PARSE2");
+
+		int j=strlen(Actualmsg);
+
+		for (int i=0; i<strlen(Actualmsg); i++){
+
+			char Character[2];
+
+			
+
+			strncpy(Character,&Actualmsg[i],1);
+
+			Character[1]='\0';
+
+			printf("CHARACTER IS *%s*\n",Character);
+
+			if(count==2){
+
+				printf("SHOULD BE COPYING INTO FIRSTARGPOINT\n");
+
+				(*FirstArgPointer)[iterator2]=*Character;
+
+				iterator2 ++;
+
+			}
+
+			if (count>2){
+
+				(*SecondArgPointer)[iterator3]=*Character;
+
+				iterator3++;
+
+			}
+
+			if (strcmp(Character," ")==0){
+
+				count++;
 
 
 
-/*				id+=1;*/
+			}
+
+			if (count==1){
+
+				printf("SHOULD BE COPYING INTO COMMAND\n");
+
+				(*Command)[iterator1]=*Character;
+
+				iterator1++;		
+
+			}
+
+			}
+
+			printf("PARSE22 DONE");
+
+	}
+
+	void ParseServerMessage(char** ServerCommand,char* ServerMessage){
+
+		int count=0;
+
+		int iterator1=0;
+
+		
+
+		int j=strlen(ServerMessage);
+
+		for (int i=0; i<strlen(ServerMessage); i++){
+
+			char Character[1];
+
+			strncpy(Character,&ServerMessage[i],1);
+
+			Character[1]='\0';
+
+			if (strcmp(Character," ")==0){
+
+				count++;
+
+			}
+
+			if (count==0){
+
+				(*ServerCommand)[iterator1]=*Character;
+
+				iterator1++;		
+
+			}
+
+			}
+
+	}
 
 
 
-/*		}*/
+	void close_connection(int client_fd) {
+
+		close(client_fd);
+
+	}
+
+	int compareClients2(const void *a, const void *b) {
+
+				
+
+
+
+			  const ClientsLoggedIn *clientA = (const ClientsLoggedIn *)a;
+
+
+
+			  const ClientsLoggedIn *clientB = (const ClientsLoggedIn *)b;
+
+
+
+			  return clientA->ListeningPort - clientB->ListeningPort;
 
 
 
 		}
 
-		printf("AT THE END OF LIST COMMAND AND RETURN M IS %s",ReturnM);
+	void ReceiveLoggedinInfo(char* ServerMessage){
 
-		return	ReturnM;
+		char* Manipulator=ServerMessage;
 
+		printf("SERVER MESSAGE IS %s\n",ServerMessage);
 
+		int count; // The count of logged-in clients
 
-	}
+	  int l=0;
 
-void login_to_server(const char* server_ip, int server_port) {
+	  for (int i=0; i<ServerMessage[0]-1;i++){
 
+				char* listeningPort=malloc(50);
 
+				char* IP=malloc(120);
 
-	struct sockaddr_in serv_addr;
+				char* HostName=malloc(200);
 
+		  		Parse2(&HostName,&IP,&listeningPort,ServerMessage);
 
+		  		int iterator=0;
 
-	if ((ClientFD = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+		  		for(int j=0; j<strlen(Manipulator);j++){
 
+					char Character[1];
 
+					strncpy(Character,&Manipulator[i],1);
 
-		cse4589_print_and_log("[LOGIN:ERROR]\n");
+					Character[1]='\0';
 
-		cse4589_print_and_log("[LOGIN:END]\n");
+					if (strcmp(Character," ")==0){
 
-		ClientFD=-1;
+						iterator++;
 
-		return;
+					}
 
-	}
+					if (iterator==4){
 
-	serv_addr.sin_family = AF_INET;
+						Manipulator=Manipulator+j;
 
+						break;
 
+					}
 
-	serv_addr.sin_port = htons(server_port);
+				}
 
+				printf("HOST NAME IS %s\n",HostName);
 
+				printf("IP IS %s",IP)
 
-	if (inet_pton(AF_INET, server_ip, &serv_addr.sin_addr) <= 0) {
+				strcpy(List1[l].IP,IP);
 
+				strcpy(List1[l].HostName,HostName);
 
+				int port=atoi(listeningPort);
 
-		cse4589_print_and_log("[LOGIN:ERROR]\n");
+				List1[l].ListeningPort=port;
 
-		cse4589_print_and_log("[LOGIN:END]\n");
+				l++;
 
-		ClientFD=-1;
+	  	}
 
-		close(ClientFD);
+	  
 
-		return;
+	    }
 
-	}
+	char* ListCommand(ClientsLoggedIn List2[]){
 
-	if (connect(ClientFD, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == -1) {
+			qsort(List2, 5, sizeof(ClientsLoggedIn), compareClients2);
 
+			char *ReturnM = malloc(1024*sizeof(char));
 
 
-		cse4589_print_and_log("[LOGIN:ERROR]\n");
 
-		cse4589_print_and_log("[LOGIN:END]\n");
+			int id=1;
 
-		ClientFD=-1;
 
-		close(ClientFD);
 
-		return;
+			for(int i=0; i<5; i++){
 
-	}
+				printf("I IS %d and List2[i].IP is %s\n",i,List2[i].IP);
 
-	else{
+				char* IP=malloc(120);
 
-/*		cse4589_print_and_log("[LOGIN:SUCCESS]\n");*/
+				strcpy(IP,List2[i].IP);
 
-/*		cse4589_print_and_log("[LOGIN:END]\n");*/
+				printf("IP IS %s\n",IP);
 
-		LoggedIn=1;
+				if (strlen(IP)>0){
 
+					sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List2[i].HostName,List2[i].IP, List2[i].ListeningPort);
 
+				}
 
-		char MESSAGE[10];
+	/*			if (LoggedIn==1){*/
 
 
 
-		sprintf(MESSAGE, "%d", Portno);
+	/*				sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List2[i].HostName,List2[i].IPaddress, List2[i].ListeningPort);*/
 
 
 
-		int j=send(ClientFD,MESSAGE,strlen(MESSAGE),0);	
+	/*				id+=1;*/
 
 
 
-/*		process_client_commands();*/
+	/*		}*/
 
-	}
 
-}
 
+			}
 
+			printf("AT THE END OF LIST COMMAND AND RETURN M IS %s",ReturnM);
 
-void process_client_commands() {
-
-	// The loop to keep client running and accept commands
-
-
-
-	while(1) {
-
-		FD_ZERO(&watch_list);
-
-		FD_SET(0,&watch_list);
-
-	
-
-		if(ClientFD!=-1){
-
-			FD_SET(ClientFD,&watch_list);
-
-		}
-
-		int selret = select(10, &watch_list, NULL, NULL, NULL);
-
-		if(selret < 0){
-
-       
-
-			perror("select failed.\n");
+			return	ReturnM;
 
 
 
 		}
 
-		if(selret >= 0){
+	void login_to_server(const char* server_ip, int server_port) {
 
-			for(int sock_index=0; sock_index<=5; sock_index+=1){
 
 
+		struct sockaddr_in serv_addr;
 
-				if(FD_ISSET(sock_index, &watch_list)){
 
 
+		if ((ClientFD = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
 
-					if (sock_index == 0){
 
-					printf("SOCK INDEX is 0jifedjiaosjdfioasjdfiojasdfiojsadfiojasiodfjioasdjio");
 
-						char *Input = (char*) malloc(sizeof(char)*256);
+			cse4589_print_and_log("[LOGIN:ERROR]\n");
 
+			cse4589_print_and_log("[LOGIN:END]\n");
 
+			ClientFD=-1;
 
-						char *login = (char*) malloc(sizeof(char)*6);		
+			return;
 
-						
+		}
 
-						char *Command= (char*) malloc(sizeof(char)*256);
+		serv_addr.sin_family = AF_INET;
 
-						
 
-						char *Arg1 = (char*) malloc(sizeof(char)*256);
 
-						
+		serv_addr.sin_port = htons(server_port);
 
-						char *Arg2 = (char*) malloc(sizeof(char)*256);
 
-						
 
-						fgets(Input, 256, stdin);
+		if (inet_pton(AF_INET, server_ip, &serv_addr.sin_addr) <= 0) {
 
-						
 
-						Parse(&Command,&Arg1,&Arg2,Input);
 
-						Input[strlen(Input)-1]= '\0';
+			cse4589_print_and_log("[LOGIN:ERROR]\n");
 
+			cse4589_print_and_log("[LOGIN:END]\n");
 
+			ClientFD=-1;
 
-						strncpy(login,Input,5);
+			close(ClientFD);
 
-						
+			return;
 
+		}
 
+		if (connect(ClientFD, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == -1) {
 
-						login[5] = '\0' ;
 
 
+			cse4589_print_and_log("[LOGIN:ERROR]\n");
 
-						if (strcmp(Input, "AUTHOR") == 0) {
+			cse4589_print_and_log("[LOGIN:END]\n");
 
+			ClientFD=-1;
 
+			close(ClientFD);
 
-							handle_author_command();
+			return;
 
+		}
 
+		else{
 
-						} 
+	/*		cse4589_print_and_log("[LOGIN:SUCCESS]\n");*/
 
+	/*		cse4589_print_and_log("[LOGIN:END]\n");*/
 
+			LoggedIn=1;
 
-						else if (strcmp(Input, "IP") == 0) {
 
 
+			char MESSAGE[10];
 
-							handle_ip_command();
 
 
+			sprintf(MESSAGE, "%d", Portno);
 
-						} 
 
 
+			int j=send(ClientFD,MESSAGE,strlen(MESSAGE),0);	
 
-						else if (strcmp(Input,"PORT")==0){
 
 
+	/*		process_client_commands();*/
 
-							handle_port_command(Portno);
+		}
 
+	}
 
 
-						}
 
+	void process_client_commands() {
 
+		// The loop to keep client running and accept commands
 
-						else if (strcmp(Input,"EXIT")==0){
 
 
+		while(1) {
 
-							cse4589_print_and_log("[EXIT:SUCCESS]\n");
+			FD_ZERO(&watch_list);
 
+			FD_SET(0,&watch_list);
 
+		
 
-							cse4589_print_and_log("[EXIT:END]\n");
+			if(ClientFD!=-1){
 
+				FD_SET(ClientFD,&watch_list);
 
+			}
 
-							close_connection(ClientFD);
+			int selret = select(10, &watch_list, NULL, NULL, NULL);
 
+			if(selret < 0){
 
+	       
 
-							exit(-1);
+				perror("select failed.\n");
 
 
 
-						}
+			}
 
-						else if (LoggedIn==0){
+			if(selret >= 0){
 
-							if ((strcmp(login,"LOGIN")==0)){
+				for(int sock_index=0; sock_index<=5; sock_index+=1){
 
-								Arg1[strlen(Arg1)-1]= '\0';
 
 
+					if(FD_ISSET(sock_index, &watch_list)){
 
-								int IPlen= strlen(Arg1);
 
 
+						if (sock_index == 0){
 
-								int PORTN= atoi(Arg2);
+						printf("SOCK INDEX is 0jifedjiaosjdfioasjdfiojasdfiojsadfiojasiodfjioasdjio");
 
+							char *Input = (char*) malloc(sizeof(char)*256);
 
 
-								login_to_server(Arg1,PORTN);
 
+							char *login = (char*) malloc(sizeof(char)*6);		
 
+							
 
-								free(Input);
+							char *Command= (char*) malloc(sizeof(char)*256);
+
+							
+
+							char *Arg1 = (char*) malloc(sizeof(char)*256);
+
+							
+
+							char *Arg2 = (char*) malloc(sizeof(char)*256);
+
+							
+
+							fgets(Input, 256, stdin);
+
+							
+
+							Parse(&Command,&Arg1,&Arg2,Input);
+
+							Input[strlen(Input)-1]= '\0';
+
+
+
+							strncpy(login,Input,5);
+
+							
+
+
+
+							login[5] = '\0' ;
+
+
+
+							if (strcmp(Input, "AUTHOR") == 0) {
+
+
+
+								handle_author_command();
+
+
+
+							} 
+
+
+
+							else if (strcmp(Input, "IP") == 0) {
+
+
+
+								handle_ip_command();
+
+
+
+							} 
+
+
+
+							else if (strcmp(Input,"PORT")==0){
+
+
+
+								handle_port_command(Portno);
 
 
 
 							}
 
-							else{
+
+
+							else if (strcmp(Input,"EXIT")==0){
 
 
 
-							cse4589_print_and_log("[%s:ERROR]\n",Input);
-
-							cse4589_print_and_log("[%s:END]\n",Input);
-
-							fflush(stdout);
-
-							}
-
-						}
-
-						
-
-						else if (LoggedIn==1){
-
-							fflush(stdout);
-
-							if (strcmp("REFRESH",Input)==0){
-
-								printf("REFRESH CALLED\n");
-
-								int j=send(ClientFD,Input,strlen(Input),0);
+								cse4589_print_and_log("[EXIT:SUCCESS]\n");
 
 
 
-								free(Input);
-
-							}
-
-							else if (strcmp(Input,"LIST")==0){
-
-								char* Message=ListCommand(List1);
-
-								cse4589_print_and_log("[LIST:SUCCESS]\n");
-
-								cse4589_print_and_log(Message);
-
-								cse4589_print_and_log("[LIST:END]\n");
-
-								free(Input);
+								cse4589_print_and_log("[EXIT:END]\n");
 
 
-
-							}
-
-							else if (strcmp(Command,"SEND")==0){
-
-								int LengthOfMessageSent=send(ClientFD,Input,strlen(Input),0);
-
-							}
-
-							else if (strcmp(Command,"BROADCAST")==0){
-
-								int LengthOfMessageSent=send(ClientFD,Input,strlen(Input),0);
-
-							}
-
-							else if (strcmp(Input,"LOGOUT")==0){
-
-								cse4589_print_and_log("[%s:SUCCESS]\n",Input);
-
-								cse4589_print_and_log("[%s:END]\n",Input);
-
-								send(ClientFD,"LOGOUT",strlen("LOGOUT"),0);
 
 								close_connection(ClientFD);
 
-								FD_CLR(ClientFD,&watch_list);
 
-								ClientFD=-1;
 
-								LoggedIn=0;
+								exit(-1);
+
+
 
 							}
 
-							else if (strcmp(Command,"BLOCK")==0){
+							else if (LoggedIn==0){
 
-								int j=send(ClientFD,Input,strlen(Input),0);
+								if ((strcmp(login,"LOGIN")==0)){
+
+									Arg1[strlen(Arg1)-1]= '\0';
 
 
 
-								free(Input);
+									int IPlen= strlen(Arg1);
+
+
+
+									int PORTN= atoi(Arg2);
+
+
+
+									login_to_server(Arg1,PORTN);
+
+
+
+									free(Input);
+
+
+
+								}
+
+								else{
+
+
+
+								cse4589_print_and_log("[%s:ERROR]\n",Input);
+
+								cse4589_print_and_log("[%s:END]\n",Input);
+
+								fflush(stdout);
+
+								}
 
 							}
 
-							else if (strcmp(Command,"UNBLOCK")==0){
+							
 
-								int j=send(ClientFD,Input,strlen(Input),0);
+							else if (LoggedIn==1){
+
+								fflush(stdout);
+
+								if (strcmp("REFRESH",Input)==0){
+
+									printf("REFRESH CALLED\n");
+
+									int j=send(ClientFD,Input,strlen(Input),0);
 
 
 
-								free(Input);
+									free(Input);
 
-							}
+								}
 
-							else{
+								else if (strcmp(Input,"LIST")==0){
 
-							fflush(stdout);
+									char* Message=ListCommand(List1);
+
+									cse4589_print_and_log("[LIST:SUCCESS]\n");
+
+									cse4589_print_and_log(Message);
+
+									cse4589_print_and_log("[LIST:END]\n");
+
+									free(Input);
+
+
+
+								}
+
+								else if (strcmp(Command,"SEND")==0){
+
+									int LengthOfMessageSent=send(ClientFD,Input,strlen(Input),0);
+
+								}
+
+								else if (strcmp(Command,"BROADCAST")==0){
+
+									int LengthOfMessageSent=send(ClientFD,Input,strlen(Input),0);
+
+								}
+
+								else if (strcmp(Input,"LOGOUT")==0){
+
+									cse4589_print_and_log("[%s:SUCCESS]\n",Input);
+
+									cse4589_print_and_log("[%s:END]\n",Input);
+
+									send(ClientFD,"LOGOUT",strlen("LOGOUT"),0);
+
+									close_connection(ClientFD);
+
+									FD_CLR(ClientFD,&watch_list);
+
+									ClientFD=-1;
+
+									LoggedIn=0;
+
+								}
+
+								else if (strcmp(Command,"BLOCK")==0){
+
+									int j=send(ClientFD,Input,strlen(Input),0);
+
+
+
+									free(Input);
+
+								}
+
+								else if (strcmp(Command,"UNBLOCK")==0){
+
+									int j=send(ClientFD,Input,strlen(Input),0);
+
+
+
+									free(Input);
+
+								}
+
+								else{
+
+								fflush(stdout);
+
+								}
 
 							}
 
 						}
 
-					}
+					//END OF READING FROM STDIN
 
-				//END OF READING FROM STDIN
+					if ((LoggedIn==1)&&(sock_index!=0)){
 
-				if ((LoggedIn==1)&&(sock_index!=0)){
+						printf("INFINTE LOOP\n");
 
-					printf("INFINTE LOOP\n");
+						char *DataReceived= (char*) malloc(256*sizeof(char));
 
-					char *DataReceived= (char*) malloc(256*sizeof(char));
+						char *ServerCommand=(char*) malloc(256*sizeof(char));
 
-					char *ServerCommand=(char*) malloc(256*sizeof(char));
+						int LengthOfMessageReceived= recv(ClientFD, DataReceived, 1023,0);
 
-					int LengthOfMessageReceived= recv(ClientFD, DataReceived, 1023,0);
+						printf("DataReceived is %s\n",DataReceived);
 
-					printf("DataReceived is %s\n",DataReceived);
+						char Mess[8];  // Make sure to allocate enough space for the copied characters and the null-terminator.
 
-					char Mess[8];  // Make sure to allocate enough space for the copied characters and the null-terminator.
+						int firstValue;
 
-					int firstValue;
+						// Copy the first 7 characters (0 to 6) from source to destination.
 
-					// Copy the first 7 characters (0 to 6) from source to destination.
+						strncpy(Mess, DataReceived, 7);
 
-					strncpy(Mess, DataReceived, 7);
+						
 
-					
+						int value = 0;
 
-					int value = 0;
+						printf("Character is *%d*\n",DataReceived[0]);
 
-					printf("Character is *%d*\n",DataReceived[0]);
+						
 
-					
+						if (strcmp(Mess,"REFRESH")==0){	
 
-					if (strcmp(Mess,"REFRESH")==0){	
+							printf("REFRESH\n");
 
-						printf("REFRESH\n");
+							char* stripped;
 
-						char* stripped;
+							stripped=DataReceived+7;
 
-						stripped=DataReceived+7;
+							ReceiveLoggedinInfo(stripped);
 
-						ReceiveLoggedinInfo(stripped);
+						}
 
-					}
+						
 
-					
+						else if ((DataReceived[0])>0&&(DataReceived[0]<5)) {
 
-					else if ((DataReceived[0])>0&&(DataReceived[0]<5)) {
+							printf("ELSE IF\n");
 
-						printf("ELSE IF\n");
+							ReceiveLoggedinInfo(DataReceived);
 
-						ReceiveLoggedinInfo(DataReceived);
+							printf("AFTER RECEIVED LOGGEDININGO \n");
 
-						printf("AFTER RECEIVED LOGGEDININGO \n");
+							char* Ret=ListCommand(List1);
 
-						char* Ret=ListCommand(List1);
+							printf("AFTER RECEIVED LISTCOMMAND \n");
 
-						printf("AFTER RECEIVED LISTCOMMAND \n");
+							cse4589_print_and_log("%s",Ret);
 
-						cse4589_print_and_log("%s",Ret);
+							free(DataReceived);
 
-						free(DataReceived);
+						}
 
-					}
+						fflush(stdout);
 
-					fflush(stdout);
+						cse4589_print_and_log("%s",DataReceived);
 
-					cse4589_print_and_log("%s",DataReceived);
+	/*					process_client_commands();*/
 
-/*					process_client_commands();*/
+						}
 
 					}
 
@@ -879,5 +883,3 @@ void process_client_commands() {
 		}
 
 	}
-
-}

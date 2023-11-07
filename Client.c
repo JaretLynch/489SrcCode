@@ -694,6 +694,8 @@ void process_client_commands() {
 
 					int value = atoi(DataReceived[0]);
 
+					printf("DATA RECEIVED[0]is %c",DataReceived[0]);
+
 					if (strcmp(Mess,"REFRESH")==0){	
 
 						printf("REFRESH\n");

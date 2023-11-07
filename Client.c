@@ -134,6 +134,10 @@ void Parse(char** Command,char** FirstArgPointer, char** SecondArgPointer, char*
 
 		char Character[2];
 
+		printf("CHARACTER as %s IS *%s*\n",Character);
+
+		printf("CHARACTER as %c IS *%s*\n",Character);
+
 		
 
 		Character[1]='\0';

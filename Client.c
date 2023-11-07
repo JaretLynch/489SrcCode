@@ -66,9 +66,9 @@ fd_set watch_list;
 
 typedef struct ClientsLoggedIn{
 
-	char* IP[30];
+	char IP[30];
 
-	char* HostName[50];
+	char HostName[50];
 
 	int LiseningPort;
 
@@ -222,11 +222,11 @@ int compareClients2(const void *a, const void *b) {
 
 
 
-		  const Client *clientA = (const Client *)a;
+		  const ClientsLoggedIn *clientA = (const Client *)a;
 
 
 
-		  const Client *clientB = (const Client *)b;
+		  const ClientsLoggedIn *clientB = (const Client *)b;
 
 
 
@@ -304,9 +304,9 @@ void ReceiveLoggedinInfo(char* ServerMessage){
 
 }
 
-char* ListCommand(client List2[]){
+char* ListCommand(ClientsLoggedIn List2[]){
 
-		qsort(List2, 5, sizeof(Client), compareClients);
+		qsort(List2, 5, sizeof(ClientsLoggedIn), compareClients);
 
 		char *ReturnM = malloc(1024*sizeof(char));
 
@@ -318,7 +318,7 @@ char* ListCommand(client List2[]){
 
 		for(int i=0; i<5; i++){
 
-			char* IP=List[i];
+			char* IP=List2[i];
 
 			if (strlen(IP)>0){
 

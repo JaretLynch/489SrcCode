@@ -344,21 +344,41 @@ int ClientExists(char* IP){
 
 		strcpy(Manipulator,ServerMessage);
 
-
+		int spaces=0;
 
 		int count; // The count of logged-in clients
 
 	  	int l=0;
 
+	  	
+
 	  	for (int i=0; i<ServerMessage[0]-1;i++){
 
-
+				spaces=0;
 
 				char* listeningPort=malloc(50);
 
 				char* IP=malloc(120);
 
 				char* FUCKYOU=malloc(200);
+
+				for(int j=0; j<strlen(Manipulator);j++){
+
+						char Character[2];
+
+						strncpy(Character,&Manipulator[j],1);
+
+						Character[1]='\0';
+
+						if (strcmp(Character," ")==0){
+
+
+
+							Spaces++;
+
+						}
+
+					if (Spaces>1){
 
 		  		Parse2(&FUCKYOU,&IP,&listeningPort,Manipulator);
 
@@ -406,7 +426,7 @@ int ClientExists(char* IP){
 
 	  	}
 
-	  
+	  }
 
 	    }
 

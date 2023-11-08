@@ -84,7 +84,7 @@ int ClientExists(char* IP){
 
 	for(int i=0; i<5;i++){
 
-		printf("IP IS *%s*\n",IP);
+		printf("IP DURING CLIENT EXISTS IS *%s*\n",IP);
 
 		if (strcmp(IP,List1[i].IP)==0){
 
@@ -387,6 +387,8 @@ int ClientExists(char* IP){
 						Parse2(&FUCKYOU,&IP,&listeningPort,Manipulator);
 
 						IP[strlen(IP-1)]='\0';
+
+						printf("IP DURING RECEIVE IS *%s*\n");
 
 						strcpy(List1[i].IP,IP);
 

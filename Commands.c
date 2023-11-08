@@ -36,7 +36,7 @@ int listening_port;
 
 
 
-char* IPaddr;
+extern char* IPaddr;
 
 void handle_author_command() {
 

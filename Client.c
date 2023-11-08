@@ -634,7 +634,7 @@ int ClientExists(char* IP){
 
 							login[5] = '\0' ;
 
-							if (strcmp(Input, "AUTHOR") == 0) {
+							if (strcmp(Input, "AUTHOR ") == 0) {
 
 
 
@@ -646,7 +646,7 @@ int ClientExists(char* IP){
 
 
 
-							else if (strcmp(Input, "IP") == 0) {
+							else if (strcmp(Input, "IP ") == 0) {
 
 
 
@@ -664,7 +664,7 @@ int ClientExists(char* IP){
 
 
 
-							else if (strcmp(Input,"PORT")==0){
+							else if (strcmp(Input,"PORT ")==0){
 
 
 
@@ -676,7 +676,7 @@ int ClientExists(char* IP){
 
 
 
-							else if (strcmp(Input,"EXIT")==0){
+							else if (strcmp(Input,"EXIT ")==0){
 
 
 

@@ -84,7 +84,7 @@ int ClientExists(char* IP){
 
 	for(int i=0; i<5;i++){
 
-		printf("IP DURING CLIENT EXISTS IS *%s*\n",IP);
+/*		printf("IP DURING CLIENT EXISTS IS *%s*\n",IP);*/
 
 		if (strcmp(IP,List1[i].IP)==0){
 
@@ -208,7 +208,7 @@ int ClientExists(char* IP){
 
 			char Character[2];
 
-			printf("Message is *%s*\n",Actualmsg);
+/*			printf("Message is *%s*\n",Actualmsg);*/
 
 			strncpy(Character,&Actualmsg[i],1);
 
@@ -220,9 +220,9 @@ int ClientExists(char* IP){
 
 			if(count==2){
 
-				printf("Character is *%s*\n",Character);
+/*				printf("Character is *%s*\n",Character);*/
 
-				printf("SHOULD BE COPYING INTO IP\n");
+/*				printf("SHOULD BE COPYING INTO IP\n");*/
 
 				(*IP)[iterator2]=*Character;
 
@@ -232,9 +232,9 @@ int ClientExists(char* IP){
 
 			if (count>2){
 
-			printf("Character is *%s*\n",Character);
+/*			printf("Character is *%s*\n",Character);*/
 
-				printf("SHOULD BE COPYING INTO Lport\n");
+/*				printf("SHOULD BE COPYING INTO Lport\n");*/
 
 				(*LPort)[iterator3]=*Character;
 
@@ -244,9 +244,9 @@ int ClientExists(char* IP){
 
 			if (count==1){
 
-			printf("Character is *%s*\n",Character);
+/*			printf("Character is *%s*\n",Character);*/
 
-				printf("SHOULD BE COPYING INTO HOSTNAME\n");
+/*				printf("SHOULD BE COPYING INTO HOSTNAME\n");*/
 
 				(*HostName)[iterator1]=*Character;
 
@@ -400,7 +400,7 @@ int ClientExists(char* IP){
 
 						IP[strlen(IP)-1]='\0';
 
-						printf("IP DURING RECEIVE IS *%s*\n",IP);
+/*						printf("IP DURING RECEIVE IS *%s*\n",IP);*/
 
 						strcpy(List1[i].IP,IP);
 
@@ -670,7 +670,7 @@ int ClientExists(char* IP){
 
 							Parse(&Command,&Arg1,&Arg2,Input);
 
-							printf("Arg1 is *%s*\n",Arg1);
+/*							printf("Arg1 is *%s*\n",Arg1);*/
 
 /*							printf("BEFORE, INPUT IS *%s*\n",Input);*/
 
@@ -842,7 +842,7 @@ int ClientExists(char* IP){
 
 										if (strcmp(IP,Arg1)!=0){
 
-
+											printf("INPUT IS *%s*\n",Input);
 
 											int j=send(ClientFD,Input,strlen(Input),0);
 
@@ -892,7 +892,7 @@ int ClientExists(char* IP){
 
 								else if (strcmp(Command,"BLOCK")==0){
 
-									printf("ARG1 is *%s*\n",Arg1);
+/*									printf("ARG1 is *%s*\n",Arg1);*/
 
 									if (ClientExists(Arg1)==1){
 

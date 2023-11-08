@@ -384,10 +384,6 @@ int ClientExists(char* IP){
 
 						Parse2(&FUCKYOU,&IP,&listeningPort,Manipulator);
 
-						printf("MANIPULATOR IS %s\n",Manipulator);
-
-						printf("IP IS *%s*and List1[i].IP is *%s*",IP,List1[i].IP);
-
 						strcpy(List1[i].IP,IP);
 
 						strcpy(List1[i].HostName,FUCKYOU);

@@ -574,7 +574,7 @@ int ClientExists(char* IP){
 
 
 
-	/*		process_client_commands();*/
+			process_client_commands();
 
 		}
 

@@ -188,13 +188,9 @@ int ClientExists(char* IP){
 
 			}
 
-			printf("PARSE DONE\n");
-
 	}
 
 	void Parse2(char** Command,char** FirstArgPointer, char** SecondArgPointer, char* Actualmsg){
-
-		printf("Parse 2 called\n");
 
 		int count=0;
 
@@ -338,7 +334,7 @@ int ClientExists(char* IP){
 
 		strcpy(Manipulator,ServerMessage);
 
-		printf("SERVER MESSAGE IS %s\n",ServerMessage);
+
 
 		int count; // The count of logged-in clients
 
@@ -346,7 +342,7 @@ int ClientExists(char* IP){
 
 	  	for (int i=0; i<ServerMessage[0]-1;i++){
 
-	  		printf("SERVERMESSAGE[0]-1 is %d\n",ServerMessage[0]-1);
+
 
 				char* listeningPort=malloc(50);
 
@@ -418,13 +414,13 @@ int ClientExists(char* IP){
 
 			for(int i=0; i<5; i++){
 
-				printf("I IS %d and List1[i].IP is %s\n",i,List1[i].IP);
+
 
 				char* IP=malloc(120);
 
 				strcpy(IP,List1[i].IP);
 
-				printf("IP IS %s\n",IP);
+
 
 				if (strlen(IP)>0){
 
@@ -616,13 +612,13 @@ int ClientExists(char* IP){
 
 							
 
-							fgets(Input, 256, stdin);
+
 
 							printf("INPUT IS %s\n",Input);
 
 							Parse(&Command,&Arg1,&Arg2,Input);
 
-							printf("AFter Parse Command is %s\n",Command);
+
 
 							Input[strlen(Input)-1]= '\0';
 
@@ -750,7 +746,7 @@ int ClientExists(char* IP){
 
 								if (strcmp("REFRESH",Input)==0){
 
-									printf("REFRESH CALLED\n");
+
 
 									int j=send(ClientFD,Input,strlen(Input),0);
 
@@ -778,7 +774,7 @@ int ClientExists(char* IP){
 
 								else if (strcmp(Command,"SEND")==0){
 
-									printf("COMMAND BLOCK INITIATED\n");
+
 
 									if (ClientExists(Arg1)==1){
 
@@ -788,13 +784,9 @@ int ClientExists(char* IP){
 
 										if (strcmp(IP,Arg1)!=0){
 
-											printf("IP IS *%s* and Arg1 is *%s*\n",IP,Arg1);
+
 
 											int j=send(ClientFD,Input,strlen(Input),0);
-
-											cse4589_print_and_log("[SEND:SUCCESS]\n");
-
-											cse4589_print_and_log("[SEND:END]\n");
 
 											}
 
@@ -930,8 +922,6 @@ int ClientExists(char* IP){
 
 						if (strcmp(Mess,"REFRESH")==0){	
 
-							printf("REFRESH\n");
-
 							char* stripped;
 
 							stripped=DataReceived+8;
@@ -943,8 +933,6 @@ int ClientExists(char* IP){
 						
 
 						else if ((DataReceived[0])>0&&(DataReceived[0]<5)) {
-
-							printf("ELSE IF\n");
 
 							ReceiveLoggedinInfo(DataReceived);
 

@@ -392,7 +392,7 @@ int ClientExists(char* IP){
 
 						strcpy(List1[i].IP,IP);
 
-						strcpy(List1[i].HostName,FUCKYOU);
+						strcpy(List1[i].HostName,HostName);
 
 						
 

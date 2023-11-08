@@ -450,6 +450,10 @@ char* RMessage(){
 
 		for (int i=0;i++;i<5){
 
+			printf("List[i].LoggedIn is %d\n",List[i].LoggedIn);
+
+			printf("List[i].Name is *%s*\n",List[i].Name);
+
 			if (List[i].LoggedIn==1){
 
 				id+=1;

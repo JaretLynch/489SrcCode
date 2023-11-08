@@ -548,6 +548,8 @@ int ClientExists(char* IP){
 
 	void process_client_commands() {
 
+		printf("CLLIENT COMMANDS CALLED\n");
+
 		// The loop to keep client running and accept commands
 
 
@@ -892,7 +894,7 @@ int ClientExists(char* IP){
 
 					if ((LoggedIn==1)&&(sock_index!=0)){
 
-
+						printf("END OF STDIN");
 
 						char *DataReceived= (char*) malloc(256*sizeof(char));
 

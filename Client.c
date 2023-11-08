@@ -618,7 +618,7 @@ int ClientExists(char* IP){
 
 							fgets(Input, 256, stdin);
 
-							
+							printf("INPUT IS %s\n",Input);
 
 							Parse(&Command,&Arg1,&Arg2,Input);
 

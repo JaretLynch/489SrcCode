@@ -448,11 +448,11 @@ char* RMessage(){
 
 		qsort(List, 5, sizeof(Client), compareClients);
 
-		for (int i=0;i++;i<5){
+		for (int i=0;i<5;i++){
 
-			printf("List[i].LoggedIn is %d\n",List[i].LoggedIn);
+/*			printf("List[i].LoggedIn is %d\n",List[i].LoggedIn);*/
 
-			printf("List[i].Name is *%s*\n",List[i].Name);
+/*			printf("List[i].Name is *%s*\n",List[i].Name);*/
 
 			if (List[i].LoggedIn==1){
 

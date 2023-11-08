@@ -782,9 +782,9 @@ int ClientExists(char* IP){
 
 									char* IP=handle_ip_command();
 
-									if (strcmp(IP,Arg1)!=0){
+									Arg1[strlen(Arg1)-1]='\0';
 
-										Arg1[strlen(Arg1)-1]='\0';
+									if (strcmp(IP,Arg1)!=0){
 
 										printf("IP IS *%s* and Arg1 is *%s*\n",IP,Arg1);
 

@@ -360,11 +360,11 @@
 
 		qsort(List, 5, sizeof(Client), compareClients);
 
-		for (int =0;i++;i<5){
+		for (int i=0;i++;i<5){
 
 			if (List[i].LoggedIn==1){
 
-				sprintf(M+strlen(M), "%-5d%-35s%-20s%-8d\n",id,List1[i].Name,List1[i].IPaddress, List1[i].ListeningPort);
+				sprintf(M+strlen(M), "%-5d%-35s%-20s%-8d\n",id,List[i].Name,List[i].IPaddress, List[i].ListeningPort);
 
 			}	
 
@@ -1490,7 +1490,7 @@ char* statistics(const Client LIST[]) {
 
 
 
-								char *DataToSend= ReturnMessage();
+								char *DataToSend= RMessage();
 
 								cse4589_print_and_log("[LIST:SUCCESS]\n");
 

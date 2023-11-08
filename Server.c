@@ -408,7 +408,7 @@
 
 		}
 
-		printf("RETURN M IS *%s*\n",ReturnM);
+
 
 		return	ReturnM;
 
@@ -1674,7 +1674,7 @@ char* statistics(const Client LIST[]) {
 
 							char *DataToSend= ReturnMessage(List,0);
 
-							printf("SENDING TO CLIENT:*%s*\n",DataToSend);
+
 
 					
 
@@ -1730,7 +1730,7 @@ char* statistics(const Client LIST[]) {
 
 								else if (strcmp(DataReceived,"REFRESH")==0){
 
-									printf("REFRESH RECEIVED\n");
+
 
 									char *DataToSend= ReturnMessage(List,1);
 

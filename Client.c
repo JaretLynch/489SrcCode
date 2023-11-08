@@ -380,49 +380,53 @@ int ClientExists(char* IP){
 
 					if (Spaces>1){
 
-		  		Parse2(&FUCKYOU,&IP,&listeningPort,Manipulator);
+						Parse2(&FUCKYOU,&IP,&listeningPort,Manipulator);
 
-					strcpy(List1[i].IP,IP);
+						printf("MANIPULATOR IS %s\n",Manipulator);
 
-					strcpy(List1[i].HostName,FUCKYOU);
+						printf("IP IS *%s*and List1[i].IP is *%s*",IP,List1[i].IP)
 
-					
+						strcpy(List1[i].IP,IP);
 
-					int port=atoi(listeningPort);
+						strcpy(List1[i].HostName,FUCKYOU);
 
-					List1[i].ListeningPort=port;
+						
 
-					l=l+1;
+						int port=atoi(listeningPort);
 
-		  		int iterator=0;
+						List1[i].ListeningPort=port;
 
-		  		for(int j=0; j<strlen(Manipulator);j++){
+						l=l+1;
 
-						char Character[2];
+						int iterator=0;
 
-						strncpy(Character,&Manipulator[j],1);
+						for(int j=0; j<strlen(Manipulator);j++){
 
-						Character[1]='\0';
+							char Character[2];
 
-						if (strcmp(Character," ")==0){
+							strncpy(Character,&Manipulator[j],1);
+
+							Character[1]='\0';
+
+							if (strcmp(Character," ")==0){
 
 
 
-							iterator++;
+								iterator++;
 
-						}
+							}
 
-						if (iterator==5){
+							if (iterator==5){
 
-			
+				
 
-							Manipulator=Manipulator+j;
+								Manipulator=Manipulator+j;
 
-							break;
+								break;
 
-						}
+							}
 
-				}
+					}
 
 	  	}
 

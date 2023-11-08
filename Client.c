@@ -384,7 +384,7 @@ int ClientExists(char* IP){
 
 						printf("MANIPULATOR IS %s\n",Manipulator);
 
-						printf("IP IS *%s*and List1[i].IP is *%s*",IP,List1[i].IP)
+						printf("IP IS *%s*and List1[i].IP is *%s*",IP,List1[i].IP);
 
 						strcpy(List1[i].IP,IP);
 

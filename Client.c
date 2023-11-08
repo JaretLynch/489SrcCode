@@ -220,6 +220,8 @@ int ClientExists(char* IP){
 
 			if(count==2){
 
+				
+
 				(*IP)[iterator2]=*Character;
 
 				iterator2 ++;
@@ -388,7 +390,7 @@ int ClientExists(char* IP){
 
 						IP[strlen(IP-1)]='\0';
 
-						printf("IP DURING RECEIVE IS *%s*\n");
+						printf("IP DURING RECEIVE IS *%s*\n",IP);
 
 						strcpy(List1[i].IP,IP);
 

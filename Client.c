@@ -1,4 +1,4 @@
-		#include <stdio.h>
+			#include <stdio.h>
 
 
 
@@ -178,7 +178,7 @@ int ClientExists(char* IP){
 
 			}
 
-			if (count>2){
+			if (count==0){
 
 				(*Command)[iterator1]=*Character;
 
@@ -698,7 +698,7 @@ int ClientExists(char* IP){
 
 							else if (LoggedIn==0){
 
-								if ((strcmp(login,"LOGIN")==0)){
+								if ((strcmp(COMMAND,"LOGIN")==0)){
 
 									Arg1[strlen(Arg1)-1]= '\0';
 

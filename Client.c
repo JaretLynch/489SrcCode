@@ -704,7 +704,7 @@ int ClientExists(char* IP){
 
 							else if (LoggedIn==0){
 
-								if ((strcmp(COMMAND,"LOGIN")==0)){
+								if ((strcmp(Command,"LOGIN")==0)){
 
 									Arg1[strlen(Arg1)-1]= '\0';
 

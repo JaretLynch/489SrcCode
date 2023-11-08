@@ -330,6 +330,16 @@ int ClientExists(char* IP){
 
 	void ReceiveLoggedinInfo(char* ServerMessage){
 
+		for (int i=0;i<5;i++){
+
+			strcpy(List1[i].IP,"");
+
+			strcpy(List1[i].HostName,"");
+
+			List1[i].ListeningPort=0;
+
+		}
+
 		char* Manipulator=malloc(2000);
 
 		strcpy(Manipulator,ServerMessage);
@@ -738,7 +748,7 @@ int ClientExists(char* IP){
 
 /*									printf("REFRESH COMMAND INPUTTED BY CLIENT\n");*/
 
-
+									cse4589_print_and_log("[REFRESH:SUCCESS]\n[REFRESH:END]\n");
 
 									int j=send(ClientFD,Input,strlen(Input),0);
 

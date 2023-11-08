@@ -412,7 +412,7 @@
 
 
 
-		return	ReturnM;
+		return	ReturnM;	
 
 
 
@@ -1494,7 +1494,9 @@ char* statistics(const Client LIST[]) {
 
 
 
-								char *DataToSend= RMessage();
+								char *DataToSend;
+
+								strcpy(DataToSend,RMessage);
 
 								cse4589_print_and_log("[LIST:SUCCESS]\n");
 

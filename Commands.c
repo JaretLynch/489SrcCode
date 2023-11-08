@@ -36,6 +36,8 @@ int listening_port;
 
 
 
+char* IPaddr;
+
 void handle_author_command() {
 
     const char *command_str = "AUTHOR";
@@ -104,9 +106,11 @@ char* handle_ip_command(const char *Address) {
 
 	char ip[INET_ADDRSTRLEN];
 
-
+	
 
 	inet_ntop(AF_INET, &local_addr.sin_addr, ip, INET_ADDRSTRLEN);
+
+	strcpy(IPaddr,ip);
 
 	close(socket_desc);
 

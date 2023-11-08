@@ -24,7 +24,7 @@
 
 void handle_author_command();
 
-void handle_ip_command();
+char* handle_ip_command();
 
 void handle_port_command();
 
@@ -62,7 +62,7 @@ void handle_author_command() {
 
 
 
-void handle_ip_command(const char *Address) {
+char* handle_ip_command(const char *Address) {
 
 	struct sockaddr_in serv_addr, local_addr;
 
@@ -110,11 +110,7 @@ void handle_ip_command(const char *Address) {
 
 	close(socket_desc);
 
-	cse4589_print_and_log("[IP:SUCCESS]\n");
-
-	cse4589_print_and_log("IP:%s\n", ip);
-
-	cse4589_print_and_log("[IP:END]\n");
+	return(ip);
 
 	}
 

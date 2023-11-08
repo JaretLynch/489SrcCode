@@ -354,6 +354,26 @@
 
 	}
 
+	char *RMessage(){
+
+		char* M=malloc(4000);
+
+		qsort(List, 5, sizeof(Client), compareClients);
+
+		for (int =0;i++;i<5){
+
+			if (List[i].LoggedIn==1){
+
+				sprintf(M+strlen(M), "%-5d%-35s%-20s%-8d\n",id,List1[i].Name,List1[i].IPaddress, List1[i].ListeningPort);
+
+			}	
+
+	}
+
+	return M;
+
+}
+
 	char* ReturnMessage(const Client LIST[],int a){
 
 		int numLoggedIn=1;
@@ -1470,7 +1490,7 @@ char* statistics(const Client LIST[]) {
 
 
 
-								char *DataToSend= ReturnMessage(List);
+								char *DataToSend= ReturnMessage();
 
 								cse4589_print_and_log("[LIST:SUCCESS]\n");
 

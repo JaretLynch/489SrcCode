@@ -656,6 +656,8 @@ int ClientExists(char* IP){
 
 							Parse(&Command,&Arg1,&Arg2,Input);
 
+							printf("Arg1 is *%s*\n",Arg1);
+
 /*							printf("BEFORE, INPUT IS *%s*\n",Input);*/
 
 /*							printf("AFTER, INPUT IS *%s*\n",Input);*/
@@ -738,8 +740,6 @@ int ClientExists(char* IP){
 
 									Input[strlen(Input)-1]= '\0';
 
-									Arg1[strlen(Arg1)-1]= '\0';
-
 
 
 									int IPlen= strlen(Arg1);
@@ -747,8 +747,6 @@ int ClientExists(char* IP){
 
 
 									int PORTN= atoi(Arg2);
-
-
 
 									login_to_server(Arg1,PORTN);
 
@@ -791,6 +789,8 @@ int ClientExists(char* IP){
 /*									printf("REFRESH COMMAND INPUTTED BY CLIENT\n");*/
 
 									cse4589_print_and_log("[REFRESH:SUCCESS]\n[REFRESH:END]\n");
+
+									
 
 									int j=send(ClientFD,Input,strlen(Input),0);
 

@@ -354,7 +354,7 @@ int ClientExists(char* IP){
 
 	  	for (int i=0; i<ServerMessage[0]-1;i++){
 
-				spaces=0;
+				Spaces=0;
 
 				char* listeningPort=malloc(50);
 

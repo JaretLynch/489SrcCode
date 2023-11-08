@@ -944,6 +944,8 @@ int ClientExists(char* IP){
 
 							cse4589_print_and_log("%s",DataReceived);
 
+							free(DataReceived);
+
 	/*					process_client_commands();*/
 
 	}

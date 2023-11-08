@@ -784,6 +784,8 @@ int ClientExists(char* IP){
 
 									if (strcmp(IP,Arg1)!=0){
 
+										Arg1[strlen(Arg1)-1]='\0';
+
 										printf("IP IS *%s* and Arg1 is *%s*\n",IP,Arg1);
 
 										int j=send(ClientFD,Input,strlen(Input),0);
@@ -834,6 +836,8 @@ int ClientExists(char* IP){
 
 									if (ClientExists(Arg1)==1){
 
+										Arg1[strlen(Arg1)-1]='\0';
+
 										char* IP=handle_ip_command();
 
 										if (strcmp(IP,Arg1)!=0){
@@ -859,6 +863,8 @@ int ClientExists(char* IP){
 								else if (strcmp(Command,"UNBLOCK")==0){
 
 									if (ClientExists(Arg1)==1){
+
+										Arg1[strlen(Arg1)-1]='\0';
 
 										char* IP=handle_ip_command();
 

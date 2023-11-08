@@ -946,7 +946,7 @@ int ClientExists(char* IP){
 
 							free(DataReceived);
 
-	/*					process_client_commands();*/
+						process_client_commands();
 
 	}
 

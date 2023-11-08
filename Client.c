@@ -220,7 +220,9 @@ int ClientExists(char* IP){
 
 			if(count==2){
 
-				
+				printf("Character is *%s*\n",Character);
+
+				printf("SHOULD BE COPYING INTO IP\n");
 
 				(*IP)[iterator2]=*Character;
 
@@ -230,6 +232,10 @@ int ClientExists(char* IP){
 
 			if (count>2){
 
+			printf("Character is *%s*\n",Character);
+
+				printf("SHOULD BE COPYING INTO Lport\n");
+
 				(*LPort)[iterator3]=*Character;
 
 				iterator3++;
@@ -237,6 +243,10 @@ int ClientExists(char* IP){
 			}
 
 			if (count==1){
+
+			printf("Character is *%s*\n",Character);
+
+				printf("SHOULD BE COPYING INTO HOSTNAME\n");
 
 				(*HostName)[iterator1]=*Character;
 
@@ -388,7 +398,7 @@ int ClientExists(char* IP){
 
 						Parse2(&HostName,&IP,&listeningPort,Manipulator);
 
-						IP[strlen(IP-1)]='\0';
+						IP[strlen(IP)-1]='\0';
 
 						printf("IP DURING RECEIVE IS *%s*\n",IP);
 

@@ -114,7 +114,7 @@ char* handle_ip_command(const char *Address) {
 
 	close(socket_desc);
 
-	return(ip);
+	return(IPaddr);
 
 	}
 

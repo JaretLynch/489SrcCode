@@ -620,11 +620,11 @@ int ClientExists(char* IP){
 
 							Parse(&Command,&Arg1,&Arg2,Input);
 
-
+							printf("BEFORE, INPUT IS *%s*\n",Input);
 
 							Input[strlen(Input)-1]= '\0';
 
-
+							printf("AFTER, INPUT IS *%s*\n",Input);
 
 							strncpy(login,Input,5);
 
@@ -634,7 +634,7 @@ int ClientExists(char* IP){
 
 							login[5] = '\0' ;
 
-							if (strcmp(Input, "AUTHOR ") == 0) {
+							if (strcmp(Input, "AUTHOR") == 0) {
 
 
 
@@ -646,7 +646,7 @@ int ClientExists(char* IP){
 
 
 
-							else if (strcmp(Input, "IP ") == 0) {
+							else if (strcmp(Input, "IP") == 0) {
 
 
 
@@ -664,7 +664,7 @@ int ClientExists(char* IP){
 
 
 
-							else if (strcmp(Input,"PORT ")==0){
+							else if (strcmp(Input,"PORT")==0){
 
 
 
@@ -676,7 +676,7 @@ int ClientExists(char* IP){
 
 
 
-							else if (strcmp(Input,"EXIT ")==0){
+							else if (strcmp(Input,"EXIT")==0){
 
 
 

@@ -792,7 +792,7 @@ int ClientExists(char* IP){
 
 									cse4589_print_and_log("[REFRESH:SUCCESS]\n[REFRESH:END]\n");
 
-									
+									printf("SENDING *%s*\n",Input);
 
 									int j=send(ClientFD,Input,strlen(Input),0);
 

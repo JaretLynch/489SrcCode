@@ -892,7 +892,11 @@ int ClientExists(char* IP){
 
 					if ((LoggedIn==1)&&(sock_index!=0)){
 
+
+
 						char *DataReceived= (char*) malloc(256*sizeof(char));
+
+						printf("DONE READING FROM STDIN, DATARECEIVED IS *%s*\n",DataReceived);
 
 						char *ServerCommand=(char*) malloc(256*sizeof(char));
 

@@ -738,6 +738,8 @@ int ClientExists(char* IP){
 
 								if ((strcmp(Command,"LOGIN")==0)){
 
+									Arg1[strlen(Arg1)-1]='\0';
+
 									Input[strlen(Input)-1]= '\0';
 
 
@@ -818,7 +820,7 @@ int ClientExists(char* IP){
 
 								else if (strcmp(Command,"SEND")==0){
 
-
+									Arg1[strlen(Arg1)-1]='\0';
 
 									if (ClientExists(Arg1)==1){
 

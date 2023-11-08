@@ -624,7 +624,7 @@ int ClientExists(char* IP){
 
 							Input[strlen(Input)-1]= '\0';
 
-
+							Input[strlen(Input)-1]= '\0';
 
 							strncpy(login,Input,5);
 
@@ -633,8 +633,6 @@ int ClientExists(char* IP){
 
 
 							login[5] = '\0' ;
-
-
 
 							if (strcmp(Input, "AUTHOR") == 0) {
 

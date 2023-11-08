@@ -64,6 +64,10 @@ void handle_author_command() {
 
 char* handle_ip_command(const char *Address) {
 
+	    IPaddr = (char *)malloc(INET_ADDRSTRLEN);
+
+
+
 	struct sockaddr_in serv_addr, local_addr;
 
 	socklen_t addr_len = sizeof(local_addr);

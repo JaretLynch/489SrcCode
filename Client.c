@@ -798,6 +798,10 @@ int ClientExists(char* IP){
 
 											}
 
+											else{
+
+												cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
+
 											}
 
 									else{

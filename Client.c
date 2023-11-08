@@ -756,6 +756,24 @@ int ClientExists(char* IP){
 
 								}
 
+							else if (strcmp("SEND",Command)==0){
+
+								cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
+
+							}
+
+							else if (strcmp("UNBLOCK",Command)==0){
+
+								cse4589_print_and_log("[UNBLOCK:ERROR]\n[UNBLOCK:END]\n");
+
+							}
+
+							else if (strcmp("BLOCK",Command)==0){
+
+								cse4589_print_and_log("[BLOCK:ERROR]\n[BLOCK:END]\n");
+
+							}
+
 							}
 
 							

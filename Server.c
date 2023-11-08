@@ -898,9 +898,11 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 									int MDLen=strlen(MessageToDest);
 
-									send(currentClient.FD,MessageToDest,MDLen,0);
+
 
 									cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
+
+									send(currentClient.FD,MessageToDest,MDLen,0);
 
 									List[GetClientByIP(SenderIP)].MessagesSent+=1;
 
@@ -1048,9 +1050,11 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 					int MSLen=strlen(MessageToSender);
 
-					send(sock_index,MessageToSender,MSLen,0);
+
 
 					cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,"255.255.255.255",Arg1);
+
+					send(sock_index,MessageToSender,MSLen,0);
 
 			}
 
@@ -1650,9 +1654,9 @@ char* statistics(const Client LIST[]) {
 
 											int MDLen=strlen(MessageToDest);
 
-											send(fdaccept,MessageToDest,MDLen,0);
-
 											cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SourceIP,BackLogIP, Msg);
+
+																						send(fdaccept,MessageToDest,MDLen,0);
 
 											List[GetClientByIP(SourceIP)].MessagesSent+=1;
 

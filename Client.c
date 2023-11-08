@@ -610,11 +610,11 @@ int ClientExists(char* IP){
 
 							char *Arg2 = (char*) malloc(sizeof(char)*256);
 
-							
+							fgets(Input, 256, stdin);
 
+							Input[strlen(INPUT)-1]='\0';	
 
-
-							printf("INPUT IS %s\n",Input);
+							printf("INPUT IS *%s*\n",Input);
 
 							Parse(&Command,&Arg1,&Arg2,Input);
 

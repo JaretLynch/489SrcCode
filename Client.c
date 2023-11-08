@@ -622,8 +622,6 @@ int ClientExists(char* IP){
 
 							printf("BEFORE, INPUT IS *%s*\n",Input);
 
-							Input[strlen(Input)-1]= '\0';
-
 							printf("AFTER, INPUT IS *%s*\n",Input);
 
 							strncpy(login,Input,5);
@@ -702,6 +700,8 @@ int ClientExists(char* IP){
 
 								if ((strcmp(Command,"LOGIN")==0)){
 
+									Input[strlen(Input)-1]= '\0';
+
 									Arg1[strlen(Arg1)-1]= '\0';
 
 
@@ -729,6 +729,8 @@ int ClientExists(char* IP){
 							
 
 							else if (LoggedIn==1){
+
+								
 
 								fflush(stdout);
 

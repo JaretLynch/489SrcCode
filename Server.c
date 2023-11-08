@@ -354,29 +354,7 @@
 
 	}
 
-	char *RMessage(){
-
-		int id=0;
-
-		char* M=malloc(4000);
-
-		qsort(List, 5, sizeof(Client), compareClients);
-
-		for (int i=0;i++;i<5){
-
-			if (List[i].LoggedIn==1){
-
-				id+=1;
-
-				sprintf(M+strlen(M), "%-5d%-35s%-20s%-8d\n",id,List[i].Name,List[i].IPaddress, List[i].ListeningPort);
-
-			}	
-
-	}
-
-	return M;
-
-}
+	
 
 	char* ReturnMessage(const Client LIST[],int a){
 
@@ -462,7 +440,29 @@
 
 
 
+char* RMessage(){
 
+		int id=0;
+
+		char* M=malloc(4000);
+
+		qsort(List, 5, sizeof(Client), compareClients);
+
+		for (int i=0;i++;i<5){
+
+			if (List[i].LoggedIn==1){
+
+				id+=1;
+
+				sprintf(M+strlen(M), "%-5d%-35s%-20s%-8d\n",id,List[i].Name,List[i].IPaddress, List[i].ListeningPort);
+
+			}	
+
+	}
+
+	return M;
+
+}
 
 int GetClientByIP(char* IP){
 

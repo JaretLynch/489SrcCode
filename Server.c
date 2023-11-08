@@ -1424,13 +1424,11 @@ char* statistics(const Client LIST[]) {
 
 							else if (strcmp(cmd,"IP")==0){
 
-								printf("IPasdfjmskdfjskdfj\n")
-
 								char* IP=handle_ip_command();
 
 								cse4589_print_and_log("[IP:SUCCESS]\n");
 
-								cse4589_print_and_log("IP:%s\n", ip);
+								cse4589_print_and_log("IP:%s\n", IP);
 
 								cse4589_print_and_log("[IP:END]\n");
 

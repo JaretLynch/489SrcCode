@@ -34,7 +34,7 @@ char local_ip[INET_ADDRSTRLEN];
 
 int listening_port;
 
-
+char* IPaddr;
 
 void handle_author_command() {
 

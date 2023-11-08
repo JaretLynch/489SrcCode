@@ -806,7 +806,7 @@ int ClientExists(char* IP){
 
 									cse4589_print_and_log("[REFRESH:SUCCESS]\n[REFRESH:END]\n");
 
-									printf("SENDING *%s*\n",Input);
+/*									printf("SENDING *%s*\n",Input);*/
 
 									int j=send(ClientFD,Input,strlen(Input),0);
 
@@ -842,7 +842,7 @@ int ClientExists(char* IP){
 
 										if (strcmp(IP,Arg1)!=0){
 
-											printf("INPUT IS *%s*\n",Input);
+/*											printf("INPUT IS *%s*\n",Input);*/
 
 											int j=send(ClientFD,Input,strlen(Input),0);
 
@@ -902,7 +902,7 @@ int ClientExists(char* IP){
 
 											int j=send(ClientFD,Input,strlen(Input),0);
 
-											cse4589_print_and_log("[BLOCK:SUCCESS]\n[BLOCK:END]\n");
+									
 
 										}
 
@@ -928,7 +928,7 @@ int ClientExists(char* IP){
 
 											int j=send(ClientFD,Input,strlen(Input),0);
 
-											cse4589_print_and_log("[UNBLOCK:SUCCESS]\n[UNBLOCK:END]\n");
+
 
 										}
 

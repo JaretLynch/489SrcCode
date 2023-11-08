@@ -1466,21 +1466,21 @@ char* statistics(const Client LIST[]) {
 
 							}
 
-/*							else if (strcmp(cmd,"LIST")==0){*/
+							else if (strcmp(cmd,"LIST")==0){
 
 
 
-/*								char *DataToSend= ReturnMessage(List);*/
+								char *DataToSend= ReturnMessage(List);
 
-/*								cse4589_print_and_log("[LIST:SUCCESS]\n");*/
+								cse4589_print_and_log("[LIST:SUCCESS]\n");
 
-/*								cse4589_print_and_log("%s", DataToSend);*/
+								cse4589_print_and_log("%s", DataToSend);
 
-/*								cse4589_print_and_log("[LIST:END]\n");*/
+								cse4589_print_and_log("[LIST:END]\n");
 
 
 
-/*							}*/
+							}
 
 							
 

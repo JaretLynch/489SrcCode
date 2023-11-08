@@ -444,7 +444,7 @@ char* RMessage(){
 
 		int id=0;
 
-		char* M=malloc(4000);
+		char *M=malloc(4000);
 
 		qsort(List, 5, sizeof(Client), compareClients);
 

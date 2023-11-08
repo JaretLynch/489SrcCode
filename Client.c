@@ -732,7 +732,7 @@ int ClientExists(char* IP){
 
 								if (strcmp("REFRESH",Input)==0){
 
-									printf("REFRESH COMMAND INPUTTED BY CLIENT\n");
+/*									printf("REFRESH COMMAND INPUTTED BY CLIENT\n");*/
 
 
 
@@ -896,7 +896,7 @@ int ClientExists(char* IP){
 
 						char *DataReceived= (char*) malloc(256*sizeof(char));
 
-						printf("DONE READING FROM STDIN, DATARECEIVED IS *%s*\n",DataReceived);
+/*						printf("DONE READING FROM STDIN, DATARECEIVED IS *%s*\n",DataReceived);*/
 
 						char *ServerCommand=(char*) malloc(256*sizeof(char));
 
@@ -910,11 +910,11 @@ int ClientExists(char* IP){
 
 						strncpy(Mess, DataReceived, 7);
 
-						printf("RECEIVED form server: *%s*\n",DataReceived);
+/*						printf("RECEIVED form server: *%s*\n",DataReceived);*/
 
 						if (strcmp(Mess,"REFRESH")==0){	
 
-							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);
+/*							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);*/
 
 							char* stripped;
 

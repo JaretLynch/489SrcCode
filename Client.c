@@ -192,7 +192,7 @@ int ClientExists(char* IP){
 
 	}
 
-	void Parse2(char** Command,char** FirstArgPointer, char** SecondArgPointer, char* Actualmsg){
+	void Parse2(char** HostName,char** IP, char** LPort, char* Actualmsg){
 
 		int count=0;
 
@@ -208,9 +208,11 @@ int ClientExists(char* IP){
 
 			char Character[2];
 
-			
+			printf("Message is *%s*\n",Actualmsg);
 
 			strncpy(Character,&Actualmsg[i],1);
+
+			
 
 			Character[1]='\0';
 
@@ -218,9 +220,7 @@ int ClientExists(char* IP){
 
 			if(count==2){
 
-
-
-				(*FirstArgPointer)[iterator2]=*Character;
+				(*IP)[iterator2]=*Character;
 
 				iterator2 ++;
 
@@ -228,7 +228,7 @@ int ClientExists(char* IP){
 
 			if (count>2){
 
-				(*SecondArgPointer)[iterator3]=*Character;
+				(*LPort)[iterator3]=*Character;
 
 				iterator3++;
 
@@ -236,7 +236,7 @@ int ClientExists(char* IP){
 
 			if (count==1){
 
-				(*Command)[iterator1]=*Character;
+				(*HostName)[iterator1]=*Character;
 
 				iterator1++;		
 
@@ -362,7 +362,7 @@ int ClientExists(char* IP){
 
 				char* IP=malloc(120);
 
-				char* FUCKYOU=malloc(200);
+				char* HostName=malloc(200);
 
 				for(int j=0; j<strlen(Manipulator);j++){
 
@@ -384,7 +384,7 @@ int ClientExists(char* IP){
 
 					if (Spaces>1){
 
-						Parse2(&FUCKYOU,&IP,&listeningPort,Manipulator);
+						Parse2(&HostName,&IP,&listeningPort,Manipulator);
 
 						IP[strlen(IP-1)]='\0';
 

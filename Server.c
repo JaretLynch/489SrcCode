@@ -1494,9 +1494,9 @@ char* statistics(const Client LIST[]) {
 
 
 
-								char *DataToSend;
+								char *DataToSend=Rmessage();
 
-								strcpy(DataToSend,RMessage);
+
 
 								cse4589_print_and_log("[LIST:SUCCESS]\n");
 

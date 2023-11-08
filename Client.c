@@ -612,7 +612,7 @@ int ClientExists(char* IP){
 
 							fgets(Input, 256, stdin);
 
-							Input[strlen(INPUT)-1]='\0';	
+							Input[strlen(Input)-1]='\0';	
 
 							printf("INPUT IS *%s*\n",Input);
 

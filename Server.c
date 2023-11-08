@@ -1684,6 +1684,8 @@ char* statistics(const Client LIST[]) {
 
 							char *LoginData=MessageCreator("LOGIN","LOGIN","LOGIN","LOGIN",1);
 
+							printf("LOGIN DATA IS *%s*\n",LoginData);
+
 							send(fdaccept,LoginData,strlen(LoginData),0);
 
 

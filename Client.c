@@ -858,7 +858,7 @@ int ClientExists(char* IP){
 
 									if (ClientExists(Arg1)==1){
 
-										char* IP=handle_ip_command;
+										char* IP=handle_ip_command();
 
 										if (strcmp(IP,Arg1)!=0){
 

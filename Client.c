@@ -782,8 +782,6 @@ int ClientExists(char* IP){
 
 								
 
-								fflush(stdout);
-
 								if (strcmp("REFRESH",Input)==0){
 
 /*									printf("REFRESH COMMAND INPUTTED BY CLIENT\n");*/
@@ -878,8 +876,6 @@ int ClientExists(char* IP){
 
 									if (ClientExists(Arg1)==1){
 
-										Arg1[strlen(Arg1)-1]='\0';
-
 										char* IP=handle_ip_command();
 
 										if (strcmp(IP,Arg1)!=0){
@@ -905,8 +901,6 @@ int ClientExists(char* IP){
 								else if (strcmp(Command,"UNBLOCK")==0){
 
 									if (ClientExists(Arg1)==1){
-
-										Arg1[strlen(Arg1)-1]='\0';
 
 										char* IP=handle_ip_command();
 
@@ -934,7 +928,7 @@ int ClientExists(char* IP){
 
 								else{
 
-								fflush(stdout);
+
 
 								}
 
@@ -995,8 +989,6 @@ int ClientExists(char* IP){
 						}
 
 						else{
-
-							fflush(stdout);
 
 							cse4589_print_and_log("%s",DataReceived);
 

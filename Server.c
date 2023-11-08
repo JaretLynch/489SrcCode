@@ -1698,6 +1698,8 @@ char* statistics(const Client LIST[]) {
 
 						else{
 
+				
+
 							int *SOCKET = &sock_index;
 
 							int Sock=*SOCKET;
@@ -1716,7 +1718,7 @@ char* statistics(const Client LIST[]) {
 
 							}
 
-
+							printf("RECEIVED FROM CLIENT:*%s*\n",DataReceived);
 
 							else {
 

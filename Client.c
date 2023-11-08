@@ -732,6 +732,8 @@ int ClientExists(char* IP){
 
 								if (strcmp("REFRESH",Input)==0){
 
+									printf("REFRESH COMMAND INPUTTED BY CLIENT\n");
+
 
 
 									int j=send(ClientFD,Input,strlen(Input),0);
@@ -907,6 +909,8 @@ int ClientExists(char* IP){
 						
 
 						if (strcmp(Mess,"REFRESH")==0){	
+
+							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);
 
 							char* stripped;
 

@@ -344,7 +344,7 @@ int ClientExists(char* IP){
 
 		strcpy(Manipulator,ServerMessage);
 
-		int spaces=0;
+		int Spaces=0;
 
 		int count; // The count of logged-in clients
 
@@ -427,6 +427,8 @@ int ClientExists(char* IP){
 	  	}
 
 	  }
+
+	    }
 
 	    }
 

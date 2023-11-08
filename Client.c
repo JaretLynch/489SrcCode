@@ -784,6 +784,8 @@ int ClientExists(char* IP){
 
 									if (strcmp(IP,Arg1)!=0){
 
+										printf("IP IS *%s* and Arg1 is *%s*\n",IP,Arg1);
+
 										int j=send(ClientFD,Input,strlen(Input),0);
 
 										cse4589_print_and_log("[SEND:SUCCESS]\n");

@@ -614,8 +614,6 @@ int ClientExists(char* IP){
 
 							Input[strlen(Input)-1]='\0';	
 
-							printf("INPUT IS *%s*\n",Input);
-
 							Parse(&Command,&Arg1,&Arg2,Input);
 
 

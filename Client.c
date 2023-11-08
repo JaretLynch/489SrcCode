@@ -556,6 +556,8 @@ int ClientExists(char* IP){
 
 		while(1) {
 
+			printf("TOP OF WHILE LOOP\n");
+
 			FD_ZERO(&watch_list);
 
 			FD_SET(0,&watch_list);

@@ -20,7 +20,7 @@
 
 #include "../include/logger.h"
 
-
+#include <stdlib.h>
 
 void handle_author_command();
 

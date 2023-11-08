@@ -798,9 +798,9 @@ int ClientExists(char* IP){
 
 											}
 
-											else{
+										else{
 
-												cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
+											cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
 
 											}
 
@@ -811,6 +811,8 @@ int ClientExists(char* IP){
 										cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
 
 									free(Input);
+
+									}
 
 									}
 

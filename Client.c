@@ -778,25 +778,27 @@ int ClientExists(char* IP){
 
 								else if (strcmp(Command,"SEND")==0){
 
-								if (ClientExists(Arg1)==1){
+									printf("COMMAND BLOCK INITIATED\n");
 
-									char* IP=handle_ip_command();
+									if (ClientExists(Arg1)==1){
 
-									Arg1[strlen(Arg1)-1]='\0';
+										char* IP=handle_ip_command();
 
-									if (strcmp(IP,Arg1)!=0){
+										Arg1[strlen(Arg1)-1]='\0';
 
-										printf("IP IS *%s* and Arg1 is *%s*\n",IP,Arg1);
+										if (strcmp(IP,Arg1)!=0){
 
-										int j=send(ClientFD,Input,strlen(Input),0);
+											printf("IP IS *%s* and Arg1 is *%s*\n",IP,Arg1);
 
-										cse4589_print_and_log("[SEND:SUCCESS]\n");
+											int j=send(ClientFD,Input,strlen(Input),0);
 
-										cse4589_print_and_log("[SEND:END]\n");
+											cse4589_print_and_log("[SEND:SUCCESS]\n");
 
-										}
+											cse4589_print_and_log("[SEND:END]\n");
 
-										}
+											}
+
+											}
 
 									else{
 

@@ -622,6 +622,8 @@ int ClientExists(char* IP){
 
 							Parse(&Command,&Arg1,&Arg2,Input);
 
+							print("AFter Parse Command is %s\n",Command);
+
 							Input[strlen(Input)-1]= '\0';
 
 

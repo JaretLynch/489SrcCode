@@ -86,7 +86,7 @@ char* handle_ip_command(const char *Address) {
 
 		perror("connect failed");
 
-	return;
+	return "ERROR";
 
 	}
 
@@ -96,7 +96,7 @@ char* handle_ip_command(const char *Address) {
 
 		perror("getsockname failed");
 
-		return;
+		return "ERROR";
 
 	}
 

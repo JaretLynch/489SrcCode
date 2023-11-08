@@ -558,7 +558,7 @@ int ClientExists(char* IP){
 
 	void process_client_commands() {
 
-		printf("CLLIENT COMMANDS CALLED\n");
+/*		printf("CLLIENT COMMANDS CALLED\n");*/
 
 		// The loop to keep client running and accept commands
 
@@ -566,7 +566,7 @@ int ClientExists(char* IP){
 
 		while(1) {
 
-			printf("TOP OF WHILE LOOP\n");
+/*			printf("TOP OF WHILE LOOP\n");*/
 
 			FD_ZERO(&watch_list);
 
@@ -630,9 +630,9 @@ int ClientExists(char* IP){
 
 							Parse(&Command,&Arg1,&Arg2,Input);
 
-							printf("BEFORE, INPUT IS *%s*\n",Input);
+/*							printf("BEFORE, INPUT IS *%s*\n",Input);*/
 
-							printf("AFTER, INPUT IS *%s*\n",Input);
+/*							printf("AFTER, INPUT IS *%s*\n",Input);*/
 
 							strncpy(login,Input,5);
 
@@ -906,7 +906,7 @@ int ClientExists(char* IP){
 
 					if ((LoggedIn==1)&&(sock_index!=0)){
 
-						printf("END OF STDIN");
+/*						printf("END OF STDIN");*/
 
 						char *DataReceived= (char*) malloc(256*sizeof(char));
 

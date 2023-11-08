@@ -384,6 +384,8 @@ int ClientExists(char* IP){
 
 						Parse2(&FUCKYOU,&IP,&listeningPort,Manipulator);
 
+						IP[strlen(IP-1)]='\0';
+
 						strcpy(List1[i].IP,IP);
 
 						strcpy(List1[i].HostName,FUCKYOU);
@@ -819,8 +821,6 @@ int ClientExists(char* IP){
 									if (ClientExists(Arg1)==1){
 
 										char* IP=handle_ip_command();
-
-										Arg1[strlen(Arg1)-1]='\0';
 
 										if (strcmp(IP,Arg1)!=0){
 

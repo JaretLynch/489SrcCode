@@ -36,8 +36,6 @@ int listening_port;
 
 
 
-extern char* IPaddr;
-
 void handle_author_command() {
 
     const char *command_str = "AUTHOR";

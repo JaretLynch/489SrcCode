@@ -928,7 +928,7 @@ int ClientExists(char* IP){
 
 						else if ((DataReceived[0])>0&&(DataReceived[0]<5)) {
 
-						
+							
 
 							ReceiveLoggedinInfo(DataReceived);
 
@@ -937,8 +937,6 @@ int ClientExists(char* IP){
 						
 
 							cse4589_print_and_log("%s",Ret);
-
-							free(DataReceived);
 
 						}
 

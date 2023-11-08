@@ -1494,7 +1494,7 @@ char* statistics(const Client LIST[]) {
 
 
 
-								char *DataToSend=Rmessage();
+								char *DataToSend=RMessage();
 
 
 

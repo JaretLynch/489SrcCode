@@ -204,11 +204,11 @@ int ClientExists(char* IP){
 
 		int j=strlen(Actualmsg);
 
+		printf("Message is *%s*\n",Actualmsg);
+
 		for (int i=0; i<strlen(Actualmsg); i++){
 
 			char Character[2];
-
-/*			printf("Message is *%s*\n",Actualmsg);*/
 
 			strncpy(Character,&Actualmsg[i],1);
 
@@ -220,9 +220,9 @@ int ClientExists(char* IP){
 
 			if(count==2){
 
-/*				printf("Character is *%s*\n",Character);*/
+				printf("Character is *%s*\n",Character);
 
-/*				printf("SHOULD BE COPYING INTO IP\n");*/
+				printf("SHOULD BE COPYING INTO IP\n");
 
 				(*IP)[iterator2]=*Character;
 
@@ -232,9 +232,9 @@ int ClientExists(char* IP){
 
 			if (count>2){
 
-/*			printf("Character is *%s*\n",Character);*/
+			printf("Character is *%s*\n",Character);
 
-/*				printf("SHOULD BE COPYING INTO Lport\n");*/
+				printf("SHOULD BE COPYING INTO Lport\n");
 
 				(*LPort)[iterator3]=*Character;
 
@@ -244,9 +244,9 @@ int ClientExists(char* IP){
 
 			if (count==1){
 
-/*			printf("Character is *%s*\n",Character);*/
+			printf("Character is *%s*\n",Character);
 
-/*				printf("SHOULD BE COPYING INTO HOSTNAME\n");*/
+				printf("SHOULD BE COPYING INTO HOSTNAME\n");
 
 				(*HostName)[iterator1]=*Character;
 

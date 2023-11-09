@@ -948,8 +948,6 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 									send(currentClient.FD,MessageToDest,MDLen,0);
 
-									cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
-
 /*																printf("SENT TO CLIENT: *%s*\n",MessageToDest);*/
 
 
@@ -958,11 +956,11 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 								else{
 
-
-
 									AddToBacklog(GetIPAddress(sock_index),ClientIP,Arg2);
 
 								}
+
+								cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
 
 								break;
 
@@ -1717,8 +1715,6 @@ char* statistics(const Client LIST[]) {
 											int MDLen=strlen(MessageToDest);
 
 											send(fdaccept,MessageToDest,MDLen,0);
-
-											cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SourceIP,BackLogIP, Msg);
 
 /*																													printf("SENT TO CLIENT: *%s*\n",MessageToDest);*/
 

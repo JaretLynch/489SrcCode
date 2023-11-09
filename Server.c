@@ -946,9 +946,9 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 /*									printf("SENDER IP IS: *%s*\nCLIENT IP IS: *%s*\n ARG2 is *%s*\n",SenderIP,ClientIP,Arg2);*/
 
-									cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
-
 									send(currentClient.FD,MessageToDest,MDLen,0);
+
+									cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
 
 /*																printf("SENT TO CLIENT: *%s*\n",MessageToDest);*/
 
@@ -1104,9 +1104,9 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 					int MSLen=strlen(MessageToSender);
 
-										cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,"255.255.255.255",Arg1);
-
 					send(sock_index,MessageToSender,MSLen,0);
+
+					cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,"255.255.255.255",Arg1);
 
 /*												printf("SENT TO CLIENT: *%s*\n",MessageToSender);*/
 
@@ -1716,9 +1716,9 @@ char* statistics(const Client LIST[]) {
 
 											int MDLen=strlen(MessageToDest);
 
-											cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SourceIP,BackLogIP, Msg);
-
 											send(fdaccept,MessageToDest,MDLen,0);
+
+											cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SourceIP,BackLogIP, Msg);
 
 /*																													printf("SENT TO CLIENT: *%s*\n",MessageToDest);*/
 

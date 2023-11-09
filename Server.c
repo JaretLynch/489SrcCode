@@ -1736,7 +1736,7 @@ char* statistics(const Client LIST[]) {
 
 						else{
 
-				
+							
 
 							int *SOCKET = &sock_index;
 
@@ -1752,7 +1752,7 @@ char* statistics(const Client LIST[]) {
 
 								remove_connection(sock_index);
 
-/*								printf("RECEIVED FROM CLIENT:*%s*\n",DataReceived);*/
+								printf("RECEIVED FROM CLIENT:*%s*\n",DataReceived);
 
 							}
 

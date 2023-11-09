@@ -340,7 +340,7 @@
 
 				printf("SourceIP is *%s*\n",SourceIP);
 
-								printf("MESGSAGE is *%s*\n",Message);
+				printf("MESGSAGE is *%s*\n",Message);
 
 				sprintf(ReturnM+strlen(ReturnM),"msg from:%s\n[msg]:%s\n[RECEIVED:END]\n", SourceIP,Message);
 
@@ -1723,6 +1723,14 @@ char* statistics(const Client LIST[]) {
 											strcpy(MessageToDest,MessageCreator(Msg,"RECEIVED",SourceIP,BackLogIP,1));
 
 											int MDLen=strlen(MessageToDest);
+
+											printf("SenderIP is *%s*\n",SourceIP);
+
+											printf("BacklogIP is *%s*\n",BackLogIP);
+
+											printf("MESGSAGE is *%s*\n",Msg);
+
+											cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SourceIP,BackLogIP, Msg);
 
 											send(fdaccept,MessageToDest,MDLen,0);
 

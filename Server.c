@@ -1764,6 +1764,20 @@ char* statistics(const Client LIST[]) {
 
 								}
 
+								else if(strcmp(DataReceived,"LIST")==){
+
+									char *DataToSend=("[LIST:SUCCESS]\n");
+
+									sprintf(DataToSend+strlen(DataToSend),RMessage(););
+
+									sprintf(DataToSend+strlen(DataToSend),"[LIST:END]\n");
+
+									send(sock_index,DataToSend,strlen(DataToSend),0);
+
+								
+
+								}
+
 								else if (strcmp(DataReceived,"REFRESH")==0){
 
 

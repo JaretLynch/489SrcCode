@@ -1000,8 +1000,6 @@ int ClientExists(char* IP){
 
 						int LengthOfMessageReceived= recv(ClientFD, DataReceived, 1023,0);
 
-														printf("RECEIVED DATA : %s\n",DataReceived);
-
 						char Mess[8];  // Make sure to allocate enough space for the copied characters and the null-terminator.
 
 						int firstValue;

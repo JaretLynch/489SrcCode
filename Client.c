@@ -1020,45 +1020,45 @@ int ClientExists(char* IP){
 
 /*						printf("RECEIVED form server: *%s*\n",DataReceived);*/
 
-						if (strcmp(Mess,"REFRESH")==0){	
+/*						if (strcmp(Mess,"REFRESH")==0){	*/
 
-/*							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);*/
+/*/*							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);*/*/
 
-							char* stripped=malloc(1000);
+/*							char* stripped=malloc(1000);*/
 
-							strcpy(stripped,DataReceived+8);
+/*							strcpy(stripped,DataReceived+8);*/
 
-							ReceiveLoggedinInfo(stripped);
+/*							ReceiveLoggedinInfo(stripped);*/
 
-						}
-
-						
-
-						else if ((DataReceived[0])>0&&(DataReceived[0]<5)) {
-
-							
-
-							ReceiveLoggedinInfo(DataReceived);
-
-							char* Ret=malloc(2000);
-
-							strcpy(Ret,ListCommand());
+/*						}*/
 
 						
 
-							cse4589_print_and_log("%s",Ret);
+/*						else if ((DataReceived[0])>0&&(DataReceived[0]<5)) {*/
 
-							if(LogInfo==1){
+/*							*/
 
-								cse4589_print_and_log("[LOGIN:SUCCESS]\n");
+/*							ReceiveLoggedinInfo(DataReceived);*/
 
-								cse4589_print_and_log("[LOGIN:END]\n");
+/*							char* Ret=malloc(2000);*/
 
-								LogInfo=0;
+/*							strcpy(Ret,ListCommand());*/
 
-							}
+/*						*/
 
-						}
+/*							cse4589_print_and_log("%s",Ret);*/
+
+/*							if(LogInfo==1){*/
+
+/*								cse4589_print_and_log("[LOGIN:SUCCESS]\n");*/
+
+/*								cse4589_print_and_log("[LOGIN:END]\n");*/
+
+/*								LogInfo=0;*/
+
+/*							}*/
+
+/*						}*/
 
 						else{
 

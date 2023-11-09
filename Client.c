@@ -354,6 +354,8 @@ int ClientExists(char* IP){
 
 		}
 
+		int TotalSpace=0;
+
 		char* Manipulator=malloc(2000);
 
 		strcpy(Manipulator,ServerMessage);
@@ -370,6 +372,8 @@ int ClientExists(char* IP){
 
 				Spaces=0;
 
+				int chars=0;
+
 				char* listeningPort=malloc(50);
 
 				char* IP=malloc(120);
@@ -377,6 +381,8 @@ int ClientExists(char* IP){
 				char* HostName=malloc(200);
 
 				for(int j=0; j<strlen(Manipulator);j++){
+
+						
 
 						char Character[2];
 
@@ -447,6 +453,16 @@ int ClientExists(char* IP){
 					}
 
 	  	}
+
+	  	if (spaces==5){
+
+	  		Manipulator=Manipulator+i;
+
+	  		printf("MANIPULAR AFTER SPECES=5 is *%s*\n",Manipulator);
+
+	  	}
+
+	  	
 
 	  }
 

@@ -868,15 +868,15 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 	Parse1(&Command,&Arg1,&Arg2,DataReceived);
 
-	Arg1[strlen(Arg1)-1]='\0';
+/*	Arg1[strlen(Arg1)-1]='\0';*/
 
-	printf("COMMAND IS *%s*\n",Command);
+/*	printf("COMMAND IS *%s*\n",Command);*/
 
-		printf("Arg1 IS *%s*\n",Arg1);
+/*		printf("Arg1 IS *%s*\n",Arg1);*/
 
-			printf("Arg2 IS *%s*\n",Arg2);
+/*			printf("Arg2 IS *%s*\n",Arg2);*/
 
-				printf("SenderIP IS *%s*\n",SenderIP);
+/*				printf("SenderIP IS *%s*\n",SenderIP);*/
 
 	if (strcmp(Command,"SEND")==0){
 

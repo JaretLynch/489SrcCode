@@ -790,23 +790,23 @@ int ClientExists(char* IP){
 
 								}
 
-							else if (strcmp("SEND",Command)==0){
+/*							else if (strcmp("SEND",Command)==0){*/
 
-								cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
+/*								cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");*/
 
-							}
+/*							}*/
 
-							else if (strcmp("UNBLOCK",Command)==0){
+/*							else if (strcmp("UNBLOCK",Command)==0){*/
 
-								cse4589_print_and_log("[UNBLOCK:ERROR]\n[UNBLOCK:END]\n");
+/*								cse4589_print_and_log("[UNBLOCK:ERROR]\n[UNBLOCK:END]\n");*/
 
-							}
+/*							}*/
 
-							else if (strcmp("BLOCK",Command)==0){
+/*							else if (strcmp("BLOCK",Command)==0){*/
 
-								cse4589_print_and_log("[BLOCK:ERROR]\n[BLOCK:END]\n");
+/*								cse4589_print_and_log("[BLOCK:ERROR]\n[BLOCK:END]\n");*/
 
-							}
+/*							}*/
 
 /*							else if (strcmp(Input,"LIST")==0){*/
 
@@ -868,37 +868,35 @@ int ClientExists(char* IP){
 
 									Arg1[strlen(Arg1)-1]='\0';
 
-									if (ClientExists(Arg1)==1){
+/*									if (ClientExists(Arg1)==1){*/
 
 										char* IP=malloc(200);
 
 										strcpy(IP,handle_ip_command());
 
-										if (strcmp(IP,Arg1)!=0){
+/*										if (strcmp(IP,Arg1)!=0){*/
 
 /*											printf("INPUT IS *%s*\n",Input);*/
 
 											int j=send(ClientFD,Input,strlen(Input),0);
 
-											}
+/*										}*/
 
-										else{
+/*										else{*/
 
-											cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
+/*											cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");*/
 
-											}
+/*											}*/
 
-										}
+/*									else{*/
 
-									else{
+/*										cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");*/
 
-										cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
+/*									free(Input);*/
 
-									free(Input);
+/*									}*/
 
-									}
-
-									}
+								}
 
 								else if ((strcmp(Command,"BROADCAST")==0)){
 

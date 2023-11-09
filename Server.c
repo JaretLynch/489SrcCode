@@ -1746,7 +1746,9 @@ char* statistics(const Client LIST[]) {
 
 							
 
-/*							char *DataToSend= RMessage(); this is the line without using local list*/ 
+							char *DataToSend= RMessage(); this is the line without using local list
+
+							send(fdaccept,DataToSend,strlen(DataToSend),0);
 
 							char *DataToSend=malloc(2000);
 

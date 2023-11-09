@@ -982,7 +982,7 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 					send(sock_index,MessageToSender,MSLen,0);
 
-												printf("SENT TO CLIENT: *%s*\n",MessageToSender);
+/*												printf("SENT TO CLIENT: *%s*\n",MessageToSender);*/
 
 		}
 
@@ -1054,7 +1054,7 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 						send(currentClient.FD,MessageToDest,MDLen,0);
 
-													printf("SENT TO CLIENT: *%s*\n",MessageToDest);
+/*													printf("SENT TO CLIENT: *%s*\n",MessageToDest);*/
 
 					}
 
@@ -1084,7 +1084,7 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 						send(sock_index,MessageToSender,MSLen,0);
 
-													printf("SENT TO CLIENT: *%s*\n",MessageToSender);
+/*													printf("SENT TO CLIENT: *%s*\n",MessageToSender);*/
 
 			}
 
@@ -1102,7 +1102,7 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 					send(sock_index,MessageToSender,MSLen,0);
 
-												printf("SENT TO CLIENT: *%s*\n",MessageToSender);
+/*												printf("SENT TO CLIENT: *%s*\n",MessageToSender);*/
 
 			}
 
@@ -1714,7 +1714,7 @@ char* statistics(const Client LIST[]) {
 
 																						send(fdaccept,MessageToDest,MDLen,0);
 
-																													printf("SENT TO CLIENT: *%s*\n",MessageToDest);
+/*																													printf("SENT TO CLIENT: *%s*\n",MessageToDest);*/
 
 										}								
 
@@ -1738,11 +1738,11 @@ char* statistics(const Client LIST[]) {
 
 							send(fdaccept,DataToSend,strlen(DataToSend),0);
 
-														printf("SENT TO CLIENT: *%s*\n",DataToSend);
+/*														printf("SENT TO CLIENT: *%s*\n",DataToSend);*/
 
 							char *LoginData=MessageCreator("LOGIN","LOGIN","LOGIN","LOGIN",1);
 
-							printf("LOGIN DATA IS *%s*\n",LoginData);
+/*							printf("LOGIN DATA IS *%s*\n",LoginData);*/
 
 							int f=send(fdaccept,LoginData,strlen(LoginData),0);
 
@@ -1772,7 +1772,7 @@ char* statistics(const Client LIST[]) {
 
 								remove_connection(sock_index);
 
-								printf("RECEIVED FROM CLIENT:*%s*\n",DataReceived);
+/*								printf("RECEIVED FROM CLIENT:*%s*\n",DataReceived);*/
 
 							}
 

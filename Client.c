@@ -346,13 +346,13 @@ int ClientExists(char* IP){
 
 		for (int i=0;i<5;i++){
 
-			struct ClientsLoggedIn John=malloc(sizeof(ClientsLoggedIn));
+			struct ClientsLoggedIn *John= (struct ClientsLoggedIn *)malloc(sizeof(struct ClientsLoggedIn));
 
-			strcpy(ClientsLoggedIn.IP,"");
+			strcpy(ClientsLoggedIn->IP,"");
 
-			strcpy(ClientsLoggedIn.HostName,"");
+			strcpy(ClientsLoggedIn->HostName,"");
 
-			ClientsLoggedIn.ListeningPort=0;
+			ClientsLoggedIn->ListeningPort=0;
 
 			List1[i]=John;
 

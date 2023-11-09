@@ -1750,7 +1750,7 @@ char* statistics(const Client LIST[]) {
 
 							send(fdaccept,DataToSend,strlen(DataToSend),0);
 
-							*DataToSend=malloc(2000);
+							DataToSend=malloc(2000);
 
 							strcpy(DataToSend,ReturnMessage(List,1));
 

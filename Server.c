@@ -1764,7 +1764,7 @@ char* statistics(const Client LIST[]) {
 
 								}
 
-								else if(strcmp(DataReceived,"LIST")==){
+								else if(strcmp(DataReceived,"LIST")==0){
 
 									char *DataToSend=("[LIST:SUCCESS]\n");
 

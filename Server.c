@@ -928,7 +928,7 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 									int MDLen=strlen(MessageToDest);
 
-									printf("SENDER IP IS: *%s*\nCLIENT IP IS: *%s*\n ARG2 is *%s*\n",SenderIP,ClientID,Arg2);
+									printf("SENDER IP IS: *%s*\nCLIENT IP IS: *%s*\n ARG2 is *%s*\n",SenderIP,ClientIP,Arg2);
 
 									cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
 

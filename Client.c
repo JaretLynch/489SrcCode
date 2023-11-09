@@ -1024,7 +1024,9 @@ int ClientExists(char* IP){
 
 						
 
-						printf("RECEIVED form server: *%s*\n",DataReceived);
+/*						printf("RECEIVED form server: *%s*\n",DataReceived);*/
+
+
 
 						if (strcmp(Mess,"REFRESH")==0){	
 
@@ -1047,8 +1049,6 @@ int ClientExists(char* IP){
 							}
 
 						}
-
-						
 
 						else if ((DataReceived[0])>0&&(DataReceived[0]<5)) {
 
@@ -1081,6 +1081,8 @@ int ClientExists(char* IP){
 						else{
 
 							cse4589_print_and_log("%s",DataReceived);
+
+							send(ClientFD,"1",1,0);
 
 							}
 

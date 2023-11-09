@@ -474,11 +474,11 @@ int ClientExists(char* IP){
 
 				if (strlen(IP)>0){
 
-					printf("List1[i].HostName is *%s*\n",List1[i].HostName);
+/*					printf("List1[i].HostName is *%s*\n",List1[i].HostName);*/
 
-					printf("List1[i].IP is *%s*\n",List1[i].IP);
+/*					printf("List1[i].IP is *%s*\n",List1[i].IP);*/
 
-					printf("List1[i].ListeningPort is *%d*\n",List1[i].ListeningPort);
+/*					printf("List1[i].ListeningPort is *%d*\n",List1[i].ListeningPort);*/
 
 					sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List1[i].HostName,List1[i].IP, List1[i].ListeningPort);
 

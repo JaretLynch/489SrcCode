@@ -848,21 +848,21 @@ int ClientExists(char* IP){
 
 								}
 
-								else if (strcmp(Input,"LIST")==0){
+/*								else if (strcmp(Input,"LIST")==0){*/
 
 /*									char* Message=ListCommand();*/
 
 /*									cse4589_print_and_log("[LIST:SUCCESS]\n");*/
 
-/*									cse4589_print_and_log(Message);*/
+/*									cse4589_print_and_log(Message);**/
 
 /*									cse4589_print_and_log("[LIST:END]\n");*/
 
 /*									free(Input);*/
 
-										send(ClientFD,"LIST",strlen("LIST"),0);
+/*										send(ClientFD,"LIST",strlen("LIST"),0);*/
 
-								}
+/*								}*/
 
 								else if (strcmp(Command,"SEND")==0){
 

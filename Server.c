@@ -338,10 +338,6 @@
 
 			else if (strcmp(Command,"RECEIVED")==0){
 
-				printf("SourceIP is *%s*\n",SourceIP);
-
-				printf("MESGSAGE is *%s*\n",Message);
-
 				sprintf(ReturnM+strlen(ReturnM),"msg from:%s\n[msg]:%s\n[RECEIVED:END]\n", SourceIP,Message);
 
 			}
@@ -964,11 +960,11 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 								}
 
-								printf("SenderIP is *%s*\n",SenderIP);
+/*								printf("SenderIP is *%s*\n",SenderIP);*/
 
-								printf("ClientIP is *%s*\n",ClientIP);
+/*								printf("ClientIP is *%s*\n",ClientIP);*/
 
-																printf("MESGSAGE is *%s*\n",Arg2);
+/*																printf("MESGSAGE is *%s*\n",Arg2);*/
 
 								cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
 
@@ -1724,11 +1720,11 @@ char* statistics(const Client LIST[]) {
 
 											int MDLen=strlen(MessageToDest);
 
-											printf("SenderIP is *%s*\n",SourceIP);
+/*											printf("SenderIP is *%s*\n",SourceIP);*/
 
-											printf("BacklogIP is *%s*\n",BackLogIP);
+/*											printf("BacklogIP is *%s*\n",BackLogIP);*/
 
-											printf("MESGSAGE is *%s*\n",Msg);
+/*											printf("MESGSAGE is *%s*\n",Msg);*/
 
 											cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SourceIP,BackLogIP, Msg);
 
@@ -1750,11 +1746,13 @@ char* statistics(const Client LIST[]) {
 
 							
 
-							char *DataToSend= RMessage();
+/*							char *DataToSend= RMessage(); this is the line without using local list*/ 
 
-					
+							char *DataToSend=malloc(2000);
 
+							strcpy(DataToSend,ReturnMessage(List,1));
 
+							DataToSend[strlen(DataToSend)]='\0';
 
 							send(fdaccept,DataToSend,strlen(DataToSend),0);
 
@@ -1862,7 +1860,7 @@ char* statistics(const Client LIST[]) {
 
 									if (strcmp(Command,"SEND")==0){
 
-										printf("SEND TRIGGERED\n");
+/*										printf("SEND TRIGGERED\n");*/
 
 										SendMessage(Command,Arg1,Arg2,SenderIP,DataReceived,sock_index);
 

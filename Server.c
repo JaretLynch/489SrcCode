@@ -338,6 +338,10 @@
 
 			else if (strcmp(Command,"RECEIVED")==0){
 
+				printf("SourceIP is *%s*\n",SourceIP);
+
+								printf("MESGSAGE is *%s*\n",Message);
+
 				sprintf(ReturnM+strlen(ReturnM),"msg from:%s\n[msg]:%s\n[RECEIVED:END]\n", SourceIP,Message);
 
 			}
@@ -964,7 +968,7 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 								printf("ClientIP is *%s*\n",ClientIP);
 
-								printf("MESGSAGE is *%s*\n",Arg2);
+																printf("MESGSAGE is *%s*\n",Arg2);
 
 								cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
 

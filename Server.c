@@ -870,6 +870,14 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 	Arg1[strlen(Arg1)-1]='\0';
 
+	printf("COMMAND IS *%s*\n",Command);
+
+		printf("Arg1 IS *%s*\n",Arg1);
+
+			printf("Arg2 IS *%s*\n",Arg2);
+
+				printf("SenderIP IS *%s*\n",SenderIP);
+
 	if (strcmp(Command,"SEND")==0){
 
 		for (int i = 0; i < 5; i++) {

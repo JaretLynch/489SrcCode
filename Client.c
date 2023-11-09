@@ -1022,7 +1022,7 @@ int ClientExists(char* IP){
 
 						
 
-						printf("RECEIVED form server: *%s*\n",DataReceived);
+/*						printf("RECEIVED form server: *%s*\n",DataReceived);*/
 
 /*						if (strcmp(Mess,"REFRESH")==0){	*/
 

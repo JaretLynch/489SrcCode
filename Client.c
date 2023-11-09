@@ -874,9 +874,9 @@ int ClientExists(char* IP){
 
 /*									if (ClientExists(Arg1)==1){*/
 
-										char* IP=malloc(200);
+/*										char* IP=malloc(200);*/
 
-										strcpy(IP,handle_ip_command());
+/*										strcpy(IP,handle_ip_command());*/
 
 /*										if (strcmp(IP,Arg1)!=0){*/
 

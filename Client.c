@@ -792,8 +792,6 @@ int ClientExists(char* IP){
 
 
 
-									free(Input);
-
 								}
 
 /*							else if (strcmp("SEND",Command)==0){*/
@@ -850,7 +848,7 @@ int ClientExists(char* IP){
 
 
 
-									free(Input);
+
 
 								}
 
@@ -1068,7 +1066,7 @@ int ClientExists(char* IP){
 
 							
 
-							free(DataReceived);
+
 
 /*							process_client_commands();*/
 

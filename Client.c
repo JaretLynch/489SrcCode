@@ -868,7 +868,7 @@ int ClientExists(char* IP){
 
 									Arg1[strlen(Arg1)-1]='\0';
 
-/*									if (ClientExists(Arg1)==1){*/
+									if (ClientExists(Arg1)==1){
 
 										char* IP=malloc(200);
 
@@ -880,7 +880,7 @@ int ClientExists(char* IP){
 
 											int j=send(ClientFD,Input,strlen(Input),0);
 
-/*										}*/
+										}
 
 /*										else{*/
 

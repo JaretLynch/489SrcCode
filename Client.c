@@ -1038,6 +1038,16 @@ int ClientExists(char* IP){
 
 							ReceiveLoggedinInfo(stripped);
 
+							if(LogInfo==1){
+
+								cse4589_print_and_log("[LOGIN:SUCCESS]\n");
+
+								cse4589_print_and_log("[LOGIN:END]\n");
+
+								LogInfo=0;
+
+							}
+
 						}
 
 						

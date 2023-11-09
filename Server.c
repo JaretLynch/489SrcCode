@@ -896,6 +896,8 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 							send(sock_index,MessageToSender,MSLen,0);
 
+							printf("SENT TO CLIENT: *%s*\n",MessageToSender);
+
 							int NumberDestHasBlocked=List[i].NumberOfBlocked;
 
 							int blocked=0;
@@ -940,6 +942,8 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 									send(currentClient.FD,MessageToDest,MDLen,0);
 
+																printf("SENT TO CLIENT: *%s*\n",MessageToDest);
+
 																free(MessageToDest);
 
 								}
@@ -977,6 +981,8 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 					int MSLen=strlen(MessageToSender);
 
 					send(sock_index,MessageToSender,MSLen,0);
+
+												printf("SENT TO CLIENT: *%s*\n",MessageToSender);
 
 		}
 
@@ -1048,6 +1054,8 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 						send(currentClient.FD,MessageToDest,MDLen,0);
 
+													printf("SENT TO CLIENT: *%s*\n",MessageToDest);
+
 					}
 
 					else{
@@ -1076,6 +1084,8 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 						send(sock_index,MessageToSender,MSLen,0);
 
+													printf("SENT TO CLIENT: *%s*\n",MessageToSender);
+
 			}
 
 			else{
@@ -1091,6 +1101,8 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 					cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,"255.255.255.255",Arg1);
 
 					send(sock_index,MessageToSender,MSLen,0);
+
+												printf("SENT TO CLIENT: *%s*\n",MessageToSender);
 
 			}
 
@@ -1702,6 +1714,8 @@ char* statistics(const Client LIST[]) {
 
 																						send(fdaccept,MessageToDest,MDLen,0);
 
+																													printf("SENT TO CLIENT: *%s*\n",MessageToDest);
+
 										}								
 
 									}
@@ -1724,7 +1738,7 @@ char* statistics(const Client LIST[]) {
 
 							send(fdaccept,DataToSend,strlen(DataToSend),0);
 
-							
+														printf("SENT TO CLIENT: *%s*\n",DataToSend);
 
 							char *LoginData=MessageCreator("LOGIN","LOGIN","LOGIN","LOGIN",1);
 

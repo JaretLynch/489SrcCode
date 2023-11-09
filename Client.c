@@ -346,7 +346,7 @@ int ClientExists(char* IP){
 
 		for (int i=0;i<5;i++){
 
-			ClientsLoggedIn John=malloc(sizeof(ClientsLoggedIn));
+			struct ClientsLoggedIn John=malloc(sizeof(ClientsLoggedIn));
 
 			strcpy(ClientsLoggedIn.IP,"");
 

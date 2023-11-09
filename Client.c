@@ -80,6 +80,8 @@
 
 	
 
+ClientsLoggedIn* John;
+
 int ClientExists(char* IP){
 
 	for(int i=0; i<5;i++){
@@ -344,15 +346,15 @@ int ClientExists(char* IP){
 
 	void ReceiveLoggedinInfo(char* ServerMessage){
 
+		John = (ClientsLoggedIn*)malloc(sizeof(ClientsLoggedIn);
+
+		strcpy(John->IP,"");
+
+		strcpy(John->HostName,"");
+
+			John->ListeningPort=0;
+
 		for (int i=0;i<5;i++){
-
-			struct ClientsLoggedIn *John= (struct ClientsLoggedIn *)malloc(sizeof(struct ClientsLoggedIn));
-
-			strcpy(ClientsLoggedIn->IP,"");
-
-			strcpy(ClientsLoggedIn->HostName,"");
-
-			ClientsLoggedIn->ListeningPort=0;
 
 			List1[i]=John;
 

@@ -356,7 +356,7 @@ int ClientExists(char* IP){
 
 		for (int i=0;i<5;i++){
 
-			List1[i]=John;
+			List1[i]=*John;
 
 		}
 

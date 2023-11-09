@@ -1720,9 +1720,9 @@ char* statistics(const Client LIST[]) {
 
 							printf("LOGIN DATA IS *%s*\n",LoginData);
 
-							send(fdaccept,LoginData,strlen(LoginData),0);
+							int f=send(fdaccept,LoginData,strlen(LoginData),0);
 
-
+							printf("f is %d\n",f);
 
 						}
 

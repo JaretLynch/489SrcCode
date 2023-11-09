@@ -404,6 +404,8 @@ int ClientExists(char* IP){
 
 						strcpy(List1[i].IP,IP);
 
+						HostName[strlen(HostName)-1]='\0';
+
 						strcpy(List1[i].HostName,HostName);
 
 						

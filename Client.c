@@ -346,7 +346,7 @@ int ClientExists(char* IP){
 
 	void ReceiveLoggedinInfo(char* ServerMessage){
 
-		John = (ClientsLoggedIn*)malloc(sizeof(ClientsLoggedIn);
+		John = (ClientsLoggedIn*)malloc(sizeof(ClientsLoggedIn));
 
 		strcpy(John->IP,"");
 

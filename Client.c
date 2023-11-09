@@ -854,7 +854,7 @@ int ClientExists(char* IP){
 
 									cse4589_print_and_log("[LIST:SUCCESS]\n");
 
-									cse4589_print_and_log(Message);*
+									cse4589_print_and_log(Message);
 
 									cse4589_print_and_log("[LIST:END]\n");
 

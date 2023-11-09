@@ -1022,7 +1022,7 @@ int ClientExists(char* IP){
 
 /*						if (strcmp(Mess,"REFRESH")==0){	*/
 
-/*/*							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);*/*/
+/*							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);*/
 
 /*							char* stripped=malloc(1000);*/
 

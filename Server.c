@@ -870,13 +870,13 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 	Arg1[strlen(Arg1)-1]='\0';
 
-	printf("COMMAND IS *%s*\n",Command);
+/*	printf("COMMAND IS *%s*\n",Command);*/
 
-		printf("Arg1 IS *%s*\n",Arg1);
+/*		printf("Arg1 IS *%s*\n",Arg1);*/
 
-			printf("Arg2 IS *%s*\n",Arg2);
+/*			printf("Arg2 IS *%s*\n",Arg2);*/
 
-				printf("SenderIP IS *%s*\n",SenderIP);
+/*				printf("SenderIP IS *%s*\n",SenderIP);*/
 
 	if (strcmp(Command,"SEND")==0){
 
@@ -1778,7 +1778,7 @@ char* statistics(const Client LIST[]) {
 
 								remove_connection(sock_index);
 
-								printf("RECEIVED FROM CLIENT:*%s*\n",DataReceived);
+/*								printf("RECEIVED FROM CLIENT:*%s*\n",DataReceived);*/
 
 							}
 

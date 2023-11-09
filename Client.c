@@ -344,13 +344,19 @@ int ClientExists(char* IP){
 
 	void ReceiveLoggedinInfo(char* ServerMessage){
 
+		ClientsLoggedIn=malloc(sizeof(ClientsLoggedIn));
+
 		for (int i=0;i<5;i++){
 
-			strcpy(List1[i].IP,"");
+			ClientsLoggedIn John=malloc(sizeof(ClientsLoggedIn));
 
-			strcpy(List1[i].HostName,"");
+			strcpy(ClientsLoggedIn.IP,"");
 
-			List1[i].ListeningPort=0;
+			strcpy(ClientsLoggedIn.HostName,"");
+
+			ClientsLoggedIn.ListeningPort=0;
+
+			List1[i]=John;
 
 		}
 

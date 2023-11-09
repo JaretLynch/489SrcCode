@@ -716,7 +716,9 @@ int ClientExists(char* IP){
 
 
 
-								char* IP=handle_ip_command();
+								char* IP=malloc(2000);
+
+								strcpy(IP,handle_ip_command());
 
 								cse4589_print_and_log("[IP:SUCCESS]\n");
 
@@ -868,7 +870,9 @@ int ClientExists(char* IP){
 
 									if (ClientExists(Arg1)==1){
 
-										char* IP=handle_ip_command();
+										char* IP=malloc(200);
+
+										strcpy(IP,handle_ip_command());
 
 										if (strcmp(IP,Arg1)!=0){
 
@@ -952,7 +956,9 @@ int ClientExists(char* IP){
 
 									if (ClientExists(Arg1)==1){
 
-										char* IP=handle_ip_command();
+										char* IP=malloc(120);
+
+										strcpy(IP,handle_ip_command());
 
 										if (strcmp(IP,Arg1)!=0){
 
@@ -1014,9 +1020,9 @@ int ClientExists(char* IP){
 
 /*							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);*/
 
-							char* stripped;
+							char* stripped=malloc(1000);
 
-							stripped=DataReceived+8;
+							strcpy(stripped,DataReceived+8);
 
 							ReceiveLoggedinInfo(stripped);
 
@@ -1030,7 +1036,9 @@ int ClientExists(char* IP){
 
 							ReceiveLoggedinInfo(DataReceived);
 
-							char* Ret=ListCommand();
+							char* Ret=malloc(2000);
+
+							strcpy(Ret,ListCommand());
 
 						
 

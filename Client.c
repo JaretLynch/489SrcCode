@@ -932,15 +932,13 @@ int ClientExists(char* IP){
 
 /*									if (ClientExists(Arg1)==1){*/
 
-										char* IP=handle_ip_command();
-
-										if (strcmp(IP,Arg1)!=0){
+										
 
 											int j=send(ClientFD,Input,strlen(Input),0);
 
 									
 
-										}
+										
 
 										}
 

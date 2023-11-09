@@ -872,7 +872,7 @@ int ClientExists(char* IP){
 
 									Arg1[strlen(Arg1)-1]='\0';
 
-									printf("*ARG1 before Client Exists is *%s*\",Arg1);
+									printf("*ARG1 before Client Exists is *%s*\n",Arg1);
 
 									if (ClientExists(Arg1)==1){
 

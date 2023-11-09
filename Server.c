@@ -1778,7 +1778,7 @@ char* statistics(const Client LIST[]) {
 
 								remove_connection(sock_index);
 
-/*								printf("RECEIVED FROM CLIENT:*%s*\n",DataReceived);*/
+								printf("RECEIVED FROM CLIENT:*%s*\n",DataReceived);
 
 							}
 

@@ -480,7 +480,7 @@ int GetClientByIP(char* IP){
 
 		if (strcmp(ListIP,IP)==0){
 
-			free(ListIP);
+
 
 			return i;
 
@@ -896,7 +896,7 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 							send(sock_index,MessageToSender,MSLen,0);
 
-							printf("SENT TO CLIENT: *%s*\n",MessageToSender);
+/*							printf("SENT TO CLIENT: *%s*\n",MessageToSender);*/
 
 							int NumberDestHasBlocked=List[i].NumberOfBlocked;
 
@@ -942,9 +942,9 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 									send(currentClient.FD,MessageToDest,MDLen,0);
 
-																printf("SENT TO CLIENT: *%s*\n",MessageToDest);
+/*																printf("SENT TO CLIENT: *%s*\n",MessageToDest);*/
 
-																free(MessageToDest);
+
 
 								}
 
@@ -960,7 +960,7 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 							}
 
-							free(MessageToSender);
+
 
 						}
 
@@ -1574,7 +1574,7 @@ char* statistics(const Client LIST[]) {
 
 
 
-							free(cmd);
+
 
 
 

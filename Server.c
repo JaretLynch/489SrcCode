@@ -1712,7 +1712,7 @@ char* statistics(const Client LIST[]) {
 
 							
 
-							char *DataToSend= ReturnMessage(List,0);
+							char *DataToSend= RMessage();
 
 
 

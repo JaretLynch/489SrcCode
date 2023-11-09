@@ -1040,7 +1040,7 @@ int ClientExists(char* IP){
 
 							if(LogInfo==1){
 
-								cse4589_print_and_log("[LOGIN:SUCCESS]\n"
+								cse4589_print_and_log("[LOGIN:SUCCESS]\n");
 
 								cse4589_print_and_log("[LOGIN:END]\n");
 

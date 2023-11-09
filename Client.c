@@ -454,7 +454,7 @@ int ClientExists(char* IP){
 
 	  	}
 
-	  	if (spaces==5){
+	  	if (Spaces==5){
 
 	  		Manipulator=Manipulator+i;
 

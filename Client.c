@@ -1022,7 +1022,7 @@ int ClientExists(char* IP){
 
 						// Copy the first 7 characters (0 to 6) from source to destination.
 
-/*						strncpy(Mes[s, DataReceived, 7);*/
+						strncpy(Mess, DataReceived, 7);
 
 						
 

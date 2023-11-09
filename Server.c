@@ -960,6 +960,12 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 								}
 
+								printf("SenderIP is *%s*\n",SenderIP);
+
+								printf("ClientIP is *%s*\n",ClientIP);
+
+								printf("MESGSAGE is *%s*\n",Arg2);
+
 								cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
 
 								break;

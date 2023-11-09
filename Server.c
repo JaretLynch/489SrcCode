@@ -1766,9 +1766,13 @@ char* statistics(const Client LIST[]) {
 
 								else if(strcmp(DataReceived,"LIST")==0){
 
-									char *DataToSend=("[LIST:SUCCESS]\n");
+									char *DataToSend=malloc(4000);
 
-									sprintf(DataToSend+strlen(DataToSend),RMessage());
+									sprintf(DataToSend,"[LIST:SUCCESS]\n");
+
+									char *M=RMessage();
+
+									sprintf(DataToSend+strlen(DataToSend),M);
 
 									sprintf(DataToSend+strlen(DataToSend),"[LIST:END]\n");
 

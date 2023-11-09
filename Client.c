@@ -88,7 +88,7 @@ int ClientExists(char* IP){
 
 /*		printf("IP DURING CLIENT EXISTS IS *%s*\n",IP);*/
 
-		printf("LIST1[%d].IP is *%s*\n",List1[i].ip);
+		printf("LIST1[%d].IP is *%s*\n",List1[i].IP);
 
 		if (((strcmp(IP,List1[i].IP))==0)&&(strcmp(IP,"")!=0)){
 

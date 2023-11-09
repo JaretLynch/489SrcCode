@@ -230,7 +230,7 @@ int ClientExists(char* IP){
 
 			}
 
-			if (count>2){
+			if (count==3){
 
 			printf("Character is *%s*\n",Character);
 

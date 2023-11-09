@@ -204,7 +204,7 @@ int ClientExists(char* IP){
 
 		int j=strlen(Actualmsg);
 
-		printf("Message is *%s*\n",Actualmsg);
+/*		printf("Message is *%s*\n",Actualmsg);*/
 
 		for (int i=0; i<strlen(Actualmsg); i++){
 
@@ -220,9 +220,9 @@ int ClientExists(char* IP){
 
 			if(count==2){
 
-				printf("Character is *%s*\n",Character);
+/*				printf("Character is *%s*\n",Character);*/
 
-				printf("SHOULD BE COPYING INTO IP\n");
+/*				printf("SHOULD BE COPYING INTO IP\n");*/
 
 				(*IP)[iterator2]=*Character;
 
@@ -232,9 +232,9 @@ int ClientExists(char* IP){
 
 			if (count==3){
 
-			printf("Character is *%s*\n",Character);
+/*			printf("Character is *%s*\n",Character);*/
 
-				printf("SHOULD BE COPYING INTO Lport\n");
+/*				printf("SHOULD BE COPYING INTO Lport\n");*/
 
 				(*LPort)[iterator3]=*Character;
 
@@ -244,9 +244,9 @@ int ClientExists(char* IP){
 
 			if (count==1){
 
-			printf("Character is *%s*\n",Character);
+/*			printf("Character is *%s*\n",Character);*/
 
-				printf("SHOULD BE COPYING INTO HOSTNAME\n");
+/*				printf("SHOULD BE COPYING INTO HOSTNAME\n");*/
 
 				(*HostName)[iterator1]=*Character;
 
@@ -474,11 +474,11 @@ int ClientExists(char* IP){
 
 				if (strlen(IP)>0){
 
-					printf("List1[i].HostName is *%s*\n",List1[i].HostName);
+/*					printf("List1[i].HostName is *%s*\n",List1[i].HostName);*/
 
-					printf("List1[i].IP is *%s*\n",List1[i].IP);
+/*					printf("List1[i].IP is *%s*\n",List1[i].IP);*/
 
-					printf("List1[i].ListeningPort is *%d*\n",List1[i].ListeningPort);
+/*					printf("List1[i].ListeningPort is *%d*\n",List1[i].ListeningPort);*/
 
 					sprintf(ReturnM+strlen(ReturnM), "%-5d%-35s%-20s%-8d\n",id,List1[i].HostName,List1[i].IP, List1[i].ListeningPort);
 

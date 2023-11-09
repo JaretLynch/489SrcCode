@@ -1492,7 +1492,7 @@ char* statistics(const Client LIST[]) {
 
 								
 
-								strcpy(&Data,statistics(List));
+								strcpy(Data,statistics(List));
 
 								cse4589_print_and_log("[STATISTICS:SUCCESS]\n");
 

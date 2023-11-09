@@ -896,6 +896,8 @@ int ClientExists(char* IP){
 
 											}
 
+											}
+
 									else{
 
 										cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
@@ -905,8 +907,6 @@ int ClientExists(char* IP){
 									}
 
 								}
-
-}
 
 								else if ((strcmp(Command,"BROADCAST")==0)){
 

@@ -1008,7 +1008,7 @@ int ClientExists(char* IP){
 
 						char *DataReceived= (char*) malloc(256*sizeof(char));
 
-/*						printf("DONE READING FROM STDIN, DATARECEIVED IS *%s*\n",DataReceived);*/
+						printf("DONE READING FROM STDIN, DATARECEIVED IS *%s*\n",DataReceived);
 
 						char *ServerCommand=(char*) malloc(256*sizeof(char));
 

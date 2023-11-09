@@ -872,35 +872,41 @@ int ClientExists(char* IP){
 
 									Arg1[strlen(Arg1)-1]='\0';
 
-/*									if (ClientExists(Arg1)==1){*/
+									printf("*ARG1 before Client Exists is *%s*\",Arg1);
 
-/*										char* IP=malloc(200);*/
+									if (ClientExists(Arg1)==1){
 
-/*										strcpy(IP,handle_ip_command());*/
+										char* IP=malloc(200);
 
-/*										if (strcmp(IP,Arg1)!=0){*/
+										strcpy(IP,handle_ip_command());
+
+										printf("IP IS *%s* and *ARG1 is *%s*\n",IP,Arg1);
+
+										if (strcmp(IP,Arg1)!=0){
 
 /*											printf("INPUT IS *%s*\n",Input);*/
 
 											int j=send(ClientFD,Input,strlen(Input),0);
 
-/*										}*/
+										}
 
-/*										else{*/
+										else{
 
-/*											cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");*/
+											cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
 
-/*											}*/
+											}
 
-/*									else{*/
+									else{
 
-/*										cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");*/
+										cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
 
-/*									free(Input);*/
+									free(Input);
 
-/*									}*/
+									}
 
 								}
+
+}
 
 								else if ((strcmp(Command,"BROADCAST")==0)){
 
@@ -1020,49 +1026,53 @@ int ClientExists(char* IP){
 
 /*						printf("RECEIVED form server: *%s*\n",DataReceived);*/
 
-/*						if (strcmp(Mess,"REFRESH")==0){	*/
+						if (strcmp(Mess,"REFRESH")==0){	
 
-/*							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);*/
+							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);
 
-/*							char* stripped=malloc(1000);*/
+							char* stripped=malloc(1000);
 
-/*							strcpy(stripped,DataReceived+8);*/
+							strcpy(stripped,DataReceived+8);
 
-/*							ReceiveLoggedinInfo(stripped);*/
+							ReceiveLoggedinInfo(stripped);
 
-/*						}*/
+						}
 
 						
 
-/*						else if ((DataReceived[0])>0&&(DataReceived[0]<5)) {*/
+						else if ((DataReceived[0])>0&&(DataReceived[0]<5)) {
 
-/*							*/
+							
 
-/*							ReceiveLoggedinInfo(DataReceived);*/
+							ReceiveLoggedinInfo(DataReceived);
 
-/*							char* Ret=malloc(2000);*/
+							char* Ret=malloc(2000);
 
-/*							strcpy(Ret,ListCommand());*/
+							strcpy(Ret,ListCommand());
 
-/*						*/
+						
 
 /*							cse4589_print_and_log("%s",Ret);*/
 
-/*							if(LogInfo==1){*/
+							if(LogInfo==1){
 
-/*								cse4589_print_and_log("[LOGIN:SUCCESS]\n");*/
+								cse4589_print_and_log("[LOGIN:SUCCESS]\n");
 
-/*								cse4589_print_and_log("[LOGIN:END]\n");*/
+								cse4589_print_and_log("[LOGIN:END]\n");
 
-/*								LogInfo=0;*/
+								LogInfo=0;
 
-/*							}*/
+							}
 
 /*						}*/
 
+}
+
+						else{
+
 							cse4589_print_and_log("%s",DataReceived);
 
-							
+							}
 
 
 

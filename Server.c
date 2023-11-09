@@ -940,6 +940,8 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 									send(currentClient.FD,MessageToDest,MDLen,0);
 
+																free(MessageToDest);
+
 								}
 
 								else{
@@ -955,8 +957,6 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 							}
 
 							free(MessageToSender);
-
-							free(MessageToDest);
 
 						}
 

@@ -1752,7 +1752,7 @@ char* statistics(const Client LIST[]) {
 
 							char *Datar=malloc(20);
 
-							while(int j=recv(fdaccept,DataR,1,0)<1{
+							while(int j=recv(fdaccept,DataR,1,0);j<1){
 
 								printf("WAITING FOR RESPONSE\n");
 

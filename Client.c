@@ -1008,8 +1008,6 @@ int ClientExists(char* IP){
 
 						char *DataReceived= (char*) malloc(256*sizeof(char));
 
-						printf("DONE READING FROM STDIN, DATARECEIVED IS *%s*\n",DataReceived);
-
 						char *ServerCommand=(char*) malloc(256*sizeof(char));
 
 						int LengthOfMessageReceived= recv(ClientFD, DataReceived, 1023,0);
@@ -1026,7 +1024,7 @@ int ClientExists(char* IP){
 
 						
 
-/*						printf("RECEIVED form server: *%s*\n",DataReceived);*/
+						printf("RECEIVED form server: *%s*\n",DataReceived);
 
 						if (strcmp(Mess,"REFRESH")==0){	
 

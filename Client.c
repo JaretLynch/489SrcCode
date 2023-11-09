@@ -56,7 +56,7 @@
 
 	int LoggedIn=0;
 
-
+	int LogInfo=0;
 
 	int ClientFD=-1;
 
@@ -354,8 +354,6 @@ int ClientExists(char* IP){
 
 		}
 
-		int TotalSpace=0;
-
 		char* Manipulator=malloc(2000);
 
 		strcpy(Manipulator,ServerMessage);
@@ -397,6 +395,12 @@ int ClientExists(char* IP){
 							Spaces++;
 
 						}
+
+						if (strcmp(Character,"[")==0){
+
+							LogInfo=1;
+
+							}
 
 						}
 
@@ -453,16 +457,6 @@ int ClientExists(char* IP){
 					}
 
 	  	}
-
-	  	if (Spaces==5){
-
-	  		Manipulator=Manipulator+i;
-
-	  		printf("MANIPULAR AFTER SPECES=5 is *%s*\n",Manipulator);
-
-	  	}
-
-	  	
 
 	  }
 
@@ -792,8 +786,6 @@ int ClientExists(char* IP){
 
 									free(Input);
 
-
-
 								}
 
 							else if (strcmp("SEND",Command)==0){
@@ -1045,6 +1037,14 @@ int ClientExists(char* IP){
 						
 
 							cse4589_print_and_log("%s",Ret);
+
+							if(LogInfo==1){
+
+								cse4589_print_and_log("[LOGIN:SUCCESS]\n[LOGIN:END]");
+
+								LogInfo=0;
+
+							}
 
 						}
 

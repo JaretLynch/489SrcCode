@@ -1714,15 +1714,17 @@ char* statistics(const Client LIST[]) {
 
 							char *DataToSend= RMessage();
 
-
-
 					
 
 
 
 							send(fdaccept,DataToSend,strlen(DataToSend),0);
 
+							
+
 							char *LoginData=MessageCreator("LOGIN","LOGIN","LOGIN","LOGIN",1);
+
+							printf("LOGIN DATA IS *%s*\n",LoginData);
 
 							int f=send(fdaccept,LoginData,strlen(LoginData),0);
 

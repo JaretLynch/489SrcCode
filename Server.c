@@ -770,7 +770,9 @@ void remove_connection(int socket) {
 
 
 
-		char* Ip=GetIPAddress(socket);
+		char* Ip=malloc(120);
+
+		strcpy(Ip,GetIPAddress(socket));
 
 		int ID=GetClientByIP(Ip);
 
@@ -1458,7 +1460,9 @@ char* statistics(const Client LIST[]) {
 
 							else if (strcmp(cmd,"IP")==0){
 
-								char* IP=handle_ip_command();
+								char* IP=malloc(120);
+
+								strcpy(IP,handle_ip_command());
 
 								cse4589_print_and_log("[IP:SUCCESS]\n");
 
@@ -1484,7 +1488,11 @@ char* statistics(const Client LIST[]) {
 
 								qsort(List, 5, sizeof(Client), compareClients);
 
-								char *Data=statistics(List);
+								char *Data= malloc(2000);
+
+								
+
+								strcpy(&Data,statistics(List));
 
 								cse4589_print_and_log("[STATISTICS:SUCCESS]\n");
 
@@ -1764,7 +1772,9 @@ char* statistics(const Client LIST[]) {
 
 									sprintf(DataToSend,"[LIST:SUCCESS]\n");
 
-									char *M=RMessage();
+									char *M=malloc(2000);
+
+									strcpy(M,RMessage());
 
 									sprintf(DataToSend+strlen(DataToSend),M);
 
@@ -1780,7 +1790,9 @@ char* statistics(const Client LIST[]) {
 
 
 
-									char *DataToSend= ReturnMessage(List,1);
+									char *DataToSend=malloc(2000);
+
+									strcpy(DataToSend,ReturnMessage(List,1));
 
 
 

@@ -344,8 +344,6 @@ int ClientExists(char* IP){
 
 	void ReceiveLoggedinInfo(char* ServerMessage){
 
-		ClientsLoggedIn=malloc(sizeof(ClientsLoggedIn));
-
 		for (int i=0;i<5;i++){
 
 			ClientsLoggedIn John=malloc(sizeof(ClientsLoggedIn));

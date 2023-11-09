@@ -1018,7 +1018,9 @@ int ClientExists(char* IP){
 
 						strncpy(Mess, DataReceived, 7);
 
-/*						printf("RECEIVED form server: *%s*\n",DataReceived);*/
+						
+
+						printf("RECEIVED form server: *%s*\n",DataReceived);
 
 /*						if (strcmp(Mess,"REFRESH")==0){	*/
 

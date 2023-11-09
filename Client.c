@@ -88,7 +88,7 @@ int ClientExists(char* IP){
 
 /*		printf("IP DURING CLIENT EXISTS IS *%s*\n",IP);*/
 
-		printf("LIST1[%d].IP is *%s*\n",i,List1[i].IP);
+/*		printf("LIST1[%d].IP is *%s*\n",i,List1[i].IP);*/
 
 		if (((strcmp(IP,List1[i].IP))==0)&&(strcmp(IP,"")!=0)){
 
@@ -874,7 +874,7 @@ int ClientExists(char* IP){
 
 									Arg1[strlen(Arg1)-1]='\0';
 
-									printf("*ARG1 before Client Exists is *%s*\n",Arg1);
+/*									printf("*ARG1 before Client Exists is *%s*\n",Arg1);*/
 
 									if (ClientExists(Arg1)==1){
 
@@ -882,7 +882,7 @@ int ClientExists(char* IP){
 
 										strcpy(IP,handle_ip_command());
 
-										printf("IP IS *%s* and *ARG1 is *%s*\n",IP,Arg1);
+/*										printf("IP IS *%s* and *ARG1 is *%s*\n",IP,Arg1);*/
 
 										if (strcmp(IP,Arg1)!=0){
 
@@ -1030,7 +1030,7 @@ int ClientExists(char* IP){
 
 						if (strcmp(Mess,"REFRESH")==0){	
 
-							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);
+/*							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);*/
 
 							char* stripped=malloc(1000);
 

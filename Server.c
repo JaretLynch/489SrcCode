@@ -1766,25 +1766,25 @@ char* statistics(const Client LIST[]) {
 
 								}
 
-/*								else if(strcmp(DataReceived,"LIST")==0){*/
+								else if(strcmp(DataReceived,"LIST")==0){
 
-/*									char *DataToSend=malloc(4000);*/
+									char *DataToSend=malloc(4000);
 
-/*									sprintf(DataToSend,"[LIST:SUCCESS]\n");*/
+									sprintf(DataToSend,"[LIST:SUCCESS]\n");
 
-/*									char *M=malloc(2000);*/
+									char *M=malloc(2000);
 
-/*									strcpy(M,RMessage());*/
+									strcpy(M,RMessage());
 
-/*									sprintf(DataToSend+strlen(DataToSend),M);*/
+									sprintf(DataToSend+strlen(DataToSend),M);
 
-/*									sprintf(DataToSend+strlen(DataToSend),"[LIST:END]\n");*/
+									sprintf(DataToSend+strlen(DataToSend),"[LIST:END]\n");
 
-/*									send(sock_index,DataToSend,strlen(DataToSend),0);*/
+									send(sock_index,DataToSend,strlen(DataToSend),0);
 
-/*								*/
+								
 
-/*								}*/
+								}
 
 								else if (strcmp(DataReceived,"REFRESH")==0){
 

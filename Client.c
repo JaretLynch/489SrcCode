@@ -1060,15 +1060,11 @@ int ClientExists(char* IP){
 
 /*						}*/
 
-						else{
-
 							cse4589_print_and_log("%s",DataReceived);
 
 							free(DataReceived);
 
-							process_client_commands();
-
-	}
+/*							process_client_commands();*/
 
 						}
 

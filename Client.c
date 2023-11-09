@@ -1010,13 +1010,15 @@ int ClientExists(char* IP){
 
 						int LengthOfMessageReceived= recv(ClientFD, DataReceived, 1023,0);
 
+						DataReceived[LengthOfMessageReceived]='\0';
+
 						char Mess[8];  // Make sure to allocate enough space for the copied characters and the null-terminator.
 
 						int firstValue;
 
 						// Copy the first 7 characters (0 to 6) from source to destination.
 
-/*						strncpy(Mess, DataReceived, 7);*/
+/*						strncpy(Mes[s, DataReceived, 7);*/
 
 						
 
@@ -1063,6 +1065,8 @@ int ClientExists(char* IP){
 /*						}*/
 
 							cse4589_print_and_log("%s",DataReceived);
+
+							
 
 							free(DataReceived);
 

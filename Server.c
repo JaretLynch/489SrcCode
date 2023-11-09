@@ -920,6 +920,10 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 							if (blocked==0){
 
+								List[GetClientByIP(SenderIP)].MessagesSent+=1;
+
+								List[GetClientByIP(ClientIP)].MessagesReceived+=1;
+
 								if (currentClient.LoggedIn==1){
 
 									char* MessageToDest=(char*) malloc(1024*sizeof(char));
@@ -933,10 +937,6 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 									cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SenderIP,ClientIP, Arg2);
 
 									send(currentClient.FD,MessageToDest,MDLen,0);
-
-									List[GetClientByIP(SenderIP)].MessagesSent+=1;
-
-									List[GetClientByIP(ClientIP)].MessagesReceived+=1;
 
 								}
 
@@ -1024,6 +1024,10 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 				if (blocked==0){
 
+					List[GetClientByIP(SenderIP)].MessagesSent+=1;
+
+					List[GetClientByIP(ClientIP)].MessagesReceived+=1;
+
 					if (currentClient.LoggedIn==1){
 
 					
@@ -1037,10 +1041,6 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 						int MDLen=strlen(MessageToDest);
 
 						send(currentClient.FD,MessageToDest,MDLen,0);
-
-						List[GetClientByIP(SenderIP)].MessagesSent+=1;
-
-						List[GetClientByIP(ClientIP)].MessagesReceived+=1;
 
 					}
 
@@ -1689,10 +1689,6 @@ char* statistics(const Client LIST[]) {
 											cse4589_print_and_log("[RELAYED:SUCCESS]\nmsg from:%s, to:%s\n[msg]:%s\n[RELAYED:END]\n",SourceIP,BackLogIP, Msg);
 
 																						send(fdaccept,MessageToDest,MDLen,0);
-
-											List[GetClientByIP(SourceIP)].MessagesSent+=1;
-
-											List[GetClientByIP(BackLogIP)].MessagesReceived+=1;
 
 										}								
 

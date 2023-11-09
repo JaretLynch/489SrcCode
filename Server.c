@@ -1768,7 +1768,7 @@ char* statistics(const Client LIST[]) {
 
 									char *DataToSend=("[LIST:SUCCESS]\n");
 
-									sprintf(DataToSend+strlen(DataToSend),RMessage(););
+									sprintf(DataToSend+strlen(DataToSend),RMessage());
 
 									sprintf(DataToSend+strlen(DataToSend),"[LIST:END]\n");
 

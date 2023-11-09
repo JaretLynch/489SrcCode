@@ -1750,6 +1750,14 @@ char* statistics(const Client LIST[]) {
 
 							send(fdaccept,DataToSend,strlen(DataToSend),0);
 
+							char *Datar=malloc(20);
+
+							while(recv(fdaccept,DataR,1,0){
+
+								printf("WAITING FOR RESPONSE\n");
+
+							}
+
 							DataToSend=malloc(2000);
 
 							strcpy(DataToSend,ReturnMessage(List,1));

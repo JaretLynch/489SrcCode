@@ -1806,18 +1806,6 @@ char* statistics(const Client LIST[]) {
 
 							int j;
 
-							while((j=recv(fdaccept,DataR,1,0))<1){
-
-/*								printf("WAITING FOR RESPONSE\n");*/
-
-							}
-
-							DataToSend=malloc(2000);
-
-							strcpy(DataToSend,ReturnMessage(List,1));
-
-							DataToSend[strlen(DataToSend)]='\0';
-
 							send(fdaccept,DataToSend,strlen(DataToSend),0);
 
 /*														printf("SENT TO CLIENT: *%s*\n",DataToSend);*/

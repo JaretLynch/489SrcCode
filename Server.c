@@ -322,7 +322,7 @@
 
 	}
 
-	void Parse2(char** Command,char** FirstArgPointer, char* Actualmsg){
+	void Parse3(char** Command,char** FirstArgPointer, char* Actualmsg){
 
 		
 
@@ -1064,7 +1064,7 @@ void BroadcastMessage(char *Command,char *Arg1,char *SenderIP,char *DataReceived
 
 	int Exists=0;
 
-		Parse2(&Command,&Arg1,DataReceived);
+		Parse3(&Command,&Arg1,DataReceived);
 
 		for (int i = 0; i < 5; i++) {
 

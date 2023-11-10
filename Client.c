@@ -872,43 +872,9 @@ int ClientExists(char* IP){
 
 								else if (strcmp(Command,"SEND")==0){
 
-									Arg1[strlen(Arg1)-1]='\0';
-
-/*									printf("*ARG1 before Client Exists is *%s*\n",Arg1);*/
-
-									if (ClientExists(Arg1)==1){
-
-										char* IP=malloc(200);
-
-										strcpy(IP,handle_ip_command());
-
-/*										printf("IP IS *%s* and *ARG1 is *%s*\n",IP,Arg1);*/
-
-										if (strcmp(IP,Arg1)!=0){
-
-/*											printf("INPUT IS *%s*\n",Input);*/
-
 											int j=send(ClientFD,Input,strlen(Input),0);
 
-										}
-
-										else{
-
-											cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
-
 											}
-
-											}
-
-									else{
-
-										cse4589_print_and_log("[SEND:ERROR]\n[SEND:END]\n");
-
-									free(Input);
-
-									}
-
-								}
 
 								else if ((strcmp(Command,"BROADCAST")==0)){
 
@@ -936,61 +902,19 @@ int ClientExists(char* IP){
 
 								else if (strcmp(Command,"BLOCK")==0){
 
-/*									printf("ARG1 is *%s*\n",Arg1);*/
-
-									if (ClientExists(Arg1)==1){
-
-										
-
 											int j=send(ClientFD,Input,strlen(Input),0);
 
-									
-
-										
-
 										}
-
-									else{
-
-										cse4589_print_and_log("[BLOCK:ERROR]\n[BLOCK:END]\n");
-
-									free(Input);
-
-									}
-
-									}
 
 								else if (strcmp(Command,"UNBLOCK")==0){
 
-									if (ClientExists(Arg1)==1){
-
-										char* IP=malloc(120);
-
-										strcpy(IP,handle_ip_command());
-
-										if (strcmp(IP,Arg1)!=0){
-
 											int j=send(ClientFD,Input,strlen(Input),0);
 
 
-
-										}
-
-									else{
-
-									
-
-										cse4589_print_and_log("[UNBLOCK:ERROR]\n[UNBLOCK:END]\n");
-
-									free(Input);
-
-									}
 
 									}
 
 							}
-
-						}
 
 						}
 
@@ -1008,77 +932,7 @@ int ClientExists(char* IP){
 
 						DataReceived[LengthOfMessageReceived]='\0';
 
-						char Mess[8];  // Make sure to allocate enough space for the copied characters and the null-terminator.
-
-						int firstValue;
-
-						// Copy the first 7 characters (0 to 6) from source to destination.
-
-						strncpy(Mess, DataReceived, 7);
-
-						
-
-/*						printf("RECEIVED form server: *%s*\n",DataReceived);*/
-
-
-
-						if (strcmp(Mess,"REFRESH")==0){	
-
-/*							printf("RECEIVED MESSAGE IS REFRESH and data received by Server is *%s*\n",DataReceived);*/
-
-							char* stripped=malloc(1000);
-
-							strcpy(stripped,DataReceived+8);
-
-							ReceiveLoggedinInfo(stripped);
-
-							if(LogInfo==1){
-
-								cse4589_print_and_log("[LOGIN:SUCCESS]\n");
-
-								cse4589_print_and_log("[LOGIN:END]\n");
-
-								LogInfo=0;
-
-							}
-
-						}
-
-						else if ((DataReceived[0])>0&&(DataReceived[0]<5)) {
-
-							
-
-							ReceiveLoggedinInfo(DataReceived);
-
-							char* Ret=malloc(2000);
-
-							strcpy(Ret,ListCommand());
-
-						
-
-/*							cse4589_print_and_log("%s",Ret);*/
-
-							if(LogInfo==1){
-
-								cse4589_print_and_log("[LOGIN:SUCCESS]\n");
-
-								cse4589_print_and_log("[LOGIN:END]\n");
-
-								LogInfo=0;
-
-							}
-
-/*						}*/
-
-}
-
-						else{
-
-							cse4589_print_and_log("%s",DataReceived);
-
-							send(ClientFD,"1",1,0);
-
-							}
+						cse4589_print_and_log("%s",DataReceived);
 
 
 
@@ -1092,6 +946,6 @@ int ClientExists(char* IP){
 
 			}
 
-		}
+		
 
-	}
+		}

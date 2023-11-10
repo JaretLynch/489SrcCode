@@ -322,6 +322,60 @@
 
 	}
 
+	void Parse2(char** Command,char** FirstArgPointer, char* Actualmsg){
+
+		
+
+		int count=0;
+
+		int iterator1=0;
+
+		int iterator2=0;
+
+		int iterator3=0;
+
+		
+
+		int j=strlen(Actualmsg);
+
+		for (int i=0; i<strlen(Actualmsg); i++){
+
+			char Character[1];
+
+			strncpy(Character,&Actualmsg[i],1);
+
+			Character[1]='\0';
+
+			if((count>0)&& (iterator2<256)){
+
+				(*FirstArgPointer)[iterator2]=*Character;
+
+				iterator2 ++;
+
+			}
+
+			//POSSIBLE ERRORS DUE TO MESSAGE SIZE 
+
+			if (strcmp(Character," ")==0){
+
+				count++;
+
+
+
+			}
+
+			if (count==0){
+
+				(*Command)[iterator1]=*Character;
+
+				iterator1++;		
+
+			}
+
+			}
+
+	}
+
 	char* MessageCreator(char* Message,char* Command,char* SourceIP,char* DestIP, int success){
 
 		char *ReturnM = malloc(300*sizeof(char));
@@ -1004,13 +1058,13 @@ void SendMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataRe
 
 
 
-void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *DataReceived, int sock_index){
+void BroadcastMessage(char *Command,char *Arg1,char *SenderIP,char *DataReceived, int sock_index){
 
 	int success=0;
 
 	int Exists=0;
 
-		Parse1(&Command,&Arg1,&Arg2,DataReceived);
+		Parse2(&Command,&Arg1,DataReceived);
 
 		for (int i = 0; i < 5; i++) {
 
@@ -1878,7 +1932,7 @@ char* statistics(const Client LIST[]) {
 
 									else if (strcmp(Command,"BROADCAST")==0){
 
-										BroadcastMessage(Command,Arg1,Arg2,SenderIP,DataReceived,sock_index);
+										BroadcastMessage(Command,Arg1,SenderIP,DataReceived,sock_index);
 
 									}
 

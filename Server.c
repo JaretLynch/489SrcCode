@@ -1066,13 +1066,11 @@ void BroadcastMessage(char *Command,char *Arg1,char *Arg2,char *SenderIP,char *D
 
 						send(currentClient.FD,MessageToDest,MDLen,0);
 
-/*													printf("SENT TO CLIENT: *%s*\n",MessageToDest);*/
+													printf("SENT TO CLIENT: *%s*\n",MessageToDest);
 
 					}
 
 					else{
-
-
 
 						AddToBacklog(GetIPAddress(sock_index),ClientIP,Arg1);
 

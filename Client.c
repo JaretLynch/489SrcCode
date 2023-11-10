@@ -936,9 +936,9 @@ int ClientExists(char* IP){
 
 								else if (strcmp(Command,"BLOCK")==0){
 
-/*									printf("ARG1 is *%s*\n",Arg1);*/
+									printf("ARG1 is *%s*\n",Arg1);
 
-/*									if (ClientExists(Arg1)==1){*/
+									if (ClientExists(Arg1)==1){
 
 										
 
@@ -950,19 +950,19 @@ int ClientExists(char* IP){
 
 										}
 
-/*									else{*/
+									else{
 
-/*										cse4589_print_and_log("[BLOCK:ERROR]\n[BLOCK:END]\n");*/
+										cse4589_print_and_log("[BLOCK:ERROR]\n[BLOCK:END]\n");
 
-/*									free(Input);*/
+									free(Input);
 
-/*									}*/
+									}
 
-/*									}*/
+									}
 
 								else if (strcmp(Command,"UNBLOCK")==0){
 
-/*									if (ClientExists(Arg1)==1){*/
+									if (ClientExists(Arg1)==1){
 
 										char* IP=malloc(120);
 
@@ -976,27 +976,21 @@ int ClientExists(char* IP){
 
 										}
 
-/*										}*/
+									else{
 
-/*									else{*/
+									
 
-/*									*/
+										cse4589_print_and_log("[UNBLOCK:ERROR]\n[UNBLOCK:END]\n");
 
-/*										cse4589_print_and_log("[UNBLOCK:ERROR]\n[UNBLOCK:END]\n");*/
+									free(Input);
 
-/*									free(Input);*/
+									}
 
-/*									}*/
-
-								}
-
-								else{
-
-
-
-								}
+									}
 
 							}
+
+						}
 
 						}
 

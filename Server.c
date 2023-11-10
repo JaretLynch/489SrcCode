@@ -1804,9 +1804,7 @@ char* statistics(const Client LIST[]) {
 
 							char *Datar=malloc(20);
 
-							int j;
-
-							send(fdaccept,DataToSend,strlen(DataToSend),0);
+	
 
 /*														printf("SENT TO CLIENT: *%s*\n",DataToSend);*/
 

@@ -936,7 +936,7 @@ int ClientExists(char* IP){
 
 								else if (strcmp(Command,"BLOCK")==0){
 
-									printf("ARG1 is *%s*\n",Arg1);
+/*									printf("ARG1 is *%s*\n",Arg1);*/
 
 									if (ClientExists(Arg1)==1){
 
